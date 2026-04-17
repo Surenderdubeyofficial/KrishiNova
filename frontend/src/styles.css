@@ -2494,3 +2494,259 @@ html[data-theme="dark"] .authPreviewBadge {
   background: rgba(225, 182, 82, 0.18);
   color: #f4de9b;
 }
+
+@media (max-width: 1024px) {
+  .authExperience,
+  .authRefresh,
+  .authBackdrop,
+  .authPagePremium {
+    width: min(100%, calc(100% - 1rem));
+    padding: 1rem 0 2rem;
+  }
+
+  .authShowcaseModal,
+  .authPagePremium .authShowcaseModal {
+    grid-template-columns: 1fr;
+    padding: 0.85rem;
+    border-radius: 28px;
+    gap: 0.9rem;
+  }
+
+  .authShowcasePanel,
+  .authPagePremium .authShowcasePanel,
+  .authWorkspaceModern,
+  .authPagePremium .authWorkspaceModal {
+    padding: 1.35rem;
+    border-radius: 24px;
+  }
+
+  .authShowcasePanel h1 {
+    font-size: clamp(2.1rem, 6vw, 3.4rem);
+    max-width: 11ch;
+  }
+
+  .authWorkspaceHeaderPremium {
+    grid-template-columns: 1fr;
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .authMiniChecklist {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .authExperience,
+  .authRefresh,
+  .authBackdrop,
+  .authPagePremium {
+    width: min(100%, calc(100% - 0.75rem));
+    padding: 0.75rem 0 1.5rem;
+  }
+
+  .authAmbientOrb {
+    display: none;
+  }
+
+  .authShowcaseModal,
+  .authPagePremium .authShowcaseModal {
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+    backdrop-filter: none;
+  }
+
+  .authShowcasePanel,
+  .authPagePremium .authShowcasePanel {
+    gap: 1rem;
+    padding: 1.2rem;
+    border-radius: 22px;
+  }
+
+  .authBrandHeader {
+    gap: 0.55rem;
+  }
+
+  .authShowcasePanel h1 {
+    font-size: clamp(1.9rem, 7vw, 2.8rem);
+    line-height: 1.02;
+    max-width: 10ch;
+  }
+
+  .authShowcaseCopy .lede {
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .authStatusRail {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .authMetricStrip,
+  .authFlowRibbon,
+  .authFeatureStack,
+  .authPreviewWindow {
+    display: none;
+  }
+
+  .authWorkspaceModern,
+  .authPagePremium .authWorkspaceModal {
+    padding: 1rem;
+    border-radius: 22px;
+    gap: 0.9rem;
+  }
+
+  .authWorkspaceHeaderPremium {
+    margin-bottom: 0;
+  }
+
+  .authWorkspaceHeaderPremium h2 {
+    font-size: 1.75rem;
+    line-height: 1.1;
+  }
+
+  .authHeaderText {
+    font-size: 0.96rem;
+    line-height: 1.6;
+  }
+
+  .authMiniChecklist {
+    display: none;
+  }
+
+  .authControlStrip,
+  .authSectionBlock,
+  .authRoleHighlight,
+  .authFormGrid,
+  .authVerifyCard,
+  .authGoogleCard,
+  .authPagePremium .authControlStrip,
+  .authPagePremium .authSectionBlock,
+  .authPagePremium .authRoleHighlight,
+  .authPagePremium .authFormGrid,
+  .authPagePremium .authVerifyCard,
+  .authPagePremium .authGoogleCard {
+    padding: 0.9rem;
+    border-radius: 18px;
+  }
+
+  .authTopControls,
+  .authTopControlsModal {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+
+  .authToggleRow,
+  .authModeTabs {
+    width: 100%;
+  }
+
+  .authModeTabs .pill,
+  .authModeTabs .activePill {
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .authRoleSelectWrap,
+  .authSelector select {
+    min-width: 0;
+    max-width: none;
+    width: 100%;
+  }
+
+  .authMethodGridModern,
+  .authMethodGrid {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+
+  .authMethodCard,
+  .authPagePremium .authMethodCard {
+    min-height: auto;
+    padding: 0.9rem;
+  }
+
+  .authFormGridModern {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .authFieldGroupWide {
+    grid-column: auto;
+  }
+
+  .authPrimaryButton,
+  .authPagePremium .authWorkspaceModal .button,
+  .authPagePremium .authWorkspaceModal .ghostAction {
+    width: 100%;
+  }
+
+  .authActionRow {
+    flex-direction: column;
+  }
+
+  .authActionRow > * {
+    width: 100%;
+  }
+
+  .authFootnoteModern,
+  .authFeedbackBanner {
+    border-radius: 16px;
+    padding: 0.85rem 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .authExperience,
+  .authRefresh,
+  .authBackdrop,
+  .authPagePremium {
+    width: min(100%, calc(100% - 0.5rem));
+    padding: 0.5rem 0 1.25rem;
+  }
+
+  .authShowcasePanel,
+  .authPagePremium .authShowcasePanel,
+  .authWorkspaceModern,
+  .authPagePremium .authWorkspaceModal {
+    padding: 0.9rem;
+    border-radius: 18px;
+  }
+
+  .authShowcasePanel h1 {
+    font-size: 1.7rem;
+    max-width: none;
+  }
+
+  .authWorkspaceHeaderPremium h2 {
+    font-size: 1.45rem;
+  }
+
+  .authFieldLabel {
+    font-size: 0.72rem;
+  }
+
+  .authWorkspaceModal input,
+  .authWorkspaceModal select,
+  .authPagePremium .authWorkspaceModal input,
+  .authPagePremium .authWorkspaceModal select {
+    min-height: 48px;
+    padding: 0.8rem 0.9rem;
+  }
+
+  .authStatusTile,
+  .authMethodCard,
+  .authControlStrip,
+  .authSectionBlock,
+  .authRoleHighlight,
+  .authFormGrid,
+  .authVerifyCard,
+  .authGoogleCard {
+    border-radius: 16px;
+  }
+}
