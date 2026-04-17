@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../AuthContext.jsx";
 import { useUi } from "../UiContext.jsx";
 import BrandLockup from "./BrandLockup.jsx";
@@ -235,31 +236,66 @@ function AdminNav({ name, logout }) {
 export default function LegacyNavbar() {
   const { user, logout } = useAuth();
   const { language, toggleLanguage, theme, toggleTheme } = useUi();
+  const location = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth > 992) {
+        setMobileMenuOpen(false);
+      }
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <nav id="navbar-main" className="navbar navbar-main navbar-expand-lg bg-default navbar-light position-sticky top-0 shadow py-0">
-      <div className={user ? "container-fluid" : "container"}>
-        <ul className="navbar-nav navbar-nav-hover align-items-lg-center">
-          <li className="nav-item dropdown">
-            <Link to="/" className="navbar-brand mr-lg-5 text-white">
-              <BrandLockup theme="dark" compact subtitle={false} />
-            </Link>
-          </li>
-        </ul>
+      <div className={`${user ? "container-fluid" : "container"} navShell`}>
+        <div className="navTopRow">
+          <ul className="navbar-nav navbar-nav-hover align-items-lg-center navBrandList">
+            <li className="nav-item dropdown">
+              <Link to="/" className="navbar-brand mr-lg-5 text-white">
+                <BrandLockup theme="dark" compact subtitle={false} />
+              </Link>
+            </li>
+          </ul>
 
-        <div className="navUtilityControls">
-          <button type="button" className="uiToggleBtn" onClick={toggleLanguage}>
-            {language === "en" ? "हिंदी" : "ENG"}
-          </button>
-          <button type="button" className="uiToggleBtn" onClick={toggleTheme}>
-            {theme === "light" ? "Dark" : "Light"}
-          </button>
+          <div className="navTopActions">
+            <div className="navUtilityControls">
+              <button type="button" className="uiToggleBtn" onClick={toggleLanguage}>
+                {language === "en" ? "हिंदी" : "ENG"}
+              </button>
+              <button type="button" className="uiToggleBtn" onClick={toggleTheme}>
+                {theme === "light" ? "Dark" : "Light"}
+              </button>
+            </div>
+
+            <button
+              type="button"
+              className={`mobileNavToggle ${mobileMenuOpen ? "active" : ""}`}
+              onClick={() => setMobileMenuOpen((current) => !current)}
+              aria-label="Toggle navigation"
+              aria-expanded={mobileMenuOpen}
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+          </div>
         </div>
 
-        {user?.role === "farmer" ? <FarmerNav name={user.name} logout={logout} /> : null}
-        {user?.role === "customer" ? <CustomerNav name={user.name} logout={logout} /> : null}
-        {user?.role === "admin" ? <AdminNav name={user.name} logout={logout} /> : null}
-        {!user ? <PublicNav /> : null}
+        <div className={`navMenuPanel ${mobileMenuOpen ? "open" : ""}`}>
+          {user?.role === "farmer" ? <FarmerNav name={user.name} logout={logout} /> : null}
+          {user?.role === "customer" ? <CustomerNav name={user.name} logout={logout} /> : null}
+          {user?.role === "admin" ? <AdminNav name={user.name} logout={logout} /> : null}
+          {!user ? <PublicNav /> : null}
+        </div>
       </div>
     </nav>
   );
