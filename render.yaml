@@ -3,7 +3,7 @@ services:
     name: krishinova-api
     runtime: node
     rootDir: backend
-    buildCommand: npm install
+    buildCommand: npm install && python3 -m pip install -r ../shared/requirements.txt
     startCommand: npm start
     healthCheckPath: /api/health
     envVars:

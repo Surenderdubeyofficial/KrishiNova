@@ -23,7 +23,7 @@ Render can use the root blueprint in [render.yaml](C:/Users/hp/Downloads/agricul
 Service settings:
 
 - Root directory: `backend`
-- Build command: `npm install`
+- Build command: `npm install && python3 -m pip install -r ../shared/requirements.txt`
 - Start command: `npm start`
 - Health check path: `/api/health`
 
