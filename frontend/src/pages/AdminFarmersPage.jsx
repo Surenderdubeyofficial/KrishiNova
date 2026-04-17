@@ -61,16 +61,16 @@ export default function AdminFarmersPage() {
                   <tbody>
                     {rows.map((row) => (
                       <tr className="text-center" key={row.farmer_id}>
-                        <td>{row.farmer_id}</td>
-                        <td>{row.farmer_name}</td>
-                        <td>{row.F_gender}</td>
-                        <td>{row.email}</td>
-                        <td>{row.phone_no}</td>
-                        <td>{row.F_birthday}</td>
-                        <td>{row.F_State}</td>
-                        <td>{row.F_District}</td>
-                        <td>{row.F_Location}</td>
-                        <td>
+                        <td data-label="ID">{row.farmer_id}</td>
+                        <td data-label={t("Farmer Name")}>{row.farmer_name}</td>
+                        <td data-label={t("Gender")}>{row.F_gender}</td>
+                        <td data-label={t("Email Id")}>{row.email}</td>
+                        <td data-label={t("Mobile No")}>{row.phone_no}</td>
+                        <td data-label={t("Date of Birth")}>{row.F_birthday}</td>
+                        <td data-label={t("State")}>{row.F_State}</td>
+                        <td data-label={t("District")}>{row.F_District}</td>
+                        <td data-label={t("City")}>{row.F_Location}</td>
+                        <td data-label={t("Delete")}>
                           <button className="btn btn-sm btn-danger" type="button" onClick={() => removeFarmer(row.farmer_id)}>
                             {t("Delete")}
                           </button>

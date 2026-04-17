@@ -2968,3 +2968,178 @@ html[data-theme="dark"] .authPreviewBadge {
     border-radius: 14px;
   }
 }
+
+@media (max-width: 768px) {
+  .section.section-shaped.section-lg {
+    overflow: hidden;
+  }
+
+  .section.section-shaped.section-lg > .container,
+  .section.section-shaped.section-lg > .container-fluid {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .row.row-content {
+    margin-left: 0;
+    margin-right: 0;
+    row-gap: 0.9rem;
+  }
+
+  .row.row-content > [class*="col-"] {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .row.text-center > [class*="col-"] {
+    margin-bottom: 0.75rem;
+  }
+
+  .row.text-center .card h3 {
+    font-size: 1.55rem;
+  }
+
+  .row.text-center .card h6 {
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .card-body > .row.mb-1 {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid rgba(24, 44, 28, 0.08);
+    row-gap: 0.25rem;
+  }
+
+  html[data-theme="dark"] .card-body > .row.mb-1 {
+    border-bottom-color: rgba(227, 237, 220, 0.08);
+  }
+
+  .card-body > .row.mb-1:last-child {
+    border-bottom: 0;
+  }
+
+  .card-body > .row.mb-1 > [class*="col-"] {
+    padding-left: 0;
+    padding-right: 0;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .card-body > .row.mb-1 .font-weight-bold {
+    font-size: 0.82rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .card-body form .form-group {
+    margin-bottom: 0.9rem !important;
+  }
+
+  .card-body form .btn,
+  .card-body form button,
+  .card-body .btn-block-mobile {
+    width: 100%;
+  }
+
+  .rounded-circle.img-fluid {
+    width: min(170px, 58vw) !important;
+    height: auto;
+  }
+
+  .badge.badge-danger.badge-pill {
+    font-size: 0.72rem;
+    white-space: normal;
+    line-height: 1.35;
+    padding: 0.5rem 0.9rem;
+  }
+
+  table.display,
+  .table.display {
+    display: block;
+  }
+
+  .table.display thead,
+  table.display thead {
+    display: none;
+  }
+
+  .table.display tbody,
+  .table.display tr,
+  .table.display td,
+  table.display tbody,
+  table.display tr,
+  table.display td {
+    display: block;
+    width: 100%;
+  }
+
+  .table.display tbody tr,
+  table.display tbody tr {
+    margin-bottom: 0.9rem;
+    padding: 0.8rem;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 12px 24px rgba(42, 61, 39, 0.08);
+    text-align: left !important;
+  }
+
+  html[data-theme="dark"] .table.display tbody tr,
+  html[data-theme="dark"] table.display tbody tr {
+    background: rgba(24, 39, 28, 0.96);
+  }
+
+  .table.display tbody td,
+  table.display tbody td {
+    border: 0 !important;
+    padding: 0.35rem 0;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .table.display tbody td .btn,
+  table.display tbody td .btn {
+    width: 100%;
+    margin-top: 0.35rem;
+  }
+
+  .table.display tbody td::before,
+  table.display tbody td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #5d7448;
+    margin-bottom: 0.2rem;
+  }
+
+  html[data-theme="dark"] .table.display tbody td::before,
+  html[data-theme="dark"] table.display tbody td::before {
+    color: #c9d8c1;
+  }
+}
+
+@media (max-width: 480px) {
+  .section.section-shaped.section-lg > .container,
+  .section.section-shaped.section-lg > .container-fluid {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .row.text-center .card h3 {
+    font-size: 1.35rem;
+  }
+
+  .card-body > .row.mb-1 {
+    padding: 0.55rem 0;
+  }
+
+  .table.display tbody tr,
+  table.display tbody tr {
+    padding: 0.7rem;
+    border-radius: 16px;
+  }
+}

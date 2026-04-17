@@ -60,15 +60,15 @@ export default function AdminCustomersPage() {
                   <tbody>
                     {rows.map((row) => (
                       <tr className="text-center" key={row.cust_id}>
-                        <td>{row.cust_id}</td>
-                        <td>{row.cust_name}</td>
-                        <td>{row.email}</td>
-                        <td>{row.phone_no}</td>
-                        <td>{row.state}</td>
-                        <td>{row.city}</td>
-                        <td>{row.address}</td>
-                        <td>{row.pincode}</td>
-                        <td>
+                        <td data-label="ID">{row.cust_id}</td>
+                        <td data-label={t("Customer Name")}>{row.cust_name}</td>
+                        <td data-label={t("Email Id")}>{row.email}</td>
+                        <td data-label={t("Mobile No")}>{row.phone_no}</td>
+                        <td data-label={t("State")}>{row.state}</td>
+                        <td data-label={t("City")}>{row.city}</td>
+                        <td data-label={t("Address")}>{row.address}</td>
+                        <td data-label={t("Pincode")}>{row.pincode}</td>
+                        <td data-label={t("Delete")}>
                           <button className="btn btn-sm btn-danger" type="button" onClick={() => removeCustomer(row.cust_id)}>
                             {t("Delete")}
                           </button>

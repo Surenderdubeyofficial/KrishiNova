@@ -71,13 +71,13 @@ export default function AdminMessagesPage() {
                     {rows.length ? (
                       rows.map((row) => (
                         <tr className="text-center" key={row.c_id}>
-                          <td>{row.c_id}</td>
-                          <td>{row.c_name}</td>
-                          <td>{row.c_mobile}</td>
-                          <td>{row.c_email}</td>
-                          <td>{row.c_address}</td>
-                          <td>{row.c_message}</td>
-                          <td>
+                          <td data-label="ID">{row.c_id}</td>
+                          <td data-label={t("Name")}>{row.c_name}</td>
+                          <td data-label={t("Mobile No")}>{row.c_mobile}</td>
+                          <td data-label={t("Email")}>{row.c_email}</td>
+                          <td data-label={t("Address")}>{row.c_address}</td>
+                          <td data-label={t("Message")}>{row.c_message}</td>
+                          <td data-label={t("Delete")}>
                             <button className="btn btn-sm btn-danger" type="button" onClick={() => removeMessage(row.c_id)}>
                               {t("Delete")}
                             </button>
