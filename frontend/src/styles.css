@@ -2750,3 +2750,221 @@ html[data-theme="dark"] .authPreviewBadge {
     border-radius: 16px;
   }
 }
+
+@media (max-width: 1024px) {
+  .page,
+  .panel,
+  .hero,
+  .homePremium,
+  .authExperience {
+    width: min(100%, calc(100% - 1rem));
+  }
+
+  .panel {
+    padding: 1.25rem;
+  }
+
+  .grid.two,
+  .grid.three,
+  .split,
+  .splitAsymmetric {
+    grid-template-columns: 1fr;
+  }
+
+  .summaryBox {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .page,
+  .panel,
+  .hero,
+  .homePremium,
+  .authExperience {
+    width: min(100%, calc(100% - 0.75rem));
+  }
+
+  .page {
+    padding: 1rem 0 2rem;
+  }
+
+  .panel {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 20px;
+  }
+
+  .panelTight {
+    padding-top: 1rem;
+  }
+
+  .card,
+  .statCard,
+  .heroCard {
+    border-radius: 20px;
+  }
+
+  .rowItem {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+    padding: 0.8rem 0.9rem;
+  }
+
+  .toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .summaryBox,
+  .actionGroup {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .summaryBox > *,
+  .actionGroup > * {
+    width: 100%;
+  }
+
+  .cropSpotlight .card-header,
+  .panel .card-header,
+  .page .card-header,
+  .card-header.d-flex {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.85rem;
+  }
+
+  .card-header .display-4,
+  .text-danger.display-4,
+  .text-success.display-4,
+  .text-white.display-4 {
+    font-size: clamp(1.7rem, 7vw, 2.35rem) !important;
+    line-height: 1.1;
+    word-break: break-word;
+  }
+
+  .card-header .btn,
+  .card-header .d-flex,
+  .card-header .actionGroup {
+    width: 100%;
+  }
+
+  .card-header .d-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem !important;
+  }
+
+  .table-responsive {
+    border-radius: 16px;
+  }
+
+  .table th,
+  .table td {
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+  .btn-table table,
+  .btn-table thead,
+  .btn-table tbody,
+  .btn-table tr,
+  .btn-table th,
+  .btn-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .btn-table thead {
+    display: none;
+  }
+
+  .btn-table tbody tr {
+    margin-bottom: 0.9rem;
+    padding: 0.85rem;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 12px 24px rgba(43, 64, 38, 0.08);
+  }
+
+  html[data-theme="dark"] .btn-table tbody tr {
+    background: rgba(24, 39, 28, 0.94);
+  }
+
+  .btn-table tbody td {
+    padding: 0.45rem 0;
+    border: 0 !important;
+  }
+
+  .btn-table tbody td .form-control,
+  .btn-table tbody td .btn {
+    width: 100%;
+  }
+
+  .insightRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .legacyChatBox {
+    min-height: 180px;
+    max-height: 320px;
+  }
+
+  .forecastCard,
+  .articleCard,
+  .insightCard,
+  .contactPanel,
+  .weatherPanel,
+  .newsPanel {
+    gap: 0.45rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page,
+  .panel,
+  .hero,
+  .homePremium,
+  .authExperience {
+    width: min(100%, calc(100% - 0.5rem));
+  }
+
+  .panel {
+    padding: 0.85rem;
+    border-radius: 16px;
+  }
+
+  .card,
+  .statCard,
+  .heroCard,
+  .rowItem,
+  .insightRow {
+    border-radius: 16px;
+  }
+
+  input,
+  textarea,
+  select {
+    padding: 0.8rem 0.9rem;
+  }
+
+  .card-header .display-4,
+  .text-danger.display-4,
+  .text-success.display-4,
+  .text-white.display-4 {
+    font-size: 1.5rem !important;
+  }
+
+  .btn-table tbody tr {
+    padding: 0.75rem;
+    border-radius: 16px;
+  }
+
+  .table-responsive {
+    border-radius: 14px;
+  }
+}
