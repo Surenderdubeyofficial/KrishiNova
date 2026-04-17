@@ -43,8 +43,8 @@ export default function FarmerStockPage() {
                     {rows.length ? (
                       rows.map((row) => (
                         <tr className="text-center" key={row.crop}>
-                          <td>{row.crop}</td>
-                          <td>{row.quantity}</td>
+                          <td data-label={t("Crop Name")}>{row.crop}</td>
+                          <td data-label={t("Quantity (in KG)")}>{row.quantity}</td>
                         </tr>
                       ))
                     ) : (

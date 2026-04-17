@@ -27,7 +27,70 @@ export default function FarmerCropRecommendationPage() {
   return (
     <ProtectedRoute role="farmer">
       <LegacySection badge="Recommendation">
-        <div className="row row-content"><div className="col-md-12 mb-3"><div className="card text-white bg-gradient-success mb-3"><form onSubmit={submit}><div className="card-header"><span className="text-info display-4"> {t("Crop Recommendation")} </span><span className="pull-right"><button type="submit" className="btn btn-warning btn-submit" disabled={submitting}>{submitting ? t("Submitting...").toUpperCase() : t("Submit").toUpperCase()}</button></span></div><div className="card-body text-dark"><p className="mb-3">Example values: 90, 42, 43, 20.8, 82, 6.5, 202.9</p><table className="table table-striped table-hover table-bordered bg-gradient-white text-center display"><thead><tr className="font-weight-bold text-default"><th>{t("Nitrogen")}</th><th>{t("Phosphorous")}</th><th>{t("Potassium")}</th><th>{t("Temperature")}</th><th>{t("Humidity")}</th><th>{t("pH")}</th><th>{t("Rainfall")}</th></tr></thead><tbody><tr className="text-center">{[["n","Ex: 90"],["p","Ex: 42"],["k","Ex: 43"],["temperature","Ex: 20.8"],["humidity","Ex: 82"],["ph","Ex: 6.5"],["rainfall","Ex: 202.9"]].map(([field,placeholder])=><td key={field}><input className="form-control" type="number" step="0.01" placeholder={placeholder} value={form[field]} onChange={(e)=>setForm({...form,[field]:e.target.value})} required /></td>)}</tr></tbody></table>{feedback ? <div className="alert alert-danger mt-3 mb-0">{feedback}</div> : null}</div></form></div><div className="card text-white bg-gradient-success mb-3"><div className="card-header"><span className="text-success display-4"> {t("Result")} </span></div><h4 className="p-4 text-dark">{result || "Submit the values to see the recommended crop."}</h4></div></div></div>
+        <div className="row row-content">
+          <div className="col-md-12 mb-3">
+            <div className="card text-white bg-gradient-success mb-3">
+              <form onSubmit={submit}>
+                <div className="card-header d-flex justify-content-between align-items-center flex-wrap" style={{ gap: "0.75rem" }}>
+                  <span className="text-info display-4"> {t("Crop Recommendation")} </span>
+                  <button type="submit" className="btn btn-warning btn-submit" disabled={submitting}>
+                    {submitting ? t("Submitting...").toUpperCase() : t("Submit").toUpperCase()}
+                  </button>
+                </div>
+                <div className="card-body text-dark">
+                  <p className="mb-3">Example values: 90, 42, 43, 20.8, 82, 6.5, 202.9</p>
+                  <table className="table table-striped table-hover table-bordered bg-gradient-white text-center display">
+                    <thead>
+                      <tr className="font-weight-bold text-default">
+                        <th>{t("Nitrogen")}</th>
+                        <th>{t("Phosphorous")}</th>
+                        <th>{t("Potassium")}</th>
+                        <th>{t("Temperature")}</th>
+                        <th>{t("Humidity")}</th>
+                        <th>{t("pH")}</th>
+                        <th>{t("Rainfall")}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="text-center">
+                        {[
+                          ["n", "Ex: 90", t("Nitrogen")],
+                          ["p", "Ex: 42", t("Phosphorous")],
+                          ["k", "Ex: 43", t("Potassium")],
+                          ["temperature", "Ex: 20.8", t("Temperature")],
+                          ["humidity", "Ex: 82", t("Humidity")],
+                          ["ph", "Ex: 6.5", t("pH")],
+                          ["rainfall", "Ex: 202.9", t("Rainfall")],
+                        ].map(([field, placeholder, label]) => (
+                          <td key={field} data-label={label}>
+                            <input
+                              className="form-control"
+                              type="number"
+                              step="0.01"
+                              placeholder={placeholder}
+                              value={form[field]}
+                              onChange={(e) => setForm({ ...form, [field]: e.target.value })}
+                              required
+                            />
+                          </td>
+                        ))}
+                      </tr>
+                    </tbody>
+                  </table>
+                  {feedback ? <div className="alert alert-danger mt-3 mb-0">{feedback}</div> : null}
+                </div>
+              </form>
+            </div>
+            <div className="card text-white bg-gradient-success mb-3">
+              <div className="card-header">
+                <span className="text-success display-4"> {t("Result")} </span>
+              </div>
+              <h4 className="p-4 text-dark" style={{ overflowWrap: "anywhere" }}>
+                {result || "Submit the values to see the recommended crop."}
+              </h4>
+            </div>
+          </div>
+        </div>
       </LegacySection>
     </ProtectedRoute>
   );

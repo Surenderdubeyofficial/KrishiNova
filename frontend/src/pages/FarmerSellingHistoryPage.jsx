@@ -30,10 +30,10 @@ export default function FarmerSellingHistoryPage() {
                   <tbody>
                     {data?.historyRows?.map((row) => (
                       <tr key={row.History_id}>
-                        <td><center>{row.farmer_crop}</center></td>
-                        <td><center>{row.farmer_quantity}</center></td>
-                        <td><center>{row.farmer_price}</center></td>
-                        <td><center>{row.date}</center></td>
+                        <td data-label={t("Crop")}><center>{row.farmer_crop}</center></td>
+                        <td data-label={t("Quantity (in KG)")}><center>{row.farmer_quantity}</center></td>
+                        <td data-label={t("Total Amount received (in Rs)")}><center>{row.farmer_price}</center></td>
+                        <td data-label={t("Date of Transaction")}><center>{row.date}</center></td>
                       </tr>
                     ))}
                   </tbody>
