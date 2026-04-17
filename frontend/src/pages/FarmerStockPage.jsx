@@ -32,28 +32,49 @@ export default function FarmerStockPage() {
                 <span className="text-warning display-4"> {t("Crop Availability")} </span>
               </div>
               <div className="card-body text-white">
-                <table className="table table-striped table-hover table-bordered bg-gradient-white text-center display">
-                  <thead>
-                    <tr className="font-weight-bold text-default">
-                      <th><center>{t("Crop Name")}</center></th>
-                      <th><center>{t("Quantity (in KG)")}</center></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {rows.length ? (
-                      rows.map((row) => (
-                        <tr className="text-center" key={row.crop}>
-                          <td data-label={t("Crop Name")}>{row.crop}</td>
-                          <td data-label={t("Quantity (in KG)")}>{row.quantity}</td>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan="2" className="text-dark bg-white">{t("No crops currently available.")}</td>
+                <div className="desktopTableWrap">
+                  <table className="table table-striped table-hover table-bordered bg-gradient-white text-center display">
+                    <thead>
+                      <tr className="font-weight-bold text-default">
+                        <th><center>{t("Crop Name")}</center></th>
+                        <th><center>{t("Quantity (in KG)")}</center></th>
                       </tr>
-                    )}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {rows.length ? (
+                        rows.map((row) => (
+                          <tr className="text-center" key={row.crop}>
+                            <td data-label={t("Crop Name")}>{row.crop}</td>
+                            <td data-label={t("Quantity (in KG)")}>{row.quantity}</td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="2" className="text-dark bg-white">{t("No crops currently available.")}</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+
+                <div className="mobileStackList">
+                  {rows.length ? (
+                    rows.map((row) => (
+                      <div className="mobileStackCard" key={row.crop}>
+                        <div className="mobileStackRow">
+                          <span className="mobileStackLabel">{t("Crop Name")}</span>
+                          <strong>{row.crop}</strong>
+                        </div>
+                        <div className="mobileStackRow">
+                          <span className="mobileStackLabel">{t("Quantity (in KG)")}</span>
+                          <strong>{row.quantity}</strong>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="mobileStackCard text-dark">{t("No crops currently available.")}</div>
+                  )}
+                </div>
               </div>
             </div>
           </div>

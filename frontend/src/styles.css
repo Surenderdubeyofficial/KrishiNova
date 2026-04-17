@@ -2289,6 +2289,47 @@ html[data-theme="dark"] .authFeedbackBanner {
   background: #f5f5f5;
 }
 
+.mobileStackList {
+  display: none;
+  gap: 0.85rem;
+}
+
+.mobileStackCard {
+  padding: 0.9rem 1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 12px 24px rgba(42, 61, 39, 0.08);
+}
+
+.mobileStackRow + .mobileStackRow {
+  margin-top: 0.7rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid rgba(24, 44, 28, 0.08);
+}
+
+.mobileStackLabel {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #5d7448;
+}
+
+html[data-theme="dark"] .mobileStackCard {
+  background: rgba(24, 39, 28, 0.96);
+  color: #eef4e8;
+}
+
+html[data-theme="dark"] .mobileStackRow + .mobileStackRow {
+  border-top-color: rgba(227, 237, 220, 0.08);
+}
+
+html[data-theme="dark"] .mobileStackLabel {
+  color: #c9d8c1;
+}
+
 .navShell {
   display: flex;
   align-items: center;
@@ -3119,6 +3160,14 @@ html[data-theme="dark"] .authPreviewBadge {
   html[data-theme="dark"] .table.display tbody td::before,
   html[data-theme="dark"] table.display tbody td::before {
     color: #c9d8c1;
+  }
+
+  .desktopTableWrap {
+    display: none;
+  }
+
+  .mobileStackList {
+    display: grid;
   }
 }
 
