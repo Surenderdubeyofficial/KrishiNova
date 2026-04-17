@@ -1,0 +1,456 @@
+
+> agriculture-portal-backend@1.0.0 dev
+> nodemon src/server.js
+
+[33m[nodemon] 3.1.14[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): *.*[39m
+[33m[nodemon] watching extensions: js,mjs,cjs,json[39m
+[32m[nodemon] starting `node src/server.js`[39m
+node:events:497
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Function.listen (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\express\lib\application.js:635:24)
+    at file:///C:/Users/hp/Downloads/agriculture-portal-main/agriculture-portal-mern-sql/backend/src/server.js:5:5
+    at ModuleJob.run (node:internal/modules/esm/module_job:345:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:651:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1976:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+
+Node.js v22.19.0
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node src/server.js`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node src/server.js`[39m
+node:events:497
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Function.listen (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\express\lib\application.js:635:24)
+    at file:///C:/Users/hp/Downloads/agriculture-portal-main/agriculture-portal-mern-sql/backend/src/server.js:5:5
+    at ModuleJob.run (node:internal/modules/esm/module_job:345:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:651:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1976:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+
+Node.js v22.19.0
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node src/server.js`[39m
+node:events:497
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Function.listen (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\express\lib\application.js:635:24)
+    at file:///C:/Users/hp/Downloads/agriculture-portal-main/agriculture-portal-mern-sql/backend/src/server.js:5:5
+    at ModuleJob.run (node:internal/modules/esm/module_job:345:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:651:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1976:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+
+Node.js v22.19.0
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node src/server.js`[39m
+API listening on http://localhost:5000
+Contact email failed: Error: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials d2e1a72fcca58-82f0c311a06sm3033865b3a.10 - gsmtp
+    at SMTPConnection._formatError (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EAUTH',
+  response: '535-5.7.8 Username and Password not accepted. For more information, go to\n' +
+    '535 5.7.8  https://support.google.com/mail/?p=BadCredentials d2e1a72fcca58-82f0c311a06sm3033865b3a.10 - gsmtp',
+  responseCode: 535,
+  command: 'AUTH PLAIN'
+}
+Contact email failed: Error: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-2b2d4db008esm24836305ad.16 - gsmtp
+    at SMTPConnection._formatError (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EAUTH',
+  response: '535-5.7.8 Username and Password not accepted. For more information, go to\n' +
+    '535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-2b2d4db008esm24836305ad.16 - gsmtp',
+  responseCode: 535,
+  command: 'AUTH PLAIN'
+}
+Error: Command failed: py C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py", line 6, in <module>
+    import cgitb
+ModuleNotFoundError: No module named 'cgitb'
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5) {
+  code: 1,
+  killed: false,
+  signal: null,
+  cmd: 'py C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year',
+  stdout: '',
+  stderr: 'Traceback (most recent call last):\r\n' +
+    '  File "C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py", line 6, in <module>\r\n' +
+    '    import cgitb\r\n' +
+    "ModuleNotFoundError: No module named 'cgitb'\r\n"
+}
+Error: Command failed: py C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py", line 6, in <module>
+    import cgitb
+ModuleNotFoundError: No module named 'cgitb'
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5) {
+  code: 1,
+  killed: false,
+  signal: null,
+  cmd: 'py C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year',
+  stdout: '',
+  stderr: 'Traceback (most recent call last):\r\n' +
+    '  File "C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py", line 6, in <module>\r\n' +
+    '    import cgitb\r\n' +
+    "ModuleNotFoundError: No module named 'cgitb'\r\n"
+}
+Error: Command failed: py C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py", line 6, in <module>
+    import cgitb
+ModuleNotFoundError: No module named 'cgitb'
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5) {
+  code: 1,
+  killed: false,
+  signal: null,
+  cmd: 'py C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year',
+  stdout: '',
+  stderr: 'Traceback (most recent call last):\r\n' +
+    '  File "C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py", line 6, in <module>\r\n' +
+    '    import cgitb\r\n' +
+    "ModuleNotFoundError: No module named 'cgitb'\r\n"
+}
+Error: Command failed: py C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py", line 6, in <module>
+    import cgitb
+ModuleNotFoundError: No module named 'cgitb'
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5) {
+  code: 1,
+  killed: false,
+  signal: null,
+  cmd: 'py C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year',
+  stdout: '',
+  stderr: 'Traceback (most recent call last):\r\n' +
+    '  File "C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py", line 6, in <module>\r\n' +
+    '    import cgitb\r\n' +
+    "ModuleNotFoundError: No module named 'cgitb'\r\n"
+}
+Error: Command failed: py C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py", line 6, in <module>
+    import cgitb
+ModuleNotFoundError: No module named 'cgitb'
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5) {
+  code: 1,
+  killed: false,
+  signal: null,
+  cmd: 'py C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year',
+  stdout: '',
+  stderr: 'Traceback (most recent call last):\r\n' +
+    '  File "C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py", line 6, in <module>\r\n' +
+    '    import cgitb\r\n' +
+    "ModuleNotFoundError: No module named 'cgitb'\r\n"
+}
+Error: Command failed: py C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py", line 6, in <module>
+    import cgitb
+ModuleNotFoundError: No module named 'cgitb'
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5) {
+  code: 1,
+  killed: false,
+  signal: null,
+  cmd: 'py C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year',
+  stdout: '',
+  stderr: 'Traceback (most recent call last):\r\n' +
+    '  File "C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py", line 6, in <module>\r\n' +
+    '    import cgitb\r\n' +
+    "ModuleNotFoundError: No module named 'cgitb'\r\n"
+}
+Error: Command failed: py C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py", line 6, in <module>
+    import cgitb
+ModuleNotFoundError: No module named 'cgitb'
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5) {
+  code: 1,
+  killed: false,
+  signal: null,
+  cmd: 'py C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year',
+  stdout: '',
+  stderr: 'Traceback (most recent call last):\r\n' +
+    '  File "C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py", line 6, in <module>\r\n' +
+    '    import cgitb\r\n' +
+    "ModuleNotFoundError: No module named 'cgitb'\r\n"
+}
+Error: Command failed: py C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py", line 6, in <module>
+    import cgitb
+ModuleNotFoundError: No module named 'cgitb'
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5) {
+  code: 1,
+  killed: false,
+  signal: null,
+  cmd: 'py C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year',
+  stdout: '',
+  stderr: 'Traceback (most recent call last):\r\n' +
+    '  File "C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py", line 6, in <module>\r\n' +
+    '    import cgitb\r\n' +
+    "ModuleNotFoundError: No module named 'cgitb'\r\n"
+}
+Error: Command failed: py C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py", line 6, in <module>
+    import cgitb
+ModuleNotFoundError: No module named 'cgitb'
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5) {
+  code: 1,
+  killed: false,
+  signal: null,
+  cmd: 'py C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year',
+  stdout: '',
+  stderr: 'Traceback (most recent call last):\r\n' +
+    '  File "C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py", line 6, in <module>\r\n' +
+    '    import cgitb\r\n' +
+    "ModuleNotFoundError: No module named 'cgitb'\r\n"
+}
+Error: Command failed: py C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py", line 6, in <module>
+    import cgitb
+ModuleNotFoundError: No module named 'cgitb'
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5) {
+  code: 1,
+  killed: false,
+  signal: null,
+  cmd: 'py C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year',
+  stdout: '',
+  stderr: 'Traceback (most recent call last):\r\n' +
+    '  File "C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py", line 6, in <module>\r\n' +
+    '    import cgitb\r\n' +
+    "ModuleNotFoundError: No module named 'cgitb'\r\n"
+}
+Error: Command failed: py C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py", line 6, in <module>
+    import cgitb
+ModuleNotFoundError: No module named 'cgitb'
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5) {
+  code: 1,
+  killed: false,
+  signal: null,
+  cmd: 'py C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year',
+  stdout: '',
+  stderr: 'Traceback (most recent call last):\r\n' +
+    '  File "C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py", line 6, in <module>\r\n' +
+    '    import cgitb\r\n' +
+    "ModuleNotFoundError: No module named 'cgitb'\r\n"
+}
+Error: Command failed: py C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py", line 6, in <module>
+    import cgitb
+ModuleNotFoundError: No module named 'cgitb'
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5) {
+  code: 1,
+  killed: false,
+  signal: null,
+  cmd: 'py C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py Haryana Mewat Whole Year',
+  stdout: '',
+  stderr: 'Traceback (most recent call last):\r\n' +
+    '  File "C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py", line 6, in <module>\r\n' +
+    '    import cgitb\r\n' +
+    "ModuleNotFoundError: No module named 'cgitb'\r\n"
+}
+Error: Command failed: py C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py Karnataka Mysore Kharif
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\crop_prediction\ZDecision_Tree_Model_Call.py", line 6, in <module>
+    import cgitb
+ModuleNotFoundError: No module named 'cgitb'
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5) {
+  code: 1,
+  killed: false,
+  signal: null,
+  cmd: 'py C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py Karnataka Mysore Kharif',
+  stdout: '',
+  stderr: 'Traceback (most recent call last):\r\n' +
+    '  File "C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\crop_prediction\\ZDecision_Tree_Model_Call.py", line 6, in <module>\r\n' +
+    '    import cgitb\r\n' +
+    "ModuleNotFoundError: No module named 'cgitb'\r\n"
+}
+C:\Users\hp\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\validation.py:2691: UserWarning: X does not have valid feature names, but DecisionTreeClassifier was fitted with feature names
+  warnings.warn(
+
+C:\Users\hp\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\validation.py:2691: UserWarning: X does not have valid feature names, but OneHotEncoder was fitted with feature names
+  warnings.warn(
+
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node src/server.js`[39m
+node:events:497
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Function.listen (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\express\lib\application.js:635:24)
+    at file:///C:/Users/hp/Downloads/agriculture-portal-main/agriculture-portal-mern-sql/backend/src/server.js:5:5
+    at ModuleJob.run (node:internal/modules/esm/module_job:345:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:651:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1976:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+
+Node.js v22.19.0
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting child process[39m
+[32m[nodemon] starting `node src/server.js`[39m
+API listening on http://localhost:5000

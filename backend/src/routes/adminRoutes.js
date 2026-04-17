@@ -1,0 +1,76 @@
+import { Router } from "express";
+import { query } from "../config/db.js";
+import { requireAuth, requireRole } from "../middleware/auth.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+
+const router = Router();
+
+router.use(requireAuth, requireRole("admin"));
+
+router.get(
+  "/farmers",
+  asyncHandler(async (_req, res) => {
+    const rows = await query(
+      "SELECT farmer_id, farmer_name, F_gender, email, phone_no, F_birthday, F_State, F_District, F_Location FROM farmerlogin ORDER BY farmer_id DESC",
+    );
+    res.json(rows);
+  }),
+);
+
+router.get(
+  "/customers",
+  asyncHandler(async (_req, res) => {
+    const rows = await query(
+      "SELECT cust_id, cust_name, email, phone_no, state, city, address, pincode FROM custlogin ORDER BY cust_id DESC",
+    );
+    res.json(rows);
+  }),
+);
+
+router.get(
+  "/messages",
+  asyncHandler(async (_req, res) => {
+    const rows = await query(
+      "SELECT c_id, c_name, c_mobile, c_email, c_address, c_message FROM contactus ORDER BY c_id DESC",
+    );
+    res.json(rows);
+  }),
+);
+
+router.delete(
+  "/farmers/:id",
+  asyncHandler(async (req, res) => {
+    const result = await query("DELETE FROM farmerlogin WHERE farmer_id = ?", [req.params.id]);
+    if (!result.affectedRows) {
+      return res.status(404).json({ message: "Farmer not found" });
+    }
+
+    res.json({ message: "Farmer deleted successfully" });
+  }),
+);
+
+router.delete(
+  "/customers/:id",
+  asyncHandler(async (req, res) => {
+    const result = await query("DELETE FROM custlogin WHERE cust_id = ?", [req.params.id]);
+    if (!result.affectedRows) {
+      return res.status(404).json({ message: "Customer not found" });
+    }
+
+    res.json({ message: "Customer deleted successfully" });
+  }),
+);
+
+router.delete(
+  "/messages/:id",
+  asyncHandler(async (req, res) => {
+    const result = await query("DELETE FROM contactus WHERE c_id = ?", [req.params.id]);
+    if (!result.affectedRows) {
+      return res.status(404).json({ message: "Message not found" });
+    }
+
+    res.json({ message: "Message deleted successfully" });
+  }),
+);
+
+export default router;

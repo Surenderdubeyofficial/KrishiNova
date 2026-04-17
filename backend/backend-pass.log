@@ -1,0 +1,529 @@
+
+> agriculture-portal-backend@1.0.0 dev
+> nodemon src/server.js
+
+[33m[nodemon] 3.1.14[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): *.*[39m
+[33m[nodemon] watching extensions: js,mjs,cjs,json[39m
+[32m[nodemon] starting `node src/server.js`[39m
+node:events:497
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Function.listen (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\express\lib\application.js:635:24)
+    at file:///C:/Users/hp/Downloads/agriculture-portal-main/agriculture-portal-mern-sql/backend/src/server.js:5:5
+    at ModuleJob.run (node:internal/modules/esm/module_job:345:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:651:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1976:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+
+Node.js v22.19.0
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node src/server.js`[39m
+API listening on http://localhost:5000
+StripeAuthenticationError: Invalid API Key provided: sk_test_xxx
+    at res.toJSON.then.StripeAPIError.message (file:///C:/Users/hp/Downloads/agriculture-portal-main/agriculture-portal-mern-sql/backend/node_modules/stripe/esm/RequestSender.js:93:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+  type: 'StripeAuthenticationError',
+  raw: {
+    message: 'Invalid API Key provided: sk_test_xxx',
+    type: 'invalid_request_error',
+    headers: {
+      server: 'nginx',
+      date: 'Fri, 10 Apr 2026 11:26:10 GMT',
+      'content-type': 'application/json',
+      'content-length': '113',
+      connection: 'keep-alive',
+      'access-control-allow-credentials': 'true',
+      'access-control-allow-methods': 'GET, HEAD, PUT, PATCH, POST, DELETE',
+      'access-control-allow-origin': '*',
+      'access-control-expose-headers': 'Request-Id, Stripe-Manage-Version, Stripe-Should-Retry, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required',
+      'access-control-max-age': '300',
+      'cache-control': 'no-cache, no-store',
+      'content-security-policy': "base-uri 'none'; default-src 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
+      vary: 'Origin',
+      'www-authenticate': 'Bearer realm="Stripe"',
+      'x-robots-tag': 'none',
+      'x-wc': '383',
+      'strict-transport-security': 'max-age=63072000; includeSubDomains; preload'
+    },
+    statusCode: 401,
+    requestId: undefined
+  },
+  rawType: 'invalid_request_error',
+  code: undefined,
+  doc_url: undefined,
+  param: undefined,
+  detail: undefined,
+  headers: {
+    server: 'nginx',
+    date: 'Fri, 10 Apr 2026 11:26:10 GMT',
+    'content-type': 'application/json',
+    'content-length': '113',
+    connection: 'keep-alive',
+    'access-control-allow-credentials': 'true',
+    'access-control-allow-methods': 'GET, HEAD, PUT, PATCH, POST, DELETE',
+    'access-control-allow-origin': '*',
+    'access-control-expose-headers': 'Request-Id, Stripe-Manage-Version, Stripe-Should-Retry, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required',
+    'access-control-max-age': '300',
+    'cache-control': 'no-cache, no-store',
+    'content-security-policy': "base-uri 'none'; default-src 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
+    vary: 'Origin',
+    'www-authenticate': 'Bearer realm="Stripe"',
+    'x-robots-tag': 'none',
+    'x-wc': '383',
+    'strict-transport-security': 'max-age=63072000; includeSubDomains; preload'
+  },
+  requestId: undefined,
+  statusCode: 401,
+  userMessage: undefined,
+  charge: undefined,
+  decline_code: undefined,
+  payment_intent: undefined,
+  payment_method: undefined,
+  payment_method_type: undefined,
+  setup_intent: undefined,
+  source: undefined
+}
+StripeAuthenticationError: Invalid API Key provided: sk_test_xxx
+    at res.toJSON.then.StripeAPIError.message (file:///C:/Users/hp/Downloads/agriculture-portal-main/agriculture-portal-mern-sql/backend/node_modules/stripe/esm/RequestSender.js:93:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+  type: 'StripeAuthenticationError',
+  raw: {
+    message: 'Invalid API Key provided: sk_test_xxx',
+    type: 'invalid_request_error',
+    headers: {
+      server: 'nginx',
+      date: 'Fri, 10 Apr 2026 11:26:15 GMT',
+      'content-type': 'application/json',
+      'content-length': '113',
+      connection: 'keep-alive',
+      'access-control-allow-credentials': 'true',
+      'access-control-allow-methods': 'GET, HEAD, PUT, PATCH, POST, DELETE',
+      'access-control-allow-origin': '*',
+      'access-control-expose-headers': 'Request-Id, Stripe-Manage-Version, Stripe-Should-Retry, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required',
+      'access-control-max-age': '300',
+      'cache-control': 'no-cache, no-store',
+      'content-security-policy': "base-uri 'none'; default-src 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
+      vary: 'Origin',
+      'www-authenticate': 'Bearer realm="Stripe"',
+      'x-robots-tag': 'none',
+      'x-wc': '383',
+      'strict-transport-security': 'max-age=63072000; includeSubDomains; preload'
+    },
+    statusCode: 401,
+    requestId: undefined
+  },
+  rawType: 'invalid_request_error',
+  code: undefined,
+  doc_url: undefined,
+  param: undefined,
+  detail: undefined,
+  headers: {
+    server: 'nginx',
+    date: 'Fri, 10 Apr 2026 11:26:15 GMT',
+    'content-type': 'application/json',
+    'content-length': '113',
+    connection: 'keep-alive',
+    'access-control-allow-credentials': 'true',
+    'access-control-allow-methods': 'GET, HEAD, PUT, PATCH, POST, DELETE',
+    'access-control-allow-origin': '*',
+    'access-control-expose-headers': 'Request-Id, Stripe-Manage-Version, Stripe-Should-Retry, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required',
+    'access-control-max-age': '300',
+    'cache-control': 'no-cache, no-store',
+    'content-security-policy': "base-uri 'none'; default-src 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
+    vary: 'Origin',
+    'www-authenticate': 'Bearer realm="Stripe"',
+    'x-robots-tag': 'none',
+    'x-wc': '383',
+    'strict-transport-security': 'max-age=63072000; includeSubDomains; preload'
+  },
+  requestId: undefined,
+  statusCode: 401,
+  userMessage: undefined,
+  charge: undefined,
+  decline_code: undefined,
+  payment_intent: undefined,
+  payment_method: undefined,
+  payment_method_type: undefined,
+  setup_intent: undefined,
+  source: undefined
+}
+StripeAuthenticationError: Invalid API Key provided: sk_test_xxx
+    at res.toJSON.then.StripeAPIError.message (file:///C:/Users/hp/Downloads/agriculture-portal-main/agriculture-portal-mern-sql/backend/node_modules/stripe/esm/RequestSender.js:93:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+  type: 'StripeAuthenticationError',
+  raw: {
+    message: 'Invalid API Key provided: sk_test_xxx',
+    type: 'invalid_request_error',
+    headers: {
+      server: 'nginx',
+      date: 'Fri, 10 Apr 2026 11:26:16 GMT',
+      'content-type': 'application/json',
+      'content-length': '113',
+      connection: 'keep-alive',
+      'access-control-allow-credentials': 'true',
+      'access-control-allow-methods': 'GET, HEAD, PUT, PATCH, POST, DELETE',
+      'access-control-allow-origin': '*',
+      'access-control-expose-headers': 'Request-Id, Stripe-Manage-Version, Stripe-Should-Retry, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required',
+      'access-control-max-age': '300',
+      'cache-control': 'no-cache, no-store',
+      'content-security-policy': "base-uri 'none'; default-src 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
+      vary: 'Origin',
+      'www-authenticate': 'Bearer realm="Stripe"',
+      'x-robots-tag': 'none',
+      'x-wc': '383',
+      'strict-transport-security': 'max-age=63072000; includeSubDomains; preload'
+    },
+    statusCode: 401,
+    requestId: undefined
+  },
+  rawType: 'invalid_request_error',
+  code: undefined,
+  doc_url: undefined,
+  param: undefined,
+  detail: undefined,
+  headers: {
+    server: 'nginx',
+    date: 'Fri, 10 Apr 2026 11:26:16 GMT',
+    'content-type': 'application/json',
+    'content-length': '113',
+    connection: 'keep-alive',
+    'access-control-allow-credentials': 'true',
+    'access-control-allow-methods': 'GET, HEAD, PUT, PATCH, POST, DELETE',
+    'access-control-allow-origin': '*',
+    'access-control-expose-headers': 'Request-Id, Stripe-Manage-Version, Stripe-Should-Retry, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required',
+    'access-control-max-age': '300',
+    'cache-control': 'no-cache, no-store',
+    'content-security-policy': "base-uri 'none'; default-src 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
+    vary: 'Origin',
+    'www-authenticate': 'Bearer realm="Stripe"',
+    'x-robots-tag': 'none',
+    'x-wc': '383',
+    'strict-transport-security': 'max-age=63072000; includeSubDomains; preload'
+  },
+  requestId: undefined,
+  statusCode: 401,
+  userMessage: undefined,
+  charge: undefined,
+  decline_code: undefined,
+  payment_intent: undefined,
+  payment_method: undefined,
+  payment_method_type: undefined,
+  setup_intent: undefined,
+  source: undefined
+}
+Error: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-2b2d4f26a97sm36742775ad.61 - gsmtp
+    at SMTPConnection._formatError (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EAUTH',
+  response: '535-5.7.8 Username and Password not accepted. For more information, go to\n' +
+    '535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-2b2d4f26a97sm36742775ad.61 - gsmtp',
+  responseCode: 535,
+  command: 'AUTH PLAIN'
+}
+Error: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-2b2d4dd8246sm26125055ad.23 - gsmtp
+    at SMTPConnection._formatError (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EAUTH',
+  response: '535-5.7.8 Username and Password not accepted. For more information, go to\n' +
+    '535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-2b2d4dd8246sm26125055ad.23 - gsmtp',
+  responseCode: 535,
+  command: 'AUTH PLAIN'
+}
+Error: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-35e3517f2a0sm8501360a91.17 - gsmtp
+    at SMTPConnection._formatError (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EAUTH',
+  response: '535-5.7.8 Username and Password not accepted. For more information, go to\n' +
+    '535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-35e3517f2a0sm8501360a91.17 - gsmtp',
+  responseCode: 535,
+  command: 'AUTH PLAIN'
+}
+Error: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-35e3512f286sm9320839a91.11 - gsmtp
+    at SMTPConnection._formatError (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EAUTH',
+  response: '535-5.7.8 Username and Password not accepted. For more information, go to\n' +
+    '535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-35e3512f286sm9320839a91.11 - gsmtp',
+  responseCode: 535,
+  command: 'AUTH PLAIN'
+}
+Error: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-2b2d4e0accbsm25518795ad.33 - gsmtp
+    at SMTPConnection._formatError (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EAUTH',
+  response: '535-5.7.8 Username and Password not accepted. For more information, go to\n' +
+    '535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-2b2d4e0accbsm25518795ad.33 - gsmtp',
+  responseCode: 535,
+  command: 'AUTH PLAIN'
+}
+Error: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-2b2d4daede9sm39061685ad.14 - gsmtp
+    at SMTPConnection._formatError (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EAUTH',
+  response: '535-5.7.8 Username and Password not accepted. For more information, go to\n' +
+    '535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-2b2d4daede9sm39061685ad.14 - gsmtp',
+  responseCode: 535,
+  command: 'AUTH PLAIN'
+}
+Error: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-35e41336a20sm4152121a91.14 - gsmtp
+    at SMTPConnection._formatError (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EAUTH',
+  response: '535-5.7.8 Username and Password not accepted. For more information, go to\n' +
+    '535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-35e41336a20sm4152121a91.14 - gsmtp',
+  responseCode: 535,
+  command: 'AUTH PLAIN'
+}
+Error: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-35e41e1196asm904766a91.1 - gsmtp
+    at SMTPConnection._formatError (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EAUTH',
+  response: '535-5.7.8 Username and Password not accepted. For more information, go to\n' +
+    '535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-35e41e1196asm904766a91.1 - gsmtp',
+  responseCode: 535,
+  command: 'AUTH PLAIN'
+}
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node src/server.js`[39m
+node:events:497
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Function.listen (C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\backend\node_modules\express\lib\application.js:635:24)
+    at file:///C:/Users/hp/Downloads/agriculture-portal-main/agriculture-portal-mern-sql/backend/src/server.js:5:5
+    at ModuleJob.run (node:internal/modules/esm/module_job:345:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:651:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1976:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+
+Node.js v22.19.0
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node src/server.js`[39m
+API listening on http://localhost:5000
+Error: Command failed: py C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\fertilizer_recommendation\fertilizer_recommendation.py 45 45 56 56 45 44 45 45
+Traceback (most recent call last):
+  File "C:\Users\hp\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\_encode.py", line 229, in _encode
+    return _map_to_integer(values, uniques)
+  File "C:\Users\hp\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\_encode.py", line 168, in _map_to_integer
+    return xp.asarray([table[v] for v in values], device=device(values))
+                       ~~~~~^^^
+  File "C:\Users\hp\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\_encode.py", line 161, in __missing__
+    raise KeyError(key)
+KeyError: '45'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\fertilizer_recommendation\fertilizer_recommendation.py", line 33, in <module>
+    soil_enc = le_soil.transform([jsonsoil])[0]
+               ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\hp\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\preprocessing\_label.py", line 144, in transform
+    return _encode(y, uniques=self.classes_)
+  File "C:\Users\hp\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\_encode.py", line 231, in _encode
+    raise ValueError(f"y contains previously unseen labels: {e}")
+ValueError: y contains previously unseen labels: '45'
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5) {
+  code: 1,
+  killed: false,
+  signal: null,
+  cmd: 'py C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\fertilizer_recommendation\\fertilizer_recommendation.py 45 45 56 56 45 44 45 45',
+  stdout: '',
+  stderr: 'Traceback (most recent call last):\r\n' +
+    '  File "C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\sklearn\\utils\\_encode.py", line 229, in _encode\r\n' +
+    '    return _map_to_integer(values, uniques)\r\n' +
+    '  File "C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\sklearn\\utils\\_encode.py", line 168, in _map_to_integer\r\n' +
+    '    return xp.asarray([table[v] for v in values], device=device(values))\r\n' +
+    '                       ~~~~~^^^\r\n' +
+    '  File "C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\sklearn\\utils\\_encode.py", line 161, in __missing__\r\n' +
+    '    raise KeyError(key)\r\n' +
+    "KeyError: '45'\r\n" +
+    '\r\n' +
+    'During handling of the above exception, another exception occurred:\r\n' +
+    '\r\n' +
+    'Traceback (most recent call last):\r\n' +
+    '  File "C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\fertilizer_recommendation\\fertilizer_recommendation.py", line 33, in <module>\r\n' +
+    '    soil_enc = le_soil.transform([jsonsoil])[0]\r\n' +
+    '               ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\r\n' +
+    '  File "C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\sklearn\\preprocessing\\_label.py", line 144, in transform\r\n' +
+    '    return _encode(y, uniques=self.classes_)\r\n' +
+    '  File "C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\sklearn\\utils\\_encode.py", line 231, in _encode\r\n' +
+    '    raise ValueError(f"y contains previously unseen labels: {e}")\r\n' +
+    "ValueError: y contains previously unseen labels: '45'\r\n"
+}
+Error: Command failed: py C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\fertilizer_recommendation\fertilizer_recommendation.py 90 42 43 20 82 25 sandy maize
+Traceback (most recent call last):
+  File "C:\Users\hp\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\_encode.py", line 229, in _encode
+    return _map_to_integer(values, uniques)
+  File "C:\Users\hp\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\_encode.py", line 168, in _map_to_integer
+    return xp.asarray([table[v] for v in values], device=device(values))
+                       ~~~~~^^^
+  File "C:\Users\hp\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\_encode.py", line 161, in __missing__
+    raise KeyError(key)
+KeyError: 'sandy'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\agriculture-portal-main\agriculture-portal-mern-sql\shared\ML\fertilizer_recommendation\fertilizer_recommendation.py", line 33, in <module>
+    soil_enc = le_soil.transform([jsonsoil])[0]
+               ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\hp\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\preprocessing\_label.py", line 144, in transform
+    return _encode(y, uniques=self.classes_)
+  File "C:\Users\hp\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\utils\_encode.py", line 231, in _encode
+    raise ValueError(f"y contains previously unseen labels: {e}")
+ValueError: y contains previously unseen labels: 'sandy'
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5) {
+  code: 1,
+  killed: false,
+  signal: null,
+  cmd: 'py C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\fertilizer_recommendation\\fertilizer_recommendation.py 90 42 43 20 82 25 sandy maize',
+  stdout: '',
+  stderr: 'Traceback (most recent call last):\r\n' +
+    '  File "C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\sklearn\\utils\\_encode.py", line 229, in _encode\r\n' +
+    '    return _map_to_integer(values, uniques)\r\n' +
+    '  File "C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\sklearn\\utils\\_encode.py", line 168, in _map_to_integer\r\n' +
+    '    return xp.asarray([table[v] for v in values], device=device(values))\r\n' +
+    '                       ~~~~~^^^\r\n' +
+    '  File "C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\sklearn\\utils\\_encode.py", line 161, in __missing__\r\n' +
+    '    raise KeyError(key)\r\n' +
+    "KeyError: 'sandy'\r\n" +
+    '\r\n' +
+    'During handling of the above exception, another exception occurred:\r\n' +
+    '\r\n' +
+    'Traceback (most recent call last):\r\n' +
+    '  File "C:\\Users\\hp\\Downloads\\agriculture-portal-main\\agriculture-portal-mern-sql\\shared\\ML\\fertilizer_recommendation\\fertilizer_recommendation.py", line 33, in <module>\r\n' +
+    '    soil_enc = le_soil.transform([jsonsoil])[0]\r\n' +
+    '               ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\r\n' +
+    '  File "C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\sklearn\\preprocessing\\_label.py", line 144, in transform\r\n' +
+    '    return _encode(y, uniques=self.classes_)\r\n' +
+    '  File "C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\sklearn\\utils\\_encode.py", line 231, in _encode\r\n' +
+    '    raise ValueError(f"y contains previously unseen labels: {e}")\r\n' +
+    "ValueError: y contains previously unseen labels: 'sandy'\r\n"
+}
+Error: Unable to fetch weather forecast
+    at fetchWeatherForecast (file:///C:/Users/hp/Downloads/agriculture-portal-main/agriculture-portal-mern-sql/backend/src/services/weatherService.js:46:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/hp/Downloads/agriculture-portal-main/agriculture-portal-mern-sql/backend/src/routes/integrationRoutes.js:27:18
+Error: Unable to fetch weather forecast
+    at fetchWeatherForecast (file:///C:/Users/hp/Downloads/agriculture-portal-main/agriculture-portal-mern-sql/backend/src/services/weatherService.js:46:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/hp/Downloads/agriculture-portal-main/agriculture-portal-mern-sql/backend/src/routes/integrationRoutes.js:27:18
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting child process[39m
+[32m[nodemon] starting `node src/server.js`[39m
+API listening on http://localhost:5000
