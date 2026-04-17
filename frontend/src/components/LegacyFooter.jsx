@@ -37,20 +37,50 @@ export default function LegacyFooter() {
           </div>
 
           <div className="col-12 col-md-3 align-self-center mt-4 mt-md-0">
-            <div className="social-network text-center">
-              <a target="_blank" href="mailto:surenderdubey9582@gmail.com" rel="noreferrer" className="btn btn-icon-only btn-linkedin rounded-circle">
+            <div className="footerSocialGrid">
+              <a
+                target="_blank"
+                href="mailto:surenderdubey9582@gmail.com"
+                rel="noreferrer"
+                className="footerSocialBtn footerSocialEmail"
+                aria-label="Email"
+              >
                 <i className="fas fa-envelope" />
               </a>
-              <a target="_blank" href="https://www.linkedin.com/in/surenderdubey/" rel="noreferrer" className="btn btn-icon-only btn-twitter rounded-circle">
+              <a
+                target="_blank"
+                href="https://www.linkedin.com/in/surenderdubey/"
+                rel="noreferrer"
+                className="footerSocialBtn footerSocialLinkedIn"
+                aria-label="LinkedIn"
+              >
                 <i className="fab fa-linkedin-in" />
               </a>
-              <a target="_blank" href="https://github.com/Surenderdubeyofficial" rel="noreferrer" className="btn btn-icon-only btn-github rounded-circle">
+              <a
+                target="_blank"
+                href="https://github.com/Surenderdubeyofficial"
+                rel="noreferrer"
+                className="footerSocialBtn footerSocialGithub"
+                aria-label="GitHub"
+              >
                 <i className="fab fa-github" />
               </a>
-              <a target="_blank" href="tel:+919582514339" rel="noreferrer" className="btn btn-icon-only btn-facebook rounded-circle">
+              <a
+                target="_blank"
+                href="tel:+919582514339"
+                rel="noreferrer"
+                className="footerSocialBtn footerSocialPhone"
+                aria-label="Phone"
+              >
                 <i className="fas fa-phone" />
               </a>
-              <a target="_blank" href="https://maps.google.com/?q=Karol+Bagh+New+Delhi+110005+India" rel="noreferrer" className="btn btn-icon-only btn-instagram rounded-circle">
+              <a
+                target="_blank"
+                href="https://maps.google.com/?q=Karol+Bagh+New+Delhi+110005+India"
+                rel="noreferrer"
+                className="footerSocialBtn footerSocialMap"
+                aria-label="Map"
+              >
                 <i className="fas fa-map-marker-alt" />
               </a>
             </div>
