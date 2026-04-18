@@ -12,6 +12,21 @@ import PhoneAuthFields from "../components/auth/PhoneAuthFields.jsx";
 import { useUi } from "../UiContext.jsx";
 
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function normalizeIndianMobile(value) {
+  const digits = String(value || "").replace(/\D/g, "");
+
+  if (digits.length === 12 && digits.startsWith("91")) {
+    return digits.slice(2);
+  }
+
+  return digits;
+}
+
+function isValidIndianMobile(value) {
+  return /^[6-9]\d{9}$/.test(normalizeIndianMobile(value));
+}
 
 const initialForm = {
   username: "",
@@ -150,6 +165,20 @@ export default function AuthPage() {
   async function submit(event) {
     event.preventDefault();
     setFeedback("");
+
+    if (role !== "admin" && authMethod !== "phone") {
+      if (!emailPattern.test(String(form.email || "").trim())) {
+        setFeedback("Enter a valid email address");
+        return;
+      }
+    }
+
+    if (role !== "admin" && (authMethod === "phone" || mode === "register")) {
+      if (!isValidIndianMobile(form.mobile)) {
+        setFeedback("Enter a valid 10-digit mobile number");
+        return;
+      }
+    }
 
     try {
       if (authMethod === "phone" && role !== "admin") {

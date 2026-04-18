@@ -11,6 +11,8 @@ import { hashPassword, verifyPassword } from "../utils/passwords.js";
 const router = Router();
 const PENDING_VALUE = "__PENDING__";
 const PENDING_EMAIL_DOMAIN = "pending.local";
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_PATTERN = /^[6-9]\d{9}$/;
 
 const roleConfig = {
   farmer: {
@@ -59,6 +61,28 @@ const roleConfig = {
 
 function isPendingValue(value) {
   return !String(value || "").trim() || String(value).trim() === PENDING_VALUE;
+}
+
+function isValidEmail(value) {
+  return EMAIL_PATTERN.test(String(value || "").trim());
+}
+
+function normalizeIndianMobile(value) {
+  const digits = String(value || "").replace(/\D/g, "");
+
+  if (digits.length === 10) {
+    return digits;
+  }
+
+  if (digits.length === 12 && digits.startsWith("91")) {
+    return digits.slice(2);
+  }
+
+  return digits;
+}
+
+function isValidIndianMobile(value) {
+  return PHONE_PATTERN.test(normalizeIndianMobile(value));
 }
 
 function isPlaceholderEmail(email) {
@@ -195,6 +219,14 @@ async function createQuickAccount(role, { email, mobile, name }) {
   return result.insertId;
 }
 
+async function recordLoginEvent({ role, userId, userName, identifier = null, method }) {
+  await query(
+    `INSERT INTO user_login_history (user_role, user_id, user_name, identifier, login_method)
+     VALUES (?, ?, ?, ?, ?)`,
+    [role, userId, userName || role, identifier, method],
+  );
+}
+
 function createToken(payload) {
   return jwt.sign(payload, process.env.JWT_SECRET || "change-this-secret", {
     expiresIn: "7d",
@@ -270,17 +302,20 @@ function validateRegistration(role, body) {
 
   if (!body.name?.trim()) common.push("Name is required");
   if (!body.email?.trim()) common.push("Email is required");
+  if (body.email?.trim() && !isValidEmail(body.email)) common.push("Enter a valid email address");
   if (!body.password?.trim() || body.password.length < 6) common.push("Password must be at least 6 characters");
   if (!body.stateCode) common.push("State is required");
 
   if (role === "farmer") {
     if (!body.mobile?.trim()) common.push("Mobile is required");
+    if (body.mobile?.trim() && !isValidIndianMobile(body.mobile)) common.push("Enter a valid 10-digit mobile number");
     if (!body.district?.trim()) common.push("District is required");
     if (!body.city?.trim()) common.push("Location is required");
   }
 
   if (role === "customer") {
     if (!body.mobile?.trim()) common.push("Mobile is required");
+    if (body.mobile?.trim() && !isValidIndianMobile(body.mobile)) common.push("Enter a valid 10-digit mobile number");
     if (!body.address?.trim()) common.push("Address is required");
     if (!body.city?.trim()) common.push("City is required");
     if (!body.pincode?.trim()) common.push("Pincode is required");
@@ -304,6 +339,7 @@ router.post(
     }
 
     const { email, password, name, stateCode } = req.body;
+    const normalizedMobile = req.body.mobile ? normalizeIndianMobile(req.body.mobile) : "";
     const existing = await query(`SELECT ${config.id} FROM ${config.table} WHERE email = ?`, [email]);
     if (existing.length) {
       return res.status(409).json({ message: "Email already exists" });
@@ -317,7 +353,7 @@ router.post(
     const passwordHash = await hashPassword(password);
     const result = await query(
       config.insertSql,
-      config.profile({ body: { ...req.body, passwordHash }, stateName: state.StateName }),
+      config.profile({ body: { ...req.body, mobile: normalizedMobile, passwordHash }, stateName: state.StateName }),
     );
     const userId = result.insertId;
 
@@ -363,6 +399,14 @@ router.post(
         return res.status(401).json({ message: "Invalid credentials" });
       }
 
+      await recordLoginEvent({
+        role: "admin",
+        userId: admin.admin_id,
+        userName: admin.admin_name,
+        identifier: admin.admin_name,
+        method: "password",
+      });
+
       return res.json({
         token: createToken({ role: "admin", userId: admin.admin_id }),
         user: sanitizeAuthUser("admin", admin),
@@ -370,6 +414,10 @@ router.post(
     } else {
       if (!email || !password) {
         return res.status(400).json({ message: "Email and password are required" });
+      }
+
+      if (!isValidEmail(email)) {
+        return res.status(400).json({ message: "Enter a valid email address" });
       }
 
       const [user] = await query(
@@ -442,6 +490,14 @@ router.post(
     await query(`UPDATE ${config.table} SET otp = 0 WHERE ${config.id} = ?`, [payload.userId]);
 
     const fullProfile = await loadUserProfile(payload.role, payload.userId);
+
+    await recordLoginEvent({
+      role: payload.role,
+      userId: payload.userId,
+      userName: fullProfile?.farmer_name || fullProfile?.cust_name || user.name,
+      identifier: fullProfile?.email || user.email,
+      method: "email_otp",
+    });
 
     return res.json({
       token: createToken({ role: payload.role, userId: payload.userId }),
@@ -517,6 +573,10 @@ router.post(
 
     if (!phoneNumber) {
       return res.status(400).json({ message: "Mobile number is required" });
+    }
+
+    if (!isValidIndianMobile(phoneNumber)) {
+      return res.status(400).json({ message: "Enter a valid 10-digit mobile number" });
     }
 
     let user = await findUserByPhone(role, phoneNumber);
@@ -602,6 +662,14 @@ router.post(
 
     const fullProfile = await loadUserProfile(payload.role, payload.userId);
 
+    await recordLoginEvent({
+      role: payload.role,
+      userId: payload.userId,
+      userName: fullProfile?.farmer_name || fullProfile?.cust_name || user.name,
+      identifier: fullProfile?.phone_no || payload.mobile,
+      method: "phone_otp",
+    });
+
     return res.json({
       token: createToken({ role: payload.role, userId: payload.userId }),
       user: sanitizeAuthUser(payload.role, fullProfile || user),
@@ -650,6 +718,14 @@ router.post(
     }
 
     const fullProfile = await loadUserProfile(role, user.id ?? user.farmer_id ?? user.cust_id);
+
+    await recordLoginEvent({
+      role,
+      userId: user.id ?? user.farmer_id ?? user.cust_id,
+      userName: fullProfile?.farmer_name || fullProfile?.cust_name || user.name,
+      identifier: googleResult.profile.email,
+      method: "google",
+    });
 
     return res.json({
       token: createToken({ role, userId: user.id ?? user.farmer_id ?? user.cust_id }),
@@ -720,6 +796,10 @@ router.put(
       return res.status(400).json({ message: "Email is required" });
     }
 
+    if (!isValidEmail(nextEmail)) {
+      return res.status(400).json({ message: "Enter a valid email address" });
+    }
+
     const emailAvailable = await ensureUniqueEmail(role, nextEmail, userId);
     if (!emailAvailable) {
       return res.status(409).json({ message: "Email already exists" });
@@ -731,6 +811,10 @@ router.put(
         return res.status(400).json({ message: "Name, email, mobile, district, and city are required" });
       }
 
+      if (!isValidIndianMobile(mobile)) {
+        return res.status(400).json({ message: "Enter a valid 10-digit mobile number" });
+      }
+
       await query(
         `UPDATE farmerlogin
          SET farmer_name = ?, email = ?, phone_no = ?, F_gender = ?, F_birthday = ?, F_State = ?, F_District = ?, F_Location = ?, password = ?
@@ -738,7 +822,7 @@ router.put(
         [
           name.trim(),
           nextEmail,
-          mobile.trim(),
+          normalizeIndianMobile(mobile),
           gender || "Male",
           dob || "",
           stateName,
@@ -754,6 +838,10 @@ router.put(
           return res.status(400).json({ message: "Name, email, mobile, city, address, and pincode are required" });
         }
 
+        if (!isValidIndianMobile(mobile)) {
+          return res.status(400).json({ message: "Enter a valid 10-digit mobile number" });
+        }
+
         await query(
           `UPDATE custlogin
          SET cust_name = ?, email = ?, phone_no = ?, state = ?, city = ?, address = ?, pincode = ?, password = ?
@@ -761,7 +849,7 @@ router.put(
           [
             name.trim(),
             nextEmail,
-            mobile.trim(),
+            normalizeIndianMobile(mobile),
             stateName,
             city.trim(),
           address.trim(),

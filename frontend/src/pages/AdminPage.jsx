@@ -153,6 +153,42 @@ export default function AdminPage() {
               </div>
             </div>
           </div>
+
+          <div className="col-md-12 mb-3">
+            <div className="card">
+              <div className="card-body bg-gradient-white">
+                <h4 className="mb-3">Recent Login Activity</h4>
+                {data?.recentLogins?.length ? (
+                  <div className="table-responsive">
+                    <table className="table table-striped table-bordered mb-0">
+                      <thead>
+                        <tr>
+                          <th>Role</th>
+                          <th>User</th>
+                          <th>Identifier</th>
+                          <th>Method</th>
+                          <th>Date & Time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {data.recentLogins.map((entry) => (
+                          <tr key={entry.login_id}>
+                            <td>{entry.user_role}</td>
+                            <td>{entry.user_name}</td>
+                            <td>{entry.identifier || "N/A"}</td>
+                            <td>{entry.login_method}</td>
+                            <td>{new Date(entry.logged_in_at).toLocaleString()}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <p className="mb-0">No login activity recorded yet.</p>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </LegacySection>
     </ProtectedRoute>

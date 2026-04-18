@@ -83,6 +83,12 @@ router.get(
     const marketTotals = await query(
       "SELECT crop, quantity FROM production_approx WHERE quantity > 0 ORDER BY quantity DESC LIMIT 6",
     );
+    const recentLogins = await query(
+      `SELECT login_id, user_role, user_name, identifier, login_method, logged_in_at
+       FROM user_login_history
+       ORDER BY login_id DESC
+       LIMIT 10`,
+    );
 
     res.json({
       totals: {
@@ -94,6 +100,7 @@ router.get(
       recentMessages,
       topCrops,
       marketTotals,
+      recentLogins,
     });
   }),
 );

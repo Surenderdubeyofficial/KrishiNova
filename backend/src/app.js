@@ -9,12 +9,17 @@ import integrationRoutes from "./routes/integrationRoutes.js";
 import marketRoutes from "./routes/marketRoutes.js";
 import predictionRoutes from "./routes/predictionRoutes.js";
 import publicRoutes from "./routes/publicRoutes.js";
+import { ensureAuthTables } from "./services/authSchema.js";
 import { ensureInvoiceTables } from "./services/invoiceSchema.js";
 
 const app = express();
 
 ensureInvoiceTables().catch((error) => {
   console.error("Failed to ensure invoice tables", error);
+});
+
+ensureAuthTables().catch((error) => {
+  console.error("Failed to ensure auth tables", error);
 });
 
 function parseAllowedOrigins() {
