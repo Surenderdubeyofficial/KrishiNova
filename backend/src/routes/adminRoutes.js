@@ -2,10 +2,60 @@ import { Router } from "express";
 import { query } from "../config/db.js";
 import { requireAuth, requireRole } from "../middleware/auth.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
+import { hashPassword } from "../utils/passwords.js";
 
 const router = Router();
 
 router.use(requireAuth, requireRole("admin"));
+
+router.get(
+  "/admins",
+  asyncHandler(async (_req, res) => {
+    const rows = await query(
+      "SELECT admin_id, admin_name FROM admin ORDER BY admin_id DESC",
+    );
+    res.json(rows);
+  }),
+);
+
+router.post(
+  "/admins",
+  asyncHandler(async (req, res) => {
+    const adminName = String(req.body?.username || "").trim();
+    const password = String(req.body?.password || "");
+
+    if (!adminName) {
+      return res.status(400).json({ message: "Admin username is required" });
+    }
+
+    if (password.length < 6) {
+      return res.status(400).json({ message: "Admin password must be at least 6 characters" });
+    }
+
+    const [existing] = await query(
+      "SELECT admin_id FROM admin WHERE admin_name = ?",
+      [adminName],
+    );
+
+    if (existing) {
+      return res.status(409).json({ message: "Admin username already exists" });
+    }
+
+    const passwordHash = await hashPassword(password);
+    const result = await query(
+      "INSERT INTO admin (admin_name, admin_password) VALUES (?, ?)",
+      [adminName, passwordHash],
+    );
+
+    res.status(201).json({
+      message: "Admin added successfully",
+      admin: {
+        admin_id: result.insertId,
+        admin_name: adminName,
+      },
+    });
+  }),
+);
 
 router.get(
   "/farmers",
