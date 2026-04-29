@@ -16,7 +16,7 @@ export default function AdminPage() {
   const [pageError, setPageError] = useState("");
   const [feedback, setFeedback] = useState("");
   const [creating, setCreating] = useState(false);
-  const [form, setForm] = useState({ username: "", email: "", mobile: "", password: "" });
+  const [form, setForm] = useState({ username: "", password: "" });
 
   async function loadDashboard() {
     setPageError("");
@@ -49,7 +49,7 @@ export default function AdminPage() {
       });
 
       setFeedback(response.message || "Admin added successfully");
-      setForm({ username: "", email: "", mobile: "", password: "" });
+      setForm({ username: "", password: "" });
       await loadDashboard();
     } catch (error) {
       setFeedback(error.message || "Unable to add admin");
@@ -104,27 +104,6 @@ export default function AdminPage() {
                     />
                   </div>
                   <div className="form-group mb-3">
-                    <label className="font-weight-bold mb-2">Admin Email</label>
-                    <input
-                      className="form-control"
-                      type="email"
-                      value={form.email}
-                      onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
-                      placeholder="Enter admin email"
-                      required
-                    />
-                  </div>
-                  <div className="form-group mb-3">
-                    <label className="font-weight-bold mb-2">Admin Mobile</label>
-                    <input
-                      className="form-control"
-                      value={form.mobile}
-                      onChange={(event) => setForm((current) => ({ ...current, mobile: event.target.value }))}
-                      placeholder="Enter admin mobile number"
-                      required
-                    />
-                  </div>
-                  <div className="form-group mb-3">
                     <label className="font-weight-bold mb-2">Admin Password</label>
                     <input
                       className="form-control"
@@ -156,8 +135,6 @@ export default function AdminPage() {
                         <tr>
                           <th>ID</th>
                           <th>Username</th>
-                          <th>Email</th>
-                          <th>Mobile</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -165,8 +142,6 @@ export default function AdminPage() {
                           <tr key={admin.admin_id}>
                             <td>{admin.admin_id}</td>
                             <td>{admin.admin_name}</td>
-                            <td>{admin.admin_email || "N/A"}</td>
-                            <td>{admin.admin_mobile || "N/A"}</td>
                           </tr>
                         ))}
                       </tbody>
