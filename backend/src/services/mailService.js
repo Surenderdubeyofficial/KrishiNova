@@ -1,21 +1,37 @@
 import nodemailer from "nodemailer";
 
 const DEFAULT_SMTP_TIMEOUT_MS = 15000;
+const DEFAULT_HTTP_TIMEOUT_MS = 15000;
 
-function getSmtpTimeout() {
-  const value = Number(process.env.SMTP_TIMEOUT_MS || DEFAULT_SMTP_TIMEOUT_MS);
-  return Number.isFinite(value) && value > 0 ? value : DEFAULT_SMTP_TIMEOUT_MS;
+function getTimeout(value, fallback) {
+  const parsed = Number(value || fallback);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
 }
 
-function withTimeout(promise, label) {
-  const timeoutMs = getSmtpTimeout();
-
+function withTimeout(promise, timeoutMs, label) {
   return Promise.race([
     promise,
     new Promise((_, reject) => {
       setTimeout(() => reject(new Error(`${label} timed out after ${timeoutMs}ms`)), timeoutMs);
     }),
   ]);
+}
+
+function getResendConfig() {
+  return {
+    apiKey: String(process.env.RESEND_API_KEY || "").trim(),
+    fromEmail: String(process.env.RESEND_FROM_EMAIL || "").trim(),
+    timeoutMs: getTimeout(process.env.RESEND_TIMEOUT_MS, DEFAULT_HTTP_TIMEOUT_MS),
+  };
+}
+
+function hasResendConfig() {
+  const { apiKey, fromEmail } = getResendConfig();
+  return Boolean(apiKey && fromEmail);
+}
+
+function getSmtpTimeout() {
+  return getTimeout(process.env.SMTP_TIMEOUT_MS, DEFAULT_SMTP_TIMEOUT_MS);
 }
 
 function createTransporter() {
@@ -38,7 +54,56 @@ function createTransporter() {
   });
 }
 
-async function sendEmail(message, missingReason = "SMTP is not configured") {
+async function sendViaResend(message) {
+  const { apiKey, fromEmail, timeoutMs } = getResendConfig();
+
+  try {
+    const response = await withTimeout(
+      fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: fromEmail,
+          to: Array.isArray(message.to) ? message.to : [message.to],
+          reply_to: message.replyTo || undefined,
+          subject: message.subject,
+          html: message.html,
+          text: message.text,
+        }),
+      }),
+      timeoutMs,
+      "Resend send",
+    );
+
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      return {
+        delivered: false,
+        reason:
+          data?.message ||
+          data?.error ||
+          `Resend request failed with status ${response.status}`,
+      };
+    }
+
+    return {
+      delivered: true,
+      provider: "resend",
+      messageId: data?.id || null,
+    };
+  } catch (error) {
+    return {
+      delivered: false,
+      reason: error?.message || "Resend delivery failed",
+    };
+  }
+}
+
+async function sendViaSmtp(message, missingReason = "SMTP is not configured") {
   const transporter = createTransporter();
 
   if (!transporter) {
@@ -49,8 +114,12 @@ async function sendEmail(message, missingReason = "SMTP is not configured") {
   }
 
   try {
-    await withTimeout(transporter.sendMail(message), "SMTP send");
-    return { delivered: true };
+    const info = await withTimeout(transporter.sendMail(message), getSmtpTimeout(), "SMTP send");
+    return {
+      delivered: true,
+      provider: "smtp",
+      messageId: info?.messageId || null,
+    };
   } catch (error) {
     return {
       delivered: false,
@@ -59,18 +128,29 @@ async function sendEmail(message, missingReason = "SMTP is not configured") {
   }
 }
 
+async function sendEmail(message, missingReason = "Mail delivery is not configured") {
+  if (hasResendConfig()) {
+    return sendViaResend(message);
+  }
+
+  return sendViaSmtp(message, missingReason);
+}
+
 export async function sendContactEmail({ name, mobile, email, address, message }) {
-  const recipient = process.env.CONTACT_RECEIVER_EMAIL || process.env.SMTP_USER;
+  const recipient =
+    String(process.env.CONTACT_RECEIVER_EMAIL || "").trim() ||
+    String(process.env.RESEND_FROM_EMAIL || "").trim() ||
+    String(process.env.SMTP_USER || "").trim();
 
   if (!recipient) {
     return {
       delivered: false,
-      reason: "SMTP is not configured",
+      reason: "Mail delivery is not configured",
     };
   }
 
   return sendEmail({
-    from: process.env.SMTP_USER,
+    from: process.env.SMTP_USER || process.env.RESEND_FROM_EMAIL,
     to: recipient,
     replyTo: email,
     subject: `Agriculture Portal contact from ${name}`,
@@ -87,7 +167,7 @@ export async function sendContactEmail({ name, mobile, email, address, message }
 
 export async function sendOtpEmail({ email, otp, role }) {
   return sendEmail({
-    from: process.env.SMTP_USER,
+    from: process.env.SMTP_USER || process.env.RESEND_FROM_EMAIL,
     to: email,
     subject: "OTP Verification",
     html: `
