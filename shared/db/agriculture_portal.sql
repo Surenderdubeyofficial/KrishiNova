@@ -30,15 +30,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `admin_id` int(20) NOT NULL,
   `admin_name` varchar(100) NOT NULL,
-  `admin_password` varchar(100) NOT NULL
+  `admin_password` varchar(100) NOT NULL,
+  `admin_email` varchar(255) DEFAULT NULL,
+  `admin_mobile` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`admin_id`, `admin_name`, `admin_password`) VALUES
-(1, 'Surender Dubey', 'Naumik@9582');
+INSERT INTO `admin` (`admin_id`, `admin_name`, `admin_password`, `admin_email`, `admin_mobile`) VALUES
+(1, 'Surender Dubey', 'Naumik@9582', 'surenderdubey9582@gmail.com', '9582514339');
 
 -- --------------------------------------------------------
 
@@ -127,7 +129,7 @@ CREATE TABLE `custlogin` (
 --
 
 INSERT INTO `custlogin` (`cust_id`, `cust_name`, `password`, `email`, `address`, `city`, `pincode`, `state`, `phone_no`, `otp`) VALUES
-(1, 'customer', 'password', 'agricultureportal01@gmail.com', 'Udupi, Bantakal', 'Mysore', '576210', 'Karnataka', '9878787898', 0);
+(1, 'customer', 'password', 'surenderdubey9582@gmail.com', 'Udupi, Bantakal', 'Mysore', '576210', 'Karnataka', '9878787898', 0);
 
 -- --------------------------------------------------------
 
@@ -820,7 +822,7 @@ CREATE TABLE `farmerlogin` (
 --
 
 INSERT INTO `farmerlogin` (`farmer_id`, `farmer_name`, `password`, `email`, `phone_no`, `F_gender`, `F_birthday`, `F_State`, `F_District`, `F_Location`, `otp`) VALUES
-(44, 'Agriculture Portal', 'password', 'agricultureportal01@gmail.com', '9878987898', 'Male', '2001-09-22', 'Karnataka', 'Mangalore', 'Bantakal', 0);
+(44, 'Agriculture Portal', 'password', 'surenderdubey9582@gmail.com', '9878987898', 'Male', '2001-09-22', 'Karnataka', 'Mangalore', 'Bantakal', 0);
 
 -- --------------------------------------------------------
 
@@ -969,7 +971,9 @@ INSERT INTO `state` (`StCode`, `StateName`) VALUES
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`admin_id`),
-  ADD UNIQUE KEY `admin_name` (`admin_name`);
+  ADD UNIQUE KEY `admin_name` (`admin_name`),
+  ADD UNIQUE KEY `admin_email` (`admin_email`),
+  ADD UNIQUE KEY `admin_mobile` (`admin_mobile`);
 
 --
 -- Indexes for table `cart`

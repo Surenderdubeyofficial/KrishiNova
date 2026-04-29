@@ -5,6 +5,22 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { hashPassword } from "../utils/passwords.js";
 
 const router = Router();
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_PATTERN = /^[6-9]\d{9}$/;
+
+function normalizeIndianMobile(value) {
+  const digits = String(value || "").replace(/\D/g, "");
+
+  if (digits.length === 12 && digits.startsWith("91")) {
+    return digits.slice(2);
+  }
+
+  return digits;
+}
+
+function isValidIndianMobile(value) {
+  return PHONE_PATTERN.test(normalizeIndianMobile(value));
+}
 
 router.use(requireAuth, requireRole("admin"));
 
@@ -12,7 +28,7 @@ router.get(
   "/admins",
   asyncHandler(async (_req, res) => {
     const rows = await query(
-      "SELECT admin_id, admin_name FROM admin ORDER BY admin_id DESC",
+      "SELECT admin_id, admin_name, admin_email, admin_mobile FROM admin ORDER BY admin_id DESC",
     );
     res.json(rows);
   }),
@@ -23,9 +39,19 @@ router.post(
   asyncHandler(async (req, res) => {
     const adminName = String(req.body?.username || "").trim();
     const password = String(req.body?.password || "");
+    const adminEmail = String(req.body?.email || "").trim().toLowerCase();
+    const adminMobile = normalizeIndianMobile(req.body?.mobile);
 
     if (!adminName) {
       return res.status(400).json({ message: "Admin username is required" });
+    }
+
+    if (!adminEmail || !EMAIL_PATTERN.test(adminEmail)) {
+      return res.status(400).json({ message: "Enter a valid admin email address" });
+    }
+
+    if (!adminMobile || !isValidIndianMobile(adminMobile)) {
+      return res.status(400).json({ message: "Enter a valid 10-digit admin mobile number" });
     }
 
     if (password.length < 6) {
@@ -33,18 +59,18 @@ router.post(
     }
 
     const [existing] = await query(
-      "SELECT admin_id FROM admin WHERE admin_name = ?",
-      [adminName],
+      "SELECT admin_id FROM admin WHERE admin_name = ? OR admin_email = ? OR admin_mobile = ?",
+      [adminName, adminEmail, adminMobile],
     );
 
     if (existing) {
-      return res.status(409).json({ message: "Admin username already exists" });
+      return res.status(409).json({ message: "Admin username, email, or mobile already exists" });
     }
 
     const passwordHash = await hashPassword(password);
     const result = await query(
-      "INSERT INTO admin (admin_name, admin_password) VALUES (?, ?)",
-      [adminName, passwordHash],
+      "INSERT INTO admin (admin_name, admin_password, admin_email, admin_mobile) VALUES (?, ?, ?, ?)",
+      [adminName, passwordHash, adminEmail, adminMobile],
     );
 
     res.status(201).json({
@@ -52,6 +78,8 @@ router.post(
       admin: {
         admin_id: result.insertId,
         admin_name: adminName,
+        admin_email: adminEmail,
+        admin_mobile: adminMobile,
       },
     });
   }),

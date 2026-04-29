@@ -43,6 +43,13 @@ const initialForm = {
   pincode: "",
 };
 
+const initialRecoveryForm = {
+  email: "",
+  mobile: "",
+  password: "",
+  confirmPassword: "",
+};
+
 function normalizeList(result) {
   if (Array.isArray(result)) {
     return result;
@@ -71,6 +78,12 @@ export default function AuthPage() {
   const [pendingOtp, setPendingOtp] = useState(null);
   const [phoneOtp, setPhoneOtp] = useState("");
   const [pendingPhoneOtp, setPendingPhoneOtp] = useState(null);
+  const [forgotMode, setForgotMode] = useState(false);
+  const [recoveryMethod, setRecoveryMethod] = useState("email");
+  const [recoveryForm, setRecoveryForm] = useState(initialRecoveryForm);
+  const [recoveryOtp, setRecoveryOtp] = useState("");
+  const [pendingRecovery, setPendingRecovery] = useState(null);
+  const [verifiedRecovery, setVerifiedRecovery] = useState(null);
 
   useEffect(() => {
     const target = searchParams.get("target");
@@ -139,11 +152,36 @@ export default function AuthPage() {
     setForm((current) => ({ ...current, [key]: value }));
   }
 
+  function updateRecoveryForm(key, value) {
+    setRecoveryForm((current) => ({ ...current, [key]: value }));
+  }
+
   function clearPendingStates() {
     setPendingOtp(null);
     setPendingPhoneOtp(null);
     setOtp("");
     setPhoneOtp("");
+  }
+
+  function clearRecoveryStates() {
+    setPendingRecovery(null);
+    setVerifiedRecovery(null);
+    setRecoveryOtp("");
+    setRecoveryForm(initialRecoveryForm);
+  }
+
+  function openForgotPassword() {
+    clearPendingStates();
+    clearRecoveryStates();
+    setForgotMode(true);
+    setRecoveryMethod("email");
+    setFeedback("");
+  }
+
+  function closeForgotPassword() {
+    clearRecoveryStates();
+    setForgotMode(false);
+    setFeedback("");
   }
 
   function finishLogin(result) {
@@ -301,9 +339,142 @@ export default function AuthPage() {
     setFeedback("");
   }
 
+  async function startRecovery(event) {
+    event.preventDefault();
+    setFeedback("");
+
+    if (recoveryMethod === "email") {
+      if (!emailPattern.test(String(recoveryForm.email || "").trim())) {
+        setFeedback("Enter a valid email address");
+        return;
+      }
+    } else if (!isValidIndianMobile(recoveryForm.mobile)) {
+      setFeedback("Enter a valid 10-digit mobile number");
+      return;
+    }
+
+    try {
+      const path =
+        recoveryMethod === "email" ? `/auth/forgot/email/start/${role}` : `/auth/forgot/phone/start/${role}`;
+      const payload =
+        recoveryMethod === "email"
+          ? { email: recoveryForm.email.trim() }
+          : { mobile: recoveryForm.mobile.trim() };
+      const result = await api(path, {
+        method: "POST",
+        body: JSON.stringify(payload),
+      });
+
+      setPendingRecovery({
+        resetToken: result.resetToken,
+        channel: recoveryMethod,
+        role,
+        user: result.user,
+      });
+      setVerifiedRecovery(null);
+      setRecoveryOtp("");
+      setFeedback(result.message || "Recovery OTP sent.");
+    } catch (error) {
+      setFeedback(error.message);
+    }
+  }
+
+  async function resendRecoveryOtp() {
+    setFeedback("");
+
+    try {
+      const result = await api("/auth/forgot/resend", {
+        method: "POST",
+        body: JSON.stringify({ resetToken: pendingRecovery?.resetToken }),
+      });
+
+      setPendingRecovery((current) =>
+        current
+          ? {
+              ...current,
+              resetToken: result.resetToken,
+            }
+          : current,
+      );
+      setFeedback(result.message || "Recovery OTP sent again.");
+    } catch (error) {
+      setFeedback(error.message);
+    }
+  }
+
+  async function verifyRecoveryOtp(event) {
+    event.preventDefault();
+    setFeedback("");
+
+    try {
+      const result = await api("/auth/forgot/verify", {
+        method: "POST",
+        body: JSON.stringify({
+          resetToken: pendingRecovery?.resetToken,
+          otp: recoveryOtp,
+        }),
+      });
+
+      setVerifiedRecovery({
+        passwordResetToken: result.passwordResetToken,
+        channel: pendingRecovery?.channel,
+      });
+      setPendingRecovery((current) => (current ? { ...current } : current));
+      setRecoveryOtp("");
+      setFeedback(result.message || "OTP verified.");
+    } catch (error) {
+      setFeedback(error.message);
+    }
+  }
+
+  async function submitPasswordReset(event) {
+    event.preventDefault();
+    setFeedback("");
+
+    if (String(recoveryForm.password || "").trim().length < 6) {
+      setFeedback("Password must be at least 6 characters");
+      return;
+    }
+
+    if (recoveryForm.password !== recoveryForm.confirmPassword) {
+      setFeedback("Passwords do not match");
+      return;
+    }
+
+    try {
+      const result = await api("/auth/forgot/reset", {
+        method: "POST",
+        body: JSON.stringify({
+          passwordResetToken: verifiedRecovery?.passwordResetToken,
+          password: recoveryForm.password,
+        }),
+      });
+
+      closeForgotPassword();
+      setMode("login");
+      setForm((current) => ({
+        ...current,
+        email: recoveryMethod === "email" ? recoveryForm.email : current.email,
+        mobile: recoveryMethod === "phone" ? recoveryForm.mobile : current.mobile,
+        password: "",
+      }));
+      setFeedback(result.message || "Password reset successful.");
+    } catch (error) {
+      setFeedback(error.message);
+    }
+  }
+
   const showGoogle = role !== "admin" && Boolean(googleClientId);
   const quickFlow = authMethod === "phone" || authMethod === "google";
-  const authTitle = pendingOtp || pendingPhoneOtp ? t("Verify access") : t("Sign in or create your account");
+  const authTitle = forgotMode
+    ? verifiedRecovery
+      ? t("Create your new password")
+      : pendingRecovery
+        ? t("Verify your recovery OTP")
+        : t("Forgot your password?")
+    : pendingOtp || pendingPhoneOtp
+      ? t("Verify access")
+      : t("Sign in or create your account");
   const roleSummary = {
     farmer: t("Sell crops, use predictions, and manage your farm profile."),
     customer: t("Buy directly from farmers and track crop availability."),
@@ -434,7 +605,15 @@ export default function AuthPage() {
               <span className="eyebrow">{t("Secure Access")}</span>
               <h2>{authTitle}</h2>
               <p className="sectionText authHeaderText">
-                {pendingOtp
+                {forgotMode
+                  ? verifiedRecovery
+                    ? "Choose a strong new password for your account."
+                    : pendingRecovery
+                      ? pendingRecovery.channel === "email"
+                        ? `Enter the email OTP sent to ${pendingRecovery.user?.email}.`
+                        : `Enter the SMS OTP sent to ${pendingRecovery.user?.mobile}.`
+                      : "Choose whether to recover your password by email or mobile OTP."
+                  : pendingOtp
                   ? `Enter the email OTP sent to ${pendingOtp.user?.email}.`
                   : pendingPhoneOtp
                     ? `Enter the SMS OTP sent to ${pendingPhoneOtp.user?.mobile}.`
@@ -448,7 +627,125 @@ export default function AuthPage() {
             </div>
           </div>
 
-          {pendingOtp ? (
+          {forgotMode ? (
+            verifiedRecovery ? (
+              <form className="authVerifyCard authVerifyCardModern authCardShell" onSubmit={submitPasswordReset}>
+                <div className="authInlineHeading">
+                  <strong>{t("Set a new password")}</strong>
+                  <span>{t("Your OTP is verified. Choose a new password to finish recovery.")}</span>
+                </div>
+                <div className="authFieldGroup">
+                  <label className="authFieldLabel">{t("New Password")}</label>
+                  <input
+                    placeholder={t("Enter new password")}
+                    type="password"
+                    value={recoveryForm.password}
+                    onChange={(e) => updateRecoveryForm("password", e.target.value)}
+                  />
+                </div>
+                <div className="authFieldGroup">
+                  <label className="authFieldLabel">{t("Confirm Password")}</label>
+                  <input
+                    placeholder={t("Confirm new password")}
+                    type="password"
+                    value={recoveryForm.confirmPassword}
+                    onChange={(e) => updateRecoveryForm("confirmPassword", e.target.value)}
+                  />
+                </div>
+                <button className="button" type="submit">{t("Update Password")}</button>
+                <div className="authActionRow">
+                  <button className="ghostAction" type="button" onClick={closeForgotPassword}>{t("Back to login")}</button>
+                </div>
+              </form>
+            ) : pendingRecovery ? (
+              <form className="authVerifyCard authVerifyCardModern authCardShell" onSubmit={verifyRecoveryOtp}>
+                <div className="authInlineHeading">
+                  <strong>{pendingRecovery.channel === "email" ? t("Email recovery") : t("Mobile recovery")}</strong>
+                  <span>
+                    {pendingRecovery.channel === "email"
+                      ? t("Use the OTP we sent to your email address.")
+                      : t("Use the SMS OTP we sent to your phone.")}
+                  </span>
+                </div>
+                <input
+                  placeholder={pendingRecovery.channel === "email" ? t("Enter email OTP") : t("Enter SMS OTP")}
+                  value={recoveryOtp}
+                  onChange={(e) => setRecoveryOtp(e.target.value)}
+                  maxLength={6}
+                />
+                <button className="button" type="submit">{t("Verify Recovery OTP")}</button>
+                <div className="authActionRow">
+                  <button className="ghostAction" type="button" onClick={resendRecoveryOtp}>{t("Resend OTP")}</button>
+                  <button className="ghostAction" type="button" onClick={closeForgotPassword}>{t("Back")}</button>
+                </div>
+              </form>
+            ) : (
+              <>
+                <div className="authControlStrip authCardShell">
+                  <div className="authTopControls authTopControlsModal">
+                    <div className="authRoleSelectWrap">
+                      <label className="authFieldLabel">{t("Role")}</label>
+                      <div className="authSelectShell">
+                        <select value={role} onChange={(e) => setRole(e.target.value)}>
+                          <option value="farmer">{t("Farmer")}</option>
+                          <option value="customer">{t("Customer")}</option>
+                          <option value="admin">{t("Admin")}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <section className="authSectionBlock authCardShell">
+                  <div className="authSectionHeader">
+                    <strong>{t("Choose recovery method")}</strong>
+                    <span>{t("Verify ownership through email OTP or mobile OTP before resetting your password.")}</span>
+                  </div>
+                  <div className="authMethodGrid authMethodGridModern">
+                    <button className={recoveryMethod === "email" ? "authMethodCard activeAuthMethod" : "authMethodCard"} type="button" onClick={() => setRecoveryMethod("email")}>
+                      <strong>{t("Email")}</strong>
+                      <span>{t("Send a reset OTP to the email linked to your account.")}</span>
+                    </button>
+                    <button className={recoveryMethod === "phone" ? "authMethodCard activeAuthMethod" : "authMethodCard"} type="button" onClick={() => setRecoveryMethod("phone")}>
+                      <strong>{t("Mobile")}</strong>
+                      <span>{t("Send a reset OTP to the mobile number saved in your profile.")}</span>
+                    </button>
+                  </div>
+                </section>
+
+                <form className="authFormGrid authFormGridModern authCardShell" onSubmit={startRecovery}>
+                  {recoveryMethod === "email" ? (
+                    <div className="authFieldGroup authFieldGroupWide">
+                      <label className="authFieldLabel">{t("Email")}</label>
+                      <input
+                        placeholder={t("Enter account email")}
+                        type="email"
+                        value={recoveryForm.email}
+                        onChange={(e) => updateRecoveryForm("email", e.target.value)}
+                      />
+                    </div>
+                  ) : (
+                    <div className="authFieldGroup authFieldGroupWide">
+                      <label className="authFieldLabel">{t("Mobile")}</label>
+                      <input
+                        placeholder={t("Enter account mobile number")}
+                        value={recoveryForm.mobile}
+                        onChange={(e) => updateRecoveryForm("mobile", e.target.value)}
+                      />
+                    </div>
+                  )}
+
+                  <button className="button authPrimaryButton" type="submit">
+                    {recoveryMethod === "email" ? t("Send Email OTP") : t("Send SMS OTP")}
+                  </button>
+                </form>
+
+                <div className="authActionRow">
+                  <button className="ghostAction" type="button" onClick={closeForgotPassword}>{t("Back to login")}</button>
+                </div>
+              </>
+            )
+          ) : pendingOtp ? (
             <form className="authVerifyCard authVerifyCardModern authCardShell" onSubmit={verifyOtp}>
               <div className="authInlineHeading">
                 <strong>{t("Email verification")}</strong>
@@ -576,6 +873,13 @@ export default function AuthPage() {
                           ? t("Continue with Email")
                           : t("Create Account")}
                   </button>
+                  {mode === "login" && role !== "admin" ? (
+                    <div className="authFormFooter authFieldGroupWide">
+                      <button className="ghostAction authInlineLink" type="button" onClick={openForgotPassword}>
+                        {t("Forgot password? Reset by email or mobile")}
+                      </button>
+                    </div>
+                  ) : null}
                 </form>
               ) : null}
 
