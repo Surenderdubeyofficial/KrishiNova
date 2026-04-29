@@ -1,11 +1,45 @@
 import pool from "../config/db.js";
 
+async function columnExists(tableName, columnName) {
+  const [rows] = await pool.query(
+    `
+      SELECT 1
+      FROM information_schema.columns
+      WHERE table_schema = DATABASE()
+        AND table_name = ?
+        AND column_name = ?
+      LIMIT 1
+    `,
+    [tableName, columnName],
+  );
+
+  return rows.length > 0;
+}
+
+async function indexExists(tableName, indexName) {
+  const [rows] = await pool.query(
+    `
+      SELECT 1
+      FROM information_schema.statistics
+      WHERE table_schema = DATABASE()
+        AND table_name = ?
+        AND index_name = ?
+      LIMIT 1
+    `,
+    [tableName, indexName],
+  );
+
+  return rows.length > 0;
+}
+
 export async function ensureAuthTables() {
-  await pool.execute(`
-    ALTER TABLE admin
-      ADD COLUMN IF NOT EXISTS admin_email VARCHAR(255) DEFAULT NULL,
-      ADD COLUMN IF NOT EXISTS admin_mobile VARCHAR(20) DEFAULT NULL
-  `);
+  if (!(await columnExists("admin", "admin_email"))) {
+    await pool.execute("ALTER TABLE admin ADD COLUMN admin_email VARCHAR(255) DEFAULT NULL");
+  }
+
+  if (!(await columnExists("admin", "admin_mobile"))) {
+    await pool.execute("ALTER TABLE admin ADD COLUMN admin_mobile VARCHAR(20) DEFAULT NULL");
+  }
 
   await pool.execute(`
     UPDATE admin
@@ -14,13 +48,13 @@ export async function ensureAuthTables() {
     WHERE admin_id = 1
   `);
 
-  await pool.execute(`
-    CREATE UNIQUE INDEX IF NOT EXISTS idx_admin_email_unique ON admin (admin_email)
-  `);
+  if (!(await indexExists("admin", "idx_admin_email_unique"))) {
+    await pool.execute("CREATE UNIQUE INDEX idx_admin_email_unique ON admin (admin_email)");
+  }
 
-  await pool.execute(`
-    CREATE UNIQUE INDEX IF NOT EXISTS idx_admin_mobile_unique ON admin (admin_mobile)
-  `);
+  if (!(await indexExists("admin", "idx_admin_mobile_unique"))) {
+    await pool.execute("CREATE UNIQUE INDEX idx_admin_mobile_unique ON admin (admin_mobile)");
+  }
 
   await pool.execute(`
     CREATE TABLE IF NOT EXISTS user_login_history (
