@@ -9,6 +9,12 @@ import "./styles.css";
 
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
+if (import.meta.env.DEV && window.location.hostname === "127.0.0.1") {
+  window.location.replace(
+    `${window.location.protocol}//localhost:${window.location.port}${window.location.pathname}${window.location.search}${window.location.hash}`,
+  );
+}
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId={googleClientId || "google-client-id-not-configured"}>

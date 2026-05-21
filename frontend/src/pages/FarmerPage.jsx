@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { api } from "../api";
 import ProtectedRoute from "../components/ProtectedRoute.jsx";
 import LegacySection from "../components/LegacySection.jsx";
+import RoleAiAssistantCard from "../components/RoleAiAssistantCard.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
 import { useUi } from "../UiContext.jsx";
 
@@ -110,6 +111,8 @@ export default function FarmerPage() {
             </div>
           </div>
         </div>
+
+        <RoleAiAssistantCard role="farmer" currentPage="Farmer Dashboard" />
 
         <section className="panel split">
           <form className="card" onSubmit={submitTrade}>

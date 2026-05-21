@@ -24,6 +24,11 @@ function getRazorpayClient() {
   });
 }
 
+export function isRazorpayTestMode() {
+  const credentials = getCredentials();
+  return Boolean(credentials?.keyId?.startsWith("rzp_test_"));
+}
+
 export async function createRazorpayOrder({ crop, quantity, unitAmount }) {
   const credentials = getCredentials();
   const razorpay = getRazorpayClient();
@@ -59,6 +64,7 @@ export async function createRazorpayOrder({ crop, quantity, unitAmount }) {
   return {
     configured: true,
     keyId: credentials.keyId,
+    mode: credentials.keyId.startsWith("rzp_test_") ? "test" : "live",
     orderId: order.id,
     amount: order.amount,
     currency: order.currency,

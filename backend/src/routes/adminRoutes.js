@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { query } from "../config/db.js";
 import { requireAuth, requireRole } from "../middleware/auth.js";
+import { withAdminContact } from "../services/adminContact.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { hashPassword } from "../utils/passwords.js";
 
@@ -14,7 +15,7 @@ router.get(
     const rows = await query(
       "SELECT admin_id, admin_name FROM admin ORDER BY admin_id DESC",
     );
-    res.json(rows);
+    res.json(rows.map(withAdminContact));
   }),
 );
 
@@ -50,10 +51,38 @@ router.post(
     res.status(201).json({
       message: "Admin added successfully",
       admin: {
-        admin_id: result.insertId,
-        admin_name: adminName,
+        ...withAdminContact({
+          admin_id: result.insertId,
+          admin_name: adminName,
+        }),
       },
     });
+  }),
+);
+
+router.delete(
+  "/admins/:id",
+  asyncHandler(async (req, res) => {
+    const adminId = Number(req.params.id);
+    if (!Number.isInteger(adminId) || adminId <= 0) {
+      return res.status(400).json({ message: "Valid admin ID is required" });
+    }
+
+    if (adminId === Number(req.user.userId)) {
+      return res.status(400).json({ message: "You cannot remove your own active admin account" });
+    }
+
+    const [summary] = await query("SELECT COUNT(*) AS total FROM admin");
+    if (Number(summary.total || 0) <= 1) {
+      return res.status(400).json({ message: "At least one admin account must remain" });
+    }
+
+    const result = await query("DELETE FROM admin WHERE admin_id = ?", [adminId]);
+    if (!result.affectedRows) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    res.json({ message: "Admin removed successfully" });
   }),
 );
 

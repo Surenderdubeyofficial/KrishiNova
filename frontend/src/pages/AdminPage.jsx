@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { api } from "../api";
+import { useAuth } from "../AuthContext.jsx";
+import { ADMIN_CONTACT } from "../branding.js";
 import ProtectedRoute from "../components/ProtectedRoute.jsx";
 import LegacySection from "../components/LegacySection.jsx";
+import RoleAiAssistantCard from "../components/RoleAiAssistantCard.jsx";
 import { useUi } from "../UiContext.jsx";
 
 function formatTotalLabel(key) {
@@ -10,6 +13,7 @@ function formatTotalLabel(key) {
 
 export default function AdminPage() {
   const { t } = useUi();
+  const { user } = useAuth();
   const [data, setData] = useState(null);
   const [admins, setAdmins] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -58,6 +62,21 @@ export default function AdminPage() {
     }
   }
 
+  async function removeAdmin(adminId) {
+    if (!window.confirm("Remove this admin account?")) {
+      return;
+    }
+
+    setFeedback("");
+    try {
+      const response = await api(`/admin/admins/${adminId}`, { method: "DELETE" });
+      setFeedback(response.message || "Admin removed successfully");
+      await loadDashboard();
+    } catch (error) {
+      setFeedback(error.message || "Unable to remove admin");
+    }
+  }
+
   return (
     <ProtectedRoute role="admin">
       <LegacySection badge="Admin">
@@ -86,6 +105,10 @@ export default function AdminPage() {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="col-md-12 mb-3">
+            <RoleAiAssistantCard role="admin" currentPage="Admin Dashboard" />
           </div>
 
           <div className="col-lg-6 mb-3">
@@ -135,13 +158,31 @@ export default function AdminPage() {
                         <tr>
                           <th>ID</th>
                           <th>Username</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         {admins.map((admin) => (
                           <tr key={admin.admin_id}>
                             <td>{admin.admin_id}</td>
-                            <td>{admin.admin_name}</td>
+                            <td>
+                              <strong>{admin.admin_name}</strong>
+                              {Number(admin.admin_id) === 1 ? (
+                                <div className="text-muted small">
+                                  {ADMIN_CONTACT.email} | {ADMIN_CONTACT.mobile} | {ADMIN_CONTACT.address}
+                                </div>
+                              ) : null}
+                            </td>
+                            <td>
+                              <button
+                                className="btn btn-danger btn-sm"
+                                type="button"
+                                disabled={Number(admin.admin_id) === Number(user?.id)}
+                                onClick={() => removeAdmin(admin.admin_id)}
+                              >
+                                Remove
+                              </button>
+                            </td>
                           </tr>
                         ))}
                       </tbody>

@@ -158,6 +158,47 @@ select {
   transform: translateY(-1px);
 }
 
+.navAiSahayakBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 38px;
+  border: 1px solid rgba(255, 218, 105, 0.52);
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  background: linear-gradient(135deg, #ffd45f, #f6b93d);
+  color: #18321d;
+  box-shadow: 0 12px 28px rgba(246, 185, 61, 0.25);
+  cursor: pointer;
+  font-size: 0.84rem;
+  font-weight: 900;
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.navAiSahayakBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 34px rgba(246, 185, 61, 0.34);
+}
+
+.navVoiceBtn {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.13);
+  color: #fffdf6;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.navVoiceBtn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
+}
+
 .hero,
 .panel,
 .page {
@@ -655,18 +696,60 @@ select {
   padding: 2rem 0 3rem;
 }
 
+.phpHomeModern .panel,
+.phpHomeModern .card,
+.phpHomeModern .phpSectionExact {
+  border-color: rgba(37, 79, 31, 0.12);
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 18px 48px rgba(29, 65, 30, 0.08);
+}
+
 .phpHeroExact {
+  position: relative;
+  overflow: hidden;
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: 1.5rem;
-  padding: 2rem;
+  padding: clamp(1.4rem, 3vw, 2.6rem);
   margin-bottom: 2rem;
   border-radius: 34px;
-  background: linear-gradient(135deg, #f7b42c, #f2d16b 45%, #fff8e4);
-  box-shadow: 0 22px 60px rgba(96, 74, 9, 0.14);
+  background:
+    linear-gradient(90deg, rgba(15, 58, 27, 0.92), rgba(30, 86, 39, 0.7) 48%, rgba(255, 248, 228, 0.08)),
+    url("/img/agri.png") center/cover;
+  box-shadow: 0 28px 76px rgba(24, 65, 26, 0.22);
+}
+
+.phpHeroExact,
+.homeAgentCard,
+.roleAiCard,
+.voicePanel {
+  animation: uiFloatIn 0.45s ease both;
+}
+
+@keyframes uiFloatIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.phpHeroExact::after {
+  content: "";
+  position: absolute;
+  inset: auto 5% -32px 5%;
+  height: 90px;
+  background: rgba(255, 255, 255, 0.5);
+  filter: blur(35px);
+  pointer-events: none;
 }
 
 .phpHeroText {
+  position: relative;
+  z-index: 1;
   display: grid;
   align-content: center;
   gap: 1rem;
@@ -678,15 +761,39 @@ select {
 
 .phpHeroText h1 {
   margin: 0;
-  color: #fff;
-  font-size: clamp(2.8rem, 4.5vw, 5rem);
+  max-width: 10ch;
+  color: #fff9dd;
+  font-size: clamp(2.7rem, 5vw, 5.8rem);
   line-height: 0.95;
+  text-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
 }
 
 .phpHeroText > p {
   margin: 0;
+  max-width: 620px;
   color: rgba(255, 255, 255, 0.92);
   font-size: 1.15rem;
+}
+
+.phpHeroExact .ctaRow {
+  align-items: center;
+}
+
+.phpHeroExact .button {
+  background: linear-gradient(135deg, #ffd45f, #7fb437);
+  color: #123418;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+}
+
+.phpHeroExact .ghostButton {
+  border-color: rgba(255, 255, 255, 0.58);
+  background: rgba(255, 255, 255, 0.18);
+  color: #fffdf6;
+  backdrop-filter: blur(8px);
+}
+
+.phpHeroExact .ghostButton:hover {
+  background: rgba(255, 255, 255, 0.28);
 }
 
 .phpQuoteExact {
@@ -719,15 +826,66 @@ select {
 }
 
 .phpHeroPlant {
+  position: relative;
+  z-index: 1;
   display: grid;
   align-content: center;
   gap: 1.25rem;
   justify-items: center;
 }
 
-.phpHeroPlant img {
-  width: min(100%, 300px);
-  filter: drop-shadow(0 16px 28px rgba(68, 58, 11, 0.18));
+.homeHeroPhoto {
+  position: relative;
+  width: min(100%, 430px);
+  min-height: 430px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 24px 58px rgba(4, 25, 12, 0.28);
+}
+
+.homeHeroPhoto img {
+  width: 100%;
+  height: 100%;
+  min-height: 430px;
+  object-fit: cover;
+  transform: scale(1.02);
+}
+
+.homeHeroAiBadge {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 0.15rem 0.75rem;
+  align-items: center;
+  padding: 0.9rem;
+  border-radius: 18px;
+  background: rgba(255, 252, 235, 0.92);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.18);
+}
+
+.homeHeroAiBadge span {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: #184d22;
+  color: #ffd45f;
+  font-weight: 900;
+}
+
+.homeHeroAiBadge strong {
+  color: #163c1d;
+}
+
+.homeHeroAiBadge small {
+  color: #5d7454;
 }
 
 .phpHeroMiniStats {
@@ -742,12 +900,169 @@ select {
   gap: 0.15rem;
   padding: 1rem;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.68);
+  background: rgba(255, 252, 235, 0.84);
   text-align: center;
 }
 
 .phpHeroMiniStats strong {
   font-size: 1.8rem;
+}
+
+.homeRoleShowcase {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: -0.4rem 0 2rem;
+}
+
+.homeAgentCard {
+  position: relative;
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+  min-height: 210px;
+  overflow: hidden;
+  border: 1px solid rgba(37, 79, 31, 0.13);
+  border-radius: 24px;
+  padding: 0.9rem;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.84), rgba(238, 248, 229, 0.78)),
+    #f6fbef;
+  box-shadow: 0 18px 44px rgba(29, 65, 30, 0.1);
+  transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+}
+
+.homeAgentCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 212, 95, 0.16), transparent 42%);
+  opacity: 0;
+  transition: opacity 0.24s ease;
+  pointer-events: none;
+}
+
+.homeAgentCard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(47, 107, 47, 0.28);
+  box-shadow: 0 24px 58px rgba(29, 65, 30, 0.16);
+}
+
+.homeAgentCard:hover::before {
+  opacity: 1;
+}
+
+.homeAgentCard img {
+  width: 104px;
+  height: 100%;
+  min-height: 190px;
+  border-radius: 18px;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.homeAgentCard:hover img {
+  transform: scale(1.045);
+}
+
+.homeAgentBody {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: start;
+  gap: 0.42rem;
+}
+
+.homeAgentBody span {
+  display: block;
+  color: #2f6b2f;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.homeAgentBody strong {
+  display: block;
+  margin-top: 0.25rem;
+  color: #173c1e;
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+
+.homeAgentBody ul {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.homeAgentBody li {
+  color: #52664e;
+  font-size: 0.9rem;
+}
+
+.homeAgentBody li::before {
+  content: "✓";
+  margin-right: 0.35rem;
+  color: #2f6b2f;
+  font-weight: 900;
+}
+
+.homeAgentActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.55rem;
+}
+
+.homeAgentActions button,
+.homeAgentActions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.48rem 0.78rem;
+  background: #245b24;
+  color: #fff8dc;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.homeAgentActions button:first-child {
+  background: linear-gradient(135deg, #ffd45f, #f0b43f);
+  color: #173c1e;
+}
+
+.homeAgentActions a {
+  border: 1px solid rgba(37, 79, 31, 0.14);
+  background: rgba(255, 255, 255, 0.72);
+  color: #21451f;
+}
+
+html[data-theme="dark"] .homeAgentCard {
+  background:
+    linear-gradient(135deg, rgba(22, 43, 27, 0.96), rgba(17, 34, 22, 0.96)),
+    #102618;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+html[data-theme="dark"] .homeAgentBody strong {
+  color: #eef4e8;
+}
+
+html[data-theme="dark"] .homeAgentBody li {
+  color: #b8c9b2;
+}
+
+html[data-theme="dark"] .homeAgentActions a {
+  background: rgba(255, 255, 255, 0.08);
+  color: #eef4e8;
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .phpHero {
@@ -2260,6 +2575,10 @@ html[data-theme="dark"] .footerSocialBtn {
 
 .legacyDropdownMenu {
   display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 3000;
   margin-top: 0;
   min-width: 220px;
   max-height: 320px;
@@ -2410,6 +2729,18 @@ html[data-theme="dark"] .mobileStackLabel {
   display: flex;
   align-items: center;
   flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.navMenuPanel .navbar-nav {
+  flex-wrap: nowrap;
+  gap: 0.15rem;
+}
+
+.navMenuPanel .nav-link {
+  white-space: nowrap;
 }
 
 .mobileNavToggle {
@@ -2447,6 +2778,52 @@ html[data-theme="dark"] .mobileStackLabel {
   transform: translateY(-7px) rotate(-45deg);
 }
 
+@media (min-width: 993px) {
+  .navShell {
+    flex-wrap: nowrap;
+  }
+
+  .navTopRow {
+    width: auto;
+    flex: 0 0 auto;
+  }
+
+  .navTopActions {
+    margin-left: 0;
+  }
+
+  .navUtilityControls {
+    margin-left: 0;
+    margin-right: 0.35rem;
+  }
+
+  .navMenuPanel {
+    justify-content: flex-end;
+    overflow: visible;
+  }
+
+  .navMenuPanel .navbar-nav {
+    width: auto;
+    min-width: 0;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    row-gap: 0.1rem;
+  }
+
+  .navMenuPanel .nav-link,
+  .navMenuPanel .legacyDropdownTrigger {
+    padding-left: 0.55rem;
+    padding-right: 0.55rem;
+    font-size: 0.9rem;
+  }
+
+  .navMenuPanel .legacyDropdownMenu {
+    position: absolute !important;
+    inset: auto auto auto 0;
+    top: 100%;
+  }
+}
+
 @media (max-width: 992px) {
   .navShell {
     display: block;
@@ -2463,6 +2840,10 @@ html[data-theme="dark"] .mobileStackLabel {
 
   .navUtilityControls {
     margin: 0;
+  }
+
+  .navAiSahayakBtn span {
+    display: none;
   }
 
   .mobileNavToggle {
@@ -3241,5 +3622,4956 @@ html[data-theme="dark"] .authPreviewBadge {
   table.display tbody tr {
     padding: 0.7rem;
     border-radius: 16px;
+  }
+}
+
+.authEasyPage {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.5rem 0 3rem;
+  display: grid;
+  gap: 1.1rem;
+}
+
+.voiceAssistant {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1100;
+  display: grid;
+  justify-items: end;
+  gap: 0.8rem;
+  pointer-events: none;
+}
+
+.voiceAssistant > * {
+  pointer-events: auto;
+}
+
+.voiceFab {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 0.65rem;
+  align-items: center;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.7rem 1rem 0.7rem 0.7rem;
+  background: #21451f;
+  color: #fffdf6;
+  box-shadow: 0 18px 38px rgba(18, 48, 20, 0.28);
+  cursor: pointer;
+}
+
+.voiceFab span {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: #f2ca65;
+  color: #21451f;
+  font-weight: 900;
+}
+
+.voiceFab strong {
+  min-width: 92px;
+  text-align: left;
+}
+
+.voiceFab.active {
+  background: #7c3a1b;
+}
+
+.voiceAssistant.open .voiceFab {
+  display: none;
+}
+
+.voicePanel {
+  width: min(560px, calc(100vw - 1.5rem));
+  max-height: min(760px, calc(100dvh - 1.25rem));
+  overflow: hidden auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.68rem;
+  padding: 0.85rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(47, 107, 47, 0.14);
+  box-shadow: 0 24px 54px rgba(19, 47, 20, 0.22);
+}
+
+.voiceAssistant.open {
+  top: 0.65rem;
+  bottom: 0.65rem;
+  align-items: start;
+}
+
+.voiceHeader,
+.voiceControls,
+.voiceActionRow {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.voiceHeader span {
+  color: #64745e;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.voiceHeader strong {
+  display: block;
+  color: #1f3f1f;
+  font-size: 1.05rem;
+}
+
+.voiceHeader button {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 999px;
+  background: #eef5e8;
+  color: #21451f;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.voiceRobot {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.7rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #eff8e8, #fff8df);
+  border: 1px solid rgba(47, 107, 47, 0.16);
+}
+
+.voiceRobot.active {
+  border-color: rgba(47, 107, 47, 0.36);
+  box-shadow: 0 10px 24px rgba(47, 107, 47, 0.16);
+}
+
+.voiceRobotAvatar {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  background: #2f6b2f;
+  box-shadow: inset 0 -8px 0 rgba(0, 0, 0, 0.12);
+}
+
+.robotSprout {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #f2ca65;
+  color: #21451f;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.robotEye {
+  position: absolute;
+  top: 19px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #f8fbf4;
+}
+
+.robotEye.left {
+  left: 15px;
+}
+
+.robotEye.right {
+  right: 15px;
+}
+
+.robotMouth {
+  position: absolute;
+  left: 17px;
+  bottom: 14px;
+  width: 20px;
+  height: 4px;
+  border-radius: 999px;
+  background: #f2ca65;
+}
+
+.voiceRobot.active .robotMouth {
+  animation: robotTalk 0.85s ease-in-out infinite;
+}
+
+.voiceRobot.active .robotEye {
+  animation: robotBlink 2.8s ease-in-out infinite;
+}
+
+@keyframes robotTalk {
+  0%,
+  100% {
+    height: 4px;
+  }
+  50% {
+    height: 10px;
+    bottom: 11px;
+  }
+}
+
+@keyframes robotBlink {
+  0%,
+  90%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.2);
+  }
+}
+
+.voiceRobot strong {
+  display: block;
+  color: #21451f;
+  font-size: 0.92rem;
+}
+
+.voiceRobot p {
+  margin: 0.16rem 0 0;
+  color: #64745e;
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.voiceQuickActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  overflow: visible;
+}
+
+.voiceQuickActions button {
+  flex: 1 1 118px;
+  border: 1px solid rgba(47, 107, 47, 0.14);
+  border-radius: 999px;
+  padding: 0.48rem 0.62rem;
+  background: #f5faef;
+  color: #284827;
+  cursor: pointer;
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.voiceQuickActions button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.voiceControls {
+  display: grid;
+  grid-template-columns: minmax(190px, 1fr) minmax(124px, 0.42fr) auto;
+  align-items: end;
+  gap: 0.55rem;
+  flex: 0 0 auto;
+}
+
+.voiceModeSwitch {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.25rem;
+  border-radius: 14px;
+  background: #eef5e8;
+}
+
+.voiceModeSwitch button {
+  border: 0;
+  border-radius: 11px;
+  padding: 0.62rem 0.7rem;
+  background: transparent;
+  color: #21451f;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.voiceModeSwitch button.selected {
+  background: #21451f;
+  color: #fffdf6;
+  box-shadow: 0 8px 16px rgba(33, 69, 31, 0.16);
+}
+
+.voiceControls label {
+  display: grid;
+  gap: 0.25rem;
+  color: #52664e;
+  font-size: 0.78rem;
+  font-weight: 800;
+  min-width: 0;
+}
+
+.voiceControls select {
+  min-height: 40px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(47, 107, 47, 0.16);
+  padding: 0.45rem 0.7rem;
+  background: #fff;
+}
+
+.voiceProviderRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 0.55rem;
+}
+
+.voiceProviderRow label {
+  display: grid;
+  gap: 0.25rem;
+  color: #52664e;
+  font-size: 0.76rem;
+  font-weight: 800;
+  min-width: 0;
+}
+
+.voiceProviderRow select {
+  min-height: 38px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(47, 107, 47, 0.16);
+  padding: 0.42rem 0.65rem;
+  background: #fff;
+}
+
+.voiceProviderBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  border-radius: 999px;
+  padding: 0.45rem 0.7rem;
+  background: #fff0d2;
+  color: #755018;
+  font-size: 0.74rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.voiceProviderBadge.active {
+  background: #e5f4dc;
+  color: #21451f;
+}
+
+.voiceToggle {
+  grid-auto-flow: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 40px;
+  padding: 0.45rem 0.62rem;
+  border-radius: 999px;
+  background: #f5faef;
+  white-space: nowrap;
+}
+
+.voiceModeNote {
+  margin: -0.2rem 0 0;
+  padding: 0.52rem 0.68rem;
+  border-radius: 12px;
+  background: #fff7df;
+  color: #665224;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.voiceMessages {
+  display: grid;
+  align-content: start;
+  gap: 0.55rem;
+  flex: 1 1 300px;
+  min-height: 220px;
+  max-height: none;
+  overflow: auto;
+  padding: 0.7rem;
+  border-radius: 14px;
+  background: #f5faef;
+  border: 1px solid rgba(47, 107, 47, 0.1);
+}
+
+.voiceMessage {
+  display: grid;
+  gap: 0.25rem;
+  width: fit-content;
+  max-width: min(92%, 440px);
+  min-width: 0;
+  padding: 0.72rem 0.82rem;
+  border-radius: 14px;
+  background: #fff;
+  color: #253e22;
+  box-shadow: 0 8px 18px rgba(27, 54, 27, 0.06);
+}
+
+.voiceMessage.user {
+  justify-self: end;
+  background: #e8f4df;
+}
+
+.voiceMessage span {
+  color: #60705d;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.voiceMessage p {
+  margin: 0;
+  line-height: 1.52;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.voiceForm {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(76px, auto);
+  gap: 0.55rem;
+  flex: 0 0 auto;
+}
+
+.voiceForm input {
+  min-height: 46px;
+  border-radius: 12px;
+  border: 1px solid rgba(47, 107, 47, 0.16);
+  padding: 0.7rem 0.85rem;
+}
+
+.voiceForm button,
+.voiceActionRow button {
+  border: 0;
+  border-radius: 12px;
+  padding: 0.72rem 0.82rem;
+  background: #2f6b2f;
+  color: #fffdf6;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.voiceForm button:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+}
+
+.voiceActionRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-content: stretch;
+  gap: 0.55rem;
+  flex: 0 0 auto;
+}
+
+.voiceActionRow button {
+  background: #eef5e8;
+  color: #21451f;
+}
+
+.voiceActionRow button.danger {
+  background: #8a3324;
+  color: #fffdf6;
+}
+
+.voicePrivacy {
+  margin: 0;
+  color: #66745f;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  flex: 0 0 auto;
+}
+
+.agriChatPage {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.35fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.agriChatGuide,
+.agriChatShell {
+  border: 1px solid rgba(47, 107, 47, 0.14);
+  border-radius: 14px;
+  background: #fffdf7;
+  box-shadow: 0 16px 34px rgba(27, 54, 27, 0.08);
+}
+
+.agriChatGuide {
+  display: grid;
+  align-content: start;
+  gap: 0.9rem;
+  padding: 0.95rem;
+}
+
+.agriRobotCard {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #eef8e7, #fff5d5);
+  border: 1px solid rgba(47, 107, 47, 0.16);
+}
+
+.agriRobotCard.active {
+  border-color: rgba(47, 107, 47, 0.36);
+  box-shadow: 0 16px 28px rgba(47, 107, 47, 0.14);
+}
+
+.agriRobotFace {
+  position: relative;
+  width: 82px;
+  height: 82px;
+  border-radius: 26px;
+  background: #2f6b2f;
+  box-shadow: inset 0 -12px 0 rgba(0, 0, 0, 0.14);
+}
+
+.agriRobotFace .robotSprout {
+  top: -10px;
+}
+
+.agriRobotFace .robotEye {
+  top: 31px;
+  width: 11px;
+  height: 11px;
+}
+
+.agriRobotFace .robotEye.left {
+  left: 24px;
+}
+
+.agriRobotFace .robotEye.right {
+  right: 24px;
+}
+
+.agriRobotFace .robotMouth {
+  left: 28px;
+  bottom: 21px;
+  width: 26px;
+}
+
+.agriRobotCard.active .robotMouth {
+  animation: robotTalk 0.85s ease-in-out infinite;
+}
+
+.agriRobotCard span,
+.agriChatHeader span {
+  color: #64745e;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.agriRobotCard h2,
+.agriChatHeader h1 {
+  margin: 0.12rem 0;
+  color: #21451f;
+  font-size: 1.35rem;
+}
+
+.agriRobotCard p {
+  margin: 0;
+  color: #64745e;
+  font-weight: 800;
+}
+
+.agriChatTips {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.agriChatTips h3 {
+  margin: 0;
+  color: #21451f;
+  font-size: 1rem;
+}
+
+.agriPromptChips {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.agriPromptChips button {
+  border: 1px solid rgba(47, 107, 47, 0.14);
+  border-radius: 12px;
+  padding: 0.72rem 0.8rem;
+  background: #f5faef;
+  color: #284827;
+  cursor: pointer;
+  text-align: left;
+  font-weight: 800;
+}
+
+.agriPromptChips button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.agriChatShell {
+  display: grid;
+  grid-template-rows: auto minmax(320px, 1fr) auto auto;
+  min-height: 650px;
+  overflow: hidden;
+}
+
+.agriChatHeader {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(47, 107, 47, 0.12);
+}
+
+.agriChatHeader strong {
+  border-radius: 999px;
+  padding: 0.45rem 0.7rem;
+  background: #eef5e8;
+  color: #21451f;
+  font-size: 0.82rem;
+}
+
+.agriChatMessages {
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+  overflow: auto;
+  padding: 1rem;
+  background: #f6faef;
+}
+
+.agriChatBubble {
+  display: grid;
+  gap: 0.3rem;
+  max-width: 78%;
+  padding: 0.82rem 0.9rem;
+  border-radius: 14px;
+  background: #fff;
+  color: #263e24;
+  box-shadow: 0 8px 18px rgba(27, 54, 27, 0.06);
+}
+
+.agriChatBubble.user {
+  justify-self: end;
+  background: #e6f3dd;
+}
+
+.agriChatBubble span {
+  color: #65775f;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.agriChatBubble p {
+  margin: 0;
+  white-space: pre-wrap;
+  line-height: 1.55;
+}
+
+.agriChatAlert {
+  margin: 0.9rem 1rem 0;
+  border-radius: 12px;
+  padding: 0.75rem 0.85rem;
+  background: #fff5d5;
+  color: #6c5418;
+  font-weight: 800;
+}
+
+.agriChatComposer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.7rem;
+  padding: 1rem;
+  border-top: 1px solid rgba(47, 107, 47, 0.12);
+  background: #fffdf7;
+}
+
+.agriChatComposer input {
+  min-height: 48px;
+  border: 1px solid rgba(47, 107, 47, 0.18);
+  border-radius: 12px;
+  padding: 0.75rem 0.9rem;
+}
+
+.agriChatComposer button {
+  border: 0;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  background: #2f6b2f;
+  color: #fffdf6;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.agriChatComposer button:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+}
+
+html[data-theme="dark"] .voicePanel,
+html[data-theme="dark"] .voiceMessage {
+  background: rgba(23, 39, 27, 0.98);
+  color: #eef4e8;
+  border-color: rgba(202, 224, 190, 0.12);
+}
+
+html[data-theme="dark"] .voiceMessages,
+html[data-theme="dark"] .voiceHeader button,
+html[data-theme="dark"] .voiceActionRow button,
+html[data-theme="dark"] .voiceMessage.user,
+html[data-theme="dark"] .voiceModeSwitch {
+  background: rgba(255, 255, 255, 0.08);
+  color: #eef4e8;
+}
+
+html[data-theme="dark"] .voiceHeader strong,
+html[data-theme="dark"] .voicePrivacy,
+html[data-theme="dark"] .voiceControls label,
+html[data-theme="dark"] .voiceMessage span {
+  color: #b8c9b2;
+}
+
+html[data-theme="dark"] .voiceControls select,
+html[data-theme="dark"] .voiceProviderRow select,
+html[data-theme="dark"] .voiceForm input {
+  background: rgba(255, 255, 255, 0.08);
+  color: #eef4e8;
+  border-color: rgba(202, 224, 190, 0.16);
+}
+
+html[data-theme="dark"] .voiceProviderRow label {
+  color: #b8c9b2;
+}
+
+html[data-theme="dark"] .voiceProviderBadge {
+  background: rgba(224, 179, 83, 0.14);
+  color: #f1dfad;
+}
+
+html[data-theme="dark"] .voiceProviderBadge.active {
+  background: rgba(186, 212, 129, 0.16);
+  color: #dce9bd;
+}
+
+html[data-theme="dark"] .voiceModeSwitch button {
+  color: #eef4e8;
+}
+
+html[data-theme="dark"] .voiceModeSwitch button.selected {
+  background: rgba(186, 212, 129, 0.18);
+}
+
+html[data-theme="dark"] .voiceModeNote {
+  background: rgba(224, 179, 83, 0.14);
+  color: #f1dfad;
+}
+
+html[data-theme="dark"] .agriChatGuide,
+html[data-theme="dark"] .agriChatShell,
+html[data-theme="dark"] .agriChatComposer,
+html[data-theme="dark"] .agriChatBubble {
+  background: rgba(23, 39, 27, 0.98);
+  color: #eef4e8;
+  border-color: rgba(202, 224, 190, 0.12);
+}
+
+html[data-theme="dark"] .agriChatMessages,
+html[data-theme="dark"] .agriPromptChips button,
+html[data-theme="dark"] .voiceQuickActions button,
+html[data-theme="dark"] .agriChatBubble.user,
+html[data-theme="dark"] .agriChatHeader strong {
+  background: rgba(255, 255, 255, 0.08);
+  color: #eef4e8;
+}
+
+html[data-theme="dark"] .agriRobotCard {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme="dark"] .agriChatHeader h1,
+html[data-theme="dark"] .agriRobotCard h2,
+html[data-theme="dark"] .agriChatTips h3,
+html[data-theme="dark"] .agriRobotCard p,
+html[data-theme="dark"] .agriChatHeader span,
+html[data-theme="dark"] .agriChatBubble span {
+  color: #b8c9b2;
+}
+
+html[data-theme="dark"] .agriChatComposer input {
+  background: rgba(255, 255, 255, 0.08);
+  color: #eef4e8;
+  border-color: rgba(202, 224, 190, 0.16);
+}
+
+@media (max-width: 620px) {
+  .voiceAssistant {
+    right: 0.55rem;
+    bottom: 0.55rem;
+  }
+
+  .voiceAssistant.open {
+    left: 0.55rem;
+  }
+
+  .voicePanel {
+    width: 100%;
+    max-height: calc(100dvh - 1.1rem);
+    overflow: hidden;
+    gap: 0.56rem;
+    padding: 0.65rem;
+  }
+
+  .voiceControls {
+    grid-template-columns: 1fr;
+  }
+
+  .voiceProviderRow {
+    grid-template-columns: 1fr;
+  }
+
+  .voiceQuickActions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .voiceQuickActions button {
+    width: 100%;
+    min-width: 0;
+    border-radius: 12px;
+  }
+
+  .voiceMessages {
+    flex-basis: 240px;
+    min-height: min(240px, 34dvh);
+  }
+
+  .voiceForm {
+    grid-template-columns: 1fr;
+  }
+
+  .voiceActionRow {
+    grid-template-columns: 1fr;
+  }
+
+  .voiceForm button,
+  .voiceActionRow button {
+    width: 100%;
+  }
+
+  .agriChatPage {
+    grid-template-columns: 1fr;
+  }
+
+  .agriChatShell {
+    min-height: 560px;
+  }
+
+  .agriChatHeader,
+  .agriChatComposer {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .agriChatBubble {
+    max-width: 94%;
+  }
+
+  .agriChatComposer button {
+    width: 100%;
+  }
+}
+
+@media (max-height: 720px) {
+  .voicePanel {
+    max-height: calc(100dvh - 1rem);
+    gap: 0.45rem;
+    padding: 0.65rem;
+  }
+
+  .voiceRobot {
+    padding: 0.55rem;
+  }
+
+  .voiceMessages {
+    flex-basis: 150px;
+    min-height: 140px;
+  }
+
+  .voiceModeNote {
+    padding: 0.42rem 0.58rem;
+    font-size: 0.74rem;
+  }
+
+  .voiceQuickActions,
+  .voicePrivacy {
+    display: none;
+  }
+
+  .voiceProviderRow {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .voiceProviderBadge {
+    display: none;
+  }
+}
+
+.authEasyHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.65fr);
+  gap: 1rem;
+  align-items: end;
+  padding: 1.25rem;
+  border: 1px solid rgba(46, 92, 38, 0.12);
+  border-radius: 22px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(239, 248, 231, 0.96)),
+    url("/img/agri.png") center/cover;
+  box-shadow: 0 18px 42px rgba(36, 79, 36, 0.1);
+}
+
+.authEasyHero h1 {
+  margin: 0.3rem 0 0.45rem;
+  font-size: clamp(2.1rem, 4vw, 4rem);
+  line-height: 1;
+  color: #163c22;
+}
+
+.authEasyStats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.authEasyStats article {
+  display: grid;
+  gap: 0.25rem;
+  min-height: 86px;
+  padding: 0.9rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(46, 92, 38, 0.12);
+}
+
+.authEasyStats span {
+  color: #60705d;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.authEasyStats strong {
+  color: #21451f;
+}
+
+.authEasyShell {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.authEasySteps,
+.authEasyFormCard {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.authEasyPanel,
+.authEasyFormCard,
+.authEasyInnerCard,
+.authEasyFormGrid {
+  border: 1px solid rgba(46, 92, 38, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 14px 32px rgba(36, 79, 36, 0.08);
+}
+
+.authEasyPanel {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1rem;
+}
+
+.authEasyPanel h2,
+.authEasyFormHeader h2 {
+  margin: 0;
+  color: #1d3f1e;
+  line-height: 1.12;
+}
+
+.authEasyPanel p,
+.authEasyFormHeader p {
+  margin: 0.25rem 0 0;
+  color: #5a6b55;
+}
+
+.authStepNumber {
+  width: 32px;
+  height: 32px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #244f24;
+  color: #fffdf6;
+  font-weight: 800;
+}
+
+.authRoleCards,
+.authMethodCards,
+.authModeSwitch {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.authRoleCards button,
+.authMethodCards button,
+.authModeSwitch button {
+  border: 1px solid rgba(46, 92, 38, 0.13);
+  border-radius: 14px;
+  padding: 0.85rem;
+  background: #f8fbf3;
+  color: #1f3f1f;
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.authRoleCards button:hover,
+.authMethodCards button:hover,
+.authModeSwitch button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(47, 107, 47, 0.35);
+}
+
+.authRoleCards button.selected,
+.authMethodCards button.selected,
+.authModeSwitch button.selected {
+  background: #e8f4df;
+  border-color: rgba(47, 107, 47, 0.42);
+  box-shadow: inset 4px 0 0 #2f6b2f;
+}
+
+.authMethodCards button:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+}
+
+.authRoleCards strong,
+.authMethodCards strong {
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.authRoleCards span,
+.authMethodCards span {
+  display: block;
+  color: #64745e;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.authModeSwitch {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.authModeSwitch button {
+  text-align: center;
+  font-weight: 800;
+}
+
+.authEasyHelp {
+  background: #213f26;
+  color: #f5f8ec;
+}
+
+.authEasyHelp h2,
+.authEasyHelp p {
+  color: inherit;
+}
+
+.authEasyFormCard {
+  padding: 1rem;
+}
+
+.authEasyFormHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: start;
+  padding: 0.35rem 0.2rem 0.5rem;
+}
+
+.authEasyBadge {
+  border-radius: 999px;
+  padding: 0.48rem 0.78rem;
+  background: #e8f4df;
+  color: #244f24;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.authEasyFormGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+  padding: 1rem;
+  box-shadow: none;
+}
+
+.authEasyFormGrid .authFieldGroupWide,
+.authEasyFormGrid .authNote,
+.authEasyFormGrid .authPrimaryButton {
+  grid-column: 1 / -1;
+}
+
+.authEasyFormGrid input,
+.authEasyFormGrid select,
+.authEasyInnerCard input {
+  min-height: 50px;
+  border-radius: 12px;
+}
+
+.authEasyInnerCard {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1rem;
+  box-shadow: none;
+}
+
+.authEasyFootnote {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  background: #fff7df;
+  color: #665224;
+}
+
+html[data-theme="dark"] .authEasyHero,
+html[data-theme="dark"] .authEasyPanel,
+html[data-theme="dark"] .authEasyFormCard,
+html[data-theme="dark"] .authEasyInnerCard,
+html[data-theme="dark"] .authEasyFormGrid,
+html[data-theme="dark"] .authEasyStats article,
+html[data-theme="dark"] .authRoleCards button,
+html[data-theme="dark"] .authMethodCards button,
+html[data-theme="dark"] .authModeSwitch button {
+  background: rgba(22, 37, 26, 0.96);
+  color: #eef4e8;
+  border-color: rgba(202, 224, 190, 0.12);
+}
+
+html[data-theme="dark"] .authEasyHero h1,
+html[data-theme="dark"] .authEasyPanel h2,
+html[data-theme="dark"] .authEasyFormHeader h2,
+html[data-theme="dark"] .authEasyStats strong,
+html[data-theme="dark"] .authRoleCards button,
+html[data-theme="dark"] .authMethodCards button,
+html[data-theme="dark"] .authModeSwitch button {
+  color: #eef4e8;
+}
+
+html[data-theme="dark"] .authEasyHero .sectionText,
+html[data-theme="dark"] .authEasyPanel p,
+html[data-theme="dark"] .authEasyFormHeader p,
+html[data-theme="dark"] .authEasyStats span,
+html[data-theme="dark"] .authRoleCards span,
+html[data-theme="dark"] .authMethodCards span {
+  color: #b8c9b2;
+}
+
+html[data-theme="dark"] .authRoleCards button.selected,
+html[data-theme="dark"] .authMethodCards button.selected,
+html[data-theme="dark"] .authModeSwitch button.selected {
+  background: rgba(186, 212, 129, 0.14);
+  border-color: rgba(186, 212, 129, 0.3);
+}
+
+html[data-theme="dark"] .authEasyFootnote {
+  background: rgba(224, 179, 83, 0.14);
+  color: #f1dfad;
+}
+
+@media (max-width: 980px) {
+  .authEasyHero,
+  .authEasyShell {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .authEasyPage {
+    width: min(100%, calc(100% - 0.75rem));
+    padding-top: 0.75rem;
+  }
+
+  .authEasyHero,
+  .authEasyPanel,
+  .authEasyFormCard {
+    border-radius: 16px;
+    padding: 0.9rem;
+  }
+
+  .authEasyStats,
+  .authEasyFormGrid,
+  .authModeSwitch {
+    grid-template-columns: 1fr;
+  }
+
+  .authEasyFormHeader {
+    display: grid;
+  }
+
+  .authEasyFormGrid {
+    padding: 0.85rem;
+  }
+}
+
+/* Final consistency pass: remove legacy layout conflicts and enforce the approved UI system. */
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+.legacyApp {
+  min-height: 100vh;
+  background:
+    linear-gradient(180deg, rgba(224, 247, 255, 0.78), rgba(247, 251, 246, 0.96) 32%, rgba(255, 248, 230, 0.9)),
+    radial-gradient(circle at 12% 18%, rgba(34, 197, 94, 0.16), transparent 28%),
+    radial-gradient(circle at 88% 8%, rgba(14, 165, 233, 0.13), transparent 24%);
+}
+
+.modernPageFrame {
+  position: relative;
+  padding: clamp(1rem, 2.5vw, 2rem) 0 clamp(2rem, 4vw, 4rem);
+}
+
+.modernPageContainer {
+  width: min(1440px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.modernPageContainer.fluid {
+  width: min(1540px, calc(100% - 1.5rem));
+}
+
+.modernPageBadge {
+  width: fit-content;
+  margin: 0 auto 1.2rem;
+  border: 1px solid rgba(21, 128, 61, 0.18);
+  border-radius: 999px;
+  padding: 0.45rem 0.85rem;
+  background: rgba(236, 253, 245, 0.9);
+  color: #166534;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  box-shadow: 0 10px 26px rgba(9, 35, 25, 0.08);
+}
+
+#navbar-main.navbar-main {
+  position: sticky !important;
+  top: 0;
+  z-index: 1000;
+  padding: 0 !important;
+  background: rgba(7, 30, 22, 0.9) !important;
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(209, 250, 229, 0.14);
+  box-shadow: 0 18px 42px rgba(7, 30, 22, 0.18) !important;
+}
+
+.navShell {
+  width: min(1540px, calc(100% - 1.5rem));
+  max-width: none !important;
+  margin: 0 auto;
+  padding: 0.7rem 0 !important;
+}
+
+.navTopRow {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.navBrandList,
+.navTopActions,
+.navUtilityControls {
+  min-width: 0;
+}
+
+.navTopActions,
+.navUtilityControls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.55rem;
+}
+
+.navMenuPanel {
+  width: 100%;
+  margin-top: 0.65rem;
+}
+
+.navMenuPanel > ul {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+#navbar-main .nav-link,
+#navbar-main .dropdown-toggle {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  padding: 0.45rem 0.62rem !important;
+  color: #ecfdf5 !important;
+  white-space: nowrap;
+}
+
+#navbar-main .nav-link:hover,
+#navbar-main .dropdown-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#navbar-main .nav-link-inner--text,
+#navbar-main .nav-link-inner--text i {
+  color: #ecfdf5 !important;
+  font-size: 0.88rem;
+}
+
+.mobileNavToggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  place-items: center;
+  cursor: pointer;
+}
+
+.mobileNavToggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  margin: 3px auto;
+  border-radius: 999px;
+  background: #ecfdf5;
+}
+
+.container,
+.container-fluid {
+  max-width: none;
+}
+
+.row {
+  min-width: 0;
+}
+
+.row-content,
+.grid,
+.split,
+.phpBottomGrid,
+.phpTechGrid,
+.phpFeatureRow,
+.phpCapabilityExact,
+.marketGrid,
+.marketTwo,
+.marketFormGrid,
+.weatherForecastGrid {
+  align-items: stretch;
+}
+
+.card,
+.panel,
+.marketMain,
+.marketSidebar,
+.agriChatShell,
+.agriChatGuide,
+.modernWeatherShell,
+.roleAiCard,
+.homeAgentCard,
+.forecastCard,
+.articleCard,
+.marketOrder,
+.marketRow {
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.card,
+.panel {
+  padding: clamp(1rem, 2vw, 1.35rem);
+}
+
+.card-body {
+  color: #17382b !important;
+}
+
+.card.text-white,
+.bg-gradient-success,
+.bg-gradient-secondary,
+.bg-gradient-white {
+  background: rgba(255, 255, 255, 0.92) !important;
+  color: #17382b !important;
+}
+
+.card .card {
+  box-shadow: none !important;
+  background: #f8fafc !important;
+}
+
+.display-4 {
+  font-size: clamp(2rem, 4vw, 3.6rem) !important;
+  line-height: 1.05 !important;
+}
+
+.phpHomeModern,
+.panel,
+.agriChatPage,
+.marketWorkspace,
+.modernWeatherShell {
+  animation: pageRise 0.55s ease both;
+}
+
+@keyframes pageRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.phpHeroExact {
+  margin-top: 0;
+}
+
+.homeRoleShowcase {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.grid.three,
+.grid.two,
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid.two,
+.split {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.split {
+  display: grid;
+  gap: 1rem;
+}
+
+.contentRow,
+.rowItem,
+.marketRow,
+.marketOrder {
+  min-width: 0;
+}
+
+.contentRow h3,
+.rowItem span,
+.marketRow *,
+.marketOrder * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.agriChatPage {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.34fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.agriChatGuide,
+.agriChatShell {
+  min-width: 0;
+}
+
+.agriChatGuide {
+  padding: 1rem;
+}
+
+.agriChatTips {
+  margin-top: 1rem;
+}
+
+.agriPromptChips {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.agriPromptChips button {
+  width: 100%;
+  min-height: 46px;
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+}
+
+.agriChatShell {
+  display: grid;
+  grid-template-rows: auto minmax(360px, 1fr) auto auto;
+}
+
+.agriChatMessages {
+  max-height: 62vh;
+  overflow: auto;
+  padding: 1rem;
+}
+
+.agriChatBubble p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.agriChatComposer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.agriChatComposer input,
+.agriChatComposer button {
+  min-height: 50px;
+}
+
+.marketWorkspace {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  align-items: start;
+}
+
+.marketSidebar {
+  position: sticky;
+  top: 118px;
+  min-height: calc(100vh - 140px);
+  padding: 1rem;
+}
+
+.marketSidebar nav {
+  display: grid;
+  gap: 0.45rem;
+  margin: 1rem 0;
+}
+
+.marketMain {
+  min-width: 0;
+  padding: clamp(1rem, 2vw, 1.35rem);
+}
+
+.marketHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+}
+
+.marketGrid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.marketTwo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.modernWeatherShell {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.modernWeatherSearch {
+  position: sticky;
+  top: 96px;
+  z-index: 5;
+  border: 1px solid rgba(15, 81, 50, 0.1);
+  border-radius: 8px;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 28px rgba(9, 35, 25, 0.08);
+}
+
+@media (max-width: 1200px) {
+  .navMenuPanel > ul {
+    justify-content: flex-start;
+  }
+
+  .homeRoleShowcase,
+  .grid.three {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 992px) {
+  .mobileNavToggle {
+    display: grid;
+  }
+
+  .navTopRow {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .navUtilityControls {
+    display: none;
+  }
+
+  .navMenuPanel {
+    display: none;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 0.75rem;
+    background: rgba(7, 30, 22, 0.98);
+  }
+
+  .navMenuPanel.open {
+    display: block;
+  }
+
+  .navMenuPanel > ul {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  #navbar-main .nav-link {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .agriChatPage,
+  .marketWorkspace,
+  .marketTwo,
+  .split,
+  .grid.two,
+  .modernWeatherHero {
+    grid-template-columns: 1fr;
+  }
+
+  .marketSidebar {
+    position: static;
+    min-height: auto;
+  }
+
+  .marketSidebar nav {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .modernPageContainer,
+  .modernPageContainer.fluid,
+  .phpHomeModern,
+  .marketWorkspace,
+  .agriChatPage,
+  .modernWeatherShell {
+    width: min(100% - 0.75rem, 100%);
+  }
+
+  .homeRoleShowcase,
+  .grid.three,
+  .grid.two,
+  .marketGrid,
+  .weatherForecastGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .agriChatComposer,
+  .marketHeader,
+  .modernWeatherSearch {
+    grid-template-columns: 1fr;
+  }
+
+  .agriChatMessages {
+    max-height: 58vh;
+  }
+}
+
+/* Simple Contact page reset. */
+.simpleContactPage {
+  width: min(1180px, calc(100% - 1.5rem)) !important;
+  margin: 0 auto !important;
+  padding: clamp(1rem, 2.5vw, 2rem) 0 4rem !important;
+  color: #12382a !important;
+}
+
+.simpleContactHero {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px) !important;
+  gap: 1.25rem !important;
+  align-items: center !important;
+  padding: clamp(1.25rem, 4vw, 3rem) !important;
+  border-radius: 8px !important;
+  background:
+    linear-gradient(135deg, rgba(8, 47, 35, 0.96), rgba(21, 128, 61, 0.88)),
+    url("/img/features.png") center / cover !important;
+  overflow: hidden !important;
+  box-shadow: 0 22px 55px rgba(9, 35, 25, 0.14) !important;
+}
+
+.simpleContactHero h1 {
+  margin: 1.5rem 0 0 !important;
+  color: #f8fafc !important;
+  font-size: clamp(2.6rem, 7vw, 5rem) !important;
+  line-height: 1 !important;
+  font-weight: 900 !important;
+  letter-spacing: 0 !important;
+}
+
+.simpleContactHero p {
+  max-width: 680px !important;
+  margin: 1rem 0 0 !important;
+  color: #d1fae5 !important;
+  font-size: 1.08rem !important;
+  line-height: 1.65 !important;
+}
+
+.simpleContactHero > img {
+  width: 100% !important;
+  height: 260px !important;
+  object-fit: cover !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(236, 253, 245, 0.2) !important;
+}
+
+.simpleContactHero .brandLockupMark {
+  width: 52px !important;
+  height: 52px !important;
+}
+
+.simpleContactHero .brandLockupText strong,
+.simpleContactHero .brandLockupText small {
+  color: #f8fafc !important;
+}
+
+.simpleContactGrid {
+  display: grid !important;
+  grid-template-columns: 0.78fr 1.22fr !important;
+  gap: 1rem !important;
+  margin-top: 1rem !important;
+}
+
+.simpleContactCard {
+  padding: clamp(1rem, 2.5vw, 1.5rem) !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(15, 81, 50, 0.14) !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+  box-shadow: 0 22px 55px rgba(9, 35, 25, 0.12) !important;
+}
+
+.simpleContactCard h2 {
+  margin: 0.45rem 0 1rem !important;
+  color: #092319 !important;
+  font-size: clamp(1.8rem, 3vw, 2.5rem) !important;
+  line-height: 1.05 !important;
+}
+
+.simpleContactList {
+  display: grid !important;
+  gap: 0.75rem !important;
+}
+
+.simpleContactList a {
+  display: grid !important;
+  grid-template-columns: 40px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  min-height: 52px !important;
+  padding: 0.75rem !important;
+  border-radius: 8px !important;
+  background: #ecfdf5 !important;
+  color: #12382a !important;
+  font-weight: 800 !important;
+  text-decoration: none !important;
+}
+
+.simpleContactList i {
+  width: 40px !important;
+  height: 40px !important;
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 8px !important;
+  background: #0f5132 !important;
+  color: #facc15 !important;
+  font-size: 1rem !important;
+}
+
+.simpleContactList span {
+  overflow-wrap: anywhere !important;
+}
+
+.simpleContactFields {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0.9rem !important;
+}
+
+.simpleContactFields label {
+  display: grid !important;
+  gap: 0.4rem !important;
+  color: #12382a !important;
+  font-weight: 900 !important;
+}
+
+.simpleContactFields input,
+.simpleContactFields textarea {
+  width: 100% !important;
+  border: 1px solid rgba(15, 81, 50, 0.16) !important;
+  border-radius: 8px !important;
+  padding: 0.9rem 1rem !important;
+  background: #f8fafc !important;
+  color: #092319 !important;
+  outline: none !important;
+}
+
+.simpleContactFields input:focus,
+.simpleContactFields textarea:focus {
+  border-color: #22c55e !important;
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.12) !important;
+}
+
+.simpleContactMessage {
+  grid-column: 1 / -1 !important;
+}
+
+.simpleContactForm .button {
+  width: 100% !important;
+  margin-top: 1rem !important;
+}
+
+@media (max-width: 900px) {
+  .simpleContactHero,
+  .simpleContactGrid,
+  .simpleContactFields {
+    grid-template-columns: 1fr !important;
+  }
+
+  .simpleContactHero img {
+    height: 220px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .simpleContactPage {
+    width: calc(100% - 0.75rem) !important;
+    padding-bottom: 6rem !important;
+  }
+
+  .simpleContactHero,
+  .simpleContactCard {
+    padding: 1rem !important;
+  }
+}
+
+/* Advanced Home + Contact redesign layer. */
+.phpHeroExact {
+  isolation: isolate !important;
+  min-height: calc(100vh - 110px) !important;
+  grid-template-columns: minmax(0, 0.92fr) minmax(360px, 0.88fr) !important;
+  padding: clamp(2rem, 4vw, 3.25rem) !important;
+  align-items: center !important;
+}
+
+.phpHeroExact h1 {
+  max-width: 11ch !important;
+  font-size: clamp(2.8rem, 5.15vw, 4.75rem) !important;
+  line-height: 1 !important;
+}
+
+.phpHeroExact p {
+  max-width: 64ch !important;
+  overflow-wrap: anywhere !important;
+}
+
+.homeAiSignalPanel {
+  width: min(760px, 100%) !important;
+  margin-top: 1.15rem !important;
+  padding: 0.85rem !important;
+  border: 1px solid rgba(236, 253, 245, 0.18) !important;
+  border-radius: 8px !important;
+  background:
+    linear-gradient(135deg, rgba(236, 253, 245, 0.14), rgba(14, 165, 233, 0.1)),
+    rgba(7, 30, 22, 0.28) !important;
+  backdrop-filter: blur(14px) !important;
+  box-shadow: 0 24px 70px rgba(7, 30, 22, 0.22) !important;
+}
+
+.homeAiSignalHeader,
+.contactPanelHeader {
+  display: grid !important;
+  gap: 0.25rem !important;
+}
+
+.homeAiSignalHeader span,
+.contactPanelHeader .eyebrow {
+  color: #a7f3d0 !important;
+  font-weight: 900 !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase !important;
+  font-size: 0.78rem !important;
+}
+
+.homeAiSignalHeader strong {
+  color: #fff7d6 !important;
+  font-size: 1.05rem !important;
+}
+
+.homeAiSignalGrid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 0.7rem !important;
+  margin-top: 0.7rem !important;
+}
+
+.homeAiSignalGrid div {
+  position: relative !important;
+  min-height: 96px !important;
+  display: grid !important;
+  gap: 0.45rem !important;
+  align-content: start !important;
+  padding: 0.75rem !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(236, 253, 245, 0.16) !important;
+  background: rgba(236, 253, 245, 0.11) !important;
+  overflow: hidden !important;
+}
+
+.homeAiSignalGrid div::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: auto 0 0 !important;
+  height: 3px !important;
+  background: linear-gradient(90deg, #facc15, #22c55e, #0ea5e9) !important;
+  animation: knScanLine 2.8s ease-in-out infinite !important;
+}
+
+.homeAiSignalGrid i {
+  width: 36px !important;
+  height: 36px !important;
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 8px !important;
+  background: rgba(250, 204, 21, 0.18) !important;
+  color: #fde68a !important;
+}
+
+.homeAiSignalGrid span {
+  color: #f8fafc !important;
+  font-weight: 900 !important;
+}
+
+.homeAiSignalGrid small {
+  color: #d1fae5 !important;
+  line-height: 1.4 !important;
+}
+
+.homeAiSignalPanel .phpQuoteRefresh {
+  width: 100% !important;
+  margin-top: 0.65rem !important;
+  min-height: 40px !important;
+  color: #12382a !important;
+  text-align: left !important;
+  white-space: normal !important;
+}
+
+.homeAiCommandVisual {
+  align-content: stretch !important;
+}
+
+.homeHeroPhoto {
+  background:
+    radial-gradient(circle at 50% 45%, rgba(34, 197, 94, 0.26), transparent 36%),
+    linear-gradient(135deg, #082f23, #166534) !important;
+  min-height: 480px !important;
+  height: min(56vh, 560px) !important;
+}
+
+.homeHeroPhoto img {
+  min-height: 480px !important;
+  height: 100% !important;
+  filter: saturate(1.12) contrast(1.04) !important;
+}
+
+.homeHeroPhoto::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  background:
+    linear-gradient(90deg, rgba(236, 253, 245, 0.08) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(236, 253, 245, 0.08) 1px, transparent 1px) !important;
+  background-size: 42px 42px !important;
+  mask-image: radial-gradient(circle at 50% 50%, black, transparent 74%) !important;
+  animation: knGridDrift 8s linear infinite !important;
+}
+
+.aiOrbit {
+  position: absolute !important;
+  inset: 15% 13% !important;
+  z-index: 2 !important;
+  border: 1px solid rgba(236, 253, 245, 0.34) !important;
+  border-radius: 50% !important;
+  animation: knOrbit 12s linear infinite !important;
+}
+
+.aiOrbit::before,
+.aiOrbit::after,
+.aiOrbit span {
+  content: "" !important;
+  position: absolute !important;
+  width: 11px !important;
+  height: 11px !important;
+  border-radius: 50% !important;
+  background: #facc15 !important;
+  box-shadow: 0 0 24px rgba(250, 204, 21, 0.82) !important;
+}
+
+.aiOrbit::before {
+  top: -5px !important;
+  left: 48% !important;
+}
+
+.aiOrbit::after {
+  right: 8% !important;
+  bottom: 15% !important;
+  background: #38bdf8 !important;
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.82) !important;
+}
+
+.aiOrbit span:nth-child(1) {
+  left: 10% !important;
+  bottom: 20% !important;
+  background: #34d399 !important;
+  box-shadow: 0 0 24px rgba(52, 211, 153, 0.82) !important;
+}
+
+.aiOrbit span:nth-child(2),
+.aiOrbit span:nth-child(3) {
+  display: none !important;
+}
+
+.homeWorkflowRail {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 0.6rem !important;
+  margin-top: 0.8rem !important;
+}
+
+.homeWorkflowRail div {
+  display: grid !important;
+  gap: 0.25rem !important;
+  padding: 0.75rem !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(236, 253, 245, 0.16) !important;
+  background: rgba(236, 253, 245, 0.86) !important;
+}
+
+.homeWorkflowRail span {
+  color: #047857 !important;
+  font-size: 0.72rem !important;
+  font-weight: 900 !important;
+}
+
+.homeWorkflowRail strong {
+  color: #12382a !important;
+  font-size: 0.86rem !important;
+  line-height: 1.2 !important;
+}
+
+.contactCommandPage {
+  width: min(1440px, calc(100% - 1rem)) !important;
+  margin: 0 auto !important;
+  padding: clamp(1rem, 2.5vw, 2rem) 0 4rem !important;
+  color: #12382a !important;
+}
+
+.contactHero {
+  position: relative !important;
+  min-height: calc(100vh - 120px) !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 0.98fr) minmax(380px, 0.82fr) !important;
+  gap: clamp(1rem, 3vw, 2rem) !important;
+  align-items: center !important;
+  overflow: hidden !important;
+  border-radius: 8px !important;
+  padding: clamp(1.2rem, 4vw, 4rem) !important;
+  background:
+    linear-gradient(135deg, rgba(8, 47, 35, 0.96), rgba(21, 128, 61, 0.86)),
+    url("/img/features.png") center / cover !important;
+  box-shadow: 0 28px 80px rgba(7, 30, 22, 0.22) !important;
+}
+
+.contactHero::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background:
+    radial-gradient(circle at 24% 30%, rgba(250, 204, 21, 0.24), transparent 22%),
+    radial-gradient(circle at 84% 22%, rgba(14, 165, 233, 0.2), transparent 24%) !important;
+  pointer-events: none !important;
+}
+
+.contactHeroCopy,
+.contactAiVisual {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.contactHeroCopy {
+  display: grid !important;
+  gap: 1rem !important;
+}
+
+.contactHeroCopy h1 {
+  max-width: 11ch !important;
+  margin: 0 !important;
+  color: #f8fafc !important;
+  font-size: clamp(3rem, 6.1vw, 5.8rem) !important;
+  line-height: 0.96 !important;
+  font-weight: 900 !important;
+  letter-spacing: 0 !important;
+}
+
+.contactHeroCopy p {
+  max-width: 760px !important;
+  color: #d1fae5 !important;
+  font-size: clamp(1.02rem, 2vw, 1.32rem) !important;
+  line-height: 1.65 !important;
+}
+
+.contactReasonRail {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.6rem !important;
+}
+
+.contactReasonRail span {
+  padding: 0.72rem 0.9rem !important;
+  border-radius: 999px !important;
+  background: rgba(236, 253, 245, 0.14) !important;
+  border: 1px solid rgba(236, 253, 245, 0.16) !important;
+  color: #f8fafc !important;
+  font-weight: 800 !important;
+}
+
+.contactAiVisual {
+  min-height: 560px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(236, 253, 245, 0.18) !important;
+  background: rgba(236, 253, 245, 0.08) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06) !important;
+}
+
+.contactAiVisual img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 560px !important;
+  object-fit: cover !important;
+  filter: saturate(1.12) contrast(1.06) !important;
+}
+
+.contactAiVisual::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background:
+    linear-gradient(180deg, transparent 0 48%, rgba(8, 47, 35, 0.72)),
+    linear-gradient(90deg, rgba(8, 47, 35, 0.6), transparent 48%) !important;
+}
+
+.contactAiCard {
+  position: absolute !important;
+  z-index: 2 !important;
+  display: grid !important;
+  gap: 0.25rem !important;
+  width: min(260px, calc(100% - 2rem)) !important;
+  padding: 1rem !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  background: rgba(248, 250, 252, 0.9) !important;
+  backdrop-filter: blur(14px) !important;
+  box-shadow: 0 22px 54px rgba(7, 30, 22, 0.2) !important;
+}
+
+.contactAiCard.primary {
+  top: 1rem !important;
+  right: 1rem !important;
+}
+
+.contactAiCard.secondary {
+  left: 1rem !important;
+  bottom: 1rem !important;
+}
+
+.contactAiCard i {
+  width: 44px !important;
+  height: 44px !important;
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 8px !important;
+  background: #0f5132 !important;
+  color: #facc15 !important;
+}
+
+.contactAiCard strong {
+  color: #12382a !important;
+}
+
+.contactAiCard span {
+  color: #557064 !important;
+  font-weight: 700 !important;
+}
+
+.contactPulse {
+  position: absolute !important;
+  z-index: 2 !important;
+  width: 110px !important;
+  height: 110px !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(250, 204, 21, 0.55) !important;
+  animation: knPulseRing 2.6s ease-out infinite !important;
+}
+
+.contactPulse.one {
+  left: 28% !important;
+  top: 28% !important;
+}
+
+.contactPulse.two {
+  right: 25% !important;
+  bottom: 25% !important;
+  animation-delay: 0.8s !important;
+}
+
+.contactCommandGrid {
+  display: grid !important;
+  grid-template-columns: minmax(300px, 0.86fr) minmax(0, 1.14fr) !important;
+  gap: 1rem !important;
+  margin-top: 1rem !important;
+}
+
+.contactInfoPanel,
+.contactFormPanel {
+  border-radius: 8px !important;
+  border: 1px solid rgba(15, 81, 50, 0.14) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  box-shadow: 0 22px 55px rgba(9, 35, 25, 0.14) !important;
+  padding: clamp(1rem, 2.4vw, 1.5rem) !important;
+}
+
+.contactPanelHeader h2 {
+  margin: 0 !important;
+  color: #092319 !important;
+  font-size: clamp(1.8rem, 3vw, 2.7rem) !important;
+  line-height: 1 !important;
+}
+
+.contactChannelGrid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0.75rem !important;
+  margin-top: 1rem !important;
+}
+
+.contactChannelCard {
+  display: grid !important;
+  gap: 0.25rem !important;
+  min-height: 166px !important;
+  padding: 1rem !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(15, 81, 50, 0.1) !important;
+  background:
+    linear-gradient(135deg, rgba(236, 253, 245, 0.86), rgba(240, 249, 255, 0.82)) !important;
+  color: #12382a !important;
+  text-decoration: none !important;
+  transition: transform 0.24s ease, box-shadow 0.24s ease !important;
+}
+
+.contactChannelCard:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 18px 38px rgba(9, 35, 25, 0.12) !important;
+}
+
+.contactChannelCard i {
+  width: 42px !important;
+  height: 42px !important;
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 8px !important;
+  background: #0f5132 !important;
+  color: #facc15 !important;
+}
+
+.contactChannelCard span,
+.contactChannelCard small {
+  color: #557064 !important;
+  font-weight: 800 !important;
+}
+
+.contactChannelCard strong {
+  color: #092319 !important;
+  overflow-wrap: anywhere !important;
+}
+
+.contactSocialRow {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.7rem !important;
+  margin-top: 1rem !important;
+}
+
+.contactSocialRow a {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  min-height: 44px !important;
+  padding: 0.7rem 1rem !important;
+  border-radius: 999px !important;
+  background: #092319 !important;
+  color: #ecfdf5 !important;
+  font-weight: 900 !important;
+  text-decoration: none !important;
+}
+
+.contactFormGrid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0.9rem !important;
+  margin-top: 1rem !important;
+}
+
+.contactFormGrid label {
+  display: grid !important;
+  gap: 0.4rem !important;
+  color: #12382a !important;
+  font-weight: 900 !important;
+}
+
+.contactFormGrid input,
+.contactFormGrid textarea {
+  width: 100% !important;
+  border: 1px solid rgba(15, 81, 50, 0.14) !important;
+  border-radius: 8px !important;
+  padding: 0.9rem 1rem !important;
+  background: #f8fafc !important;
+  color: #092319 !important;
+  outline: none !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease !important;
+}
+
+.contactFormGrid input:focus,
+.contactFormGrid textarea:focus {
+  border-color: #22c55e !important;
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.12) !important;
+  transform: translateY(-1px) !important;
+}
+
+.contactMessageField {
+  grid-column: 1 / -1 !important;
+}
+
+.contactSubmitButton {
+  width: 100% !important;
+  margin-top: 1rem !important;
+  display: inline-flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 0.55rem !important;
+}
+
+.contactFeedback {
+  margin: 1rem 0 0 !important;
+}
+
+@keyframes knScanLine {
+  0%,
+  100% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes knGridDrift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 42px 42px;
+  }
+}
+
+@keyframes knOrbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes knPulseRing {
+  0% {
+    transform: scale(0.55);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  .contactHero,
+  .contactCommandGrid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .contactAiVisual {
+    min-height: 420px !important;
+  }
+
+  .contactAiVisual img {
+    min-height: 420px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .homeAiSignalGrid,
+  .homeWorkflowRail,
+  .contactChannelGrid,
+  .contactFormGrid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .phpHeroExact h1,
+  .contactHeroCopy h1 {
+    max-width: 100% !important;
+    font-size: clamp(2.25rem, 10vw, 3.05rem) !important;
+    line-height: 1 !important;
+  }
+
+  .phpHeroExact {
+    min-height: auto !important;
+    padding: 1rem !important;
+  }
+
+  .homeAiSignalPanel {
+    padding: 0.85rem !important;
+  }
+
+  .phpHeroExact p,
+  .contactHeroCopy p {
+    max-width: 100% !important;
+    font-size: 0.98rem !important;
+    line-height: 1.5 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .homeAiSignalGrid div {
+    min-height: auto !important;
+  }
+
+  .contactReasonRail {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .contactReasonRail span {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .contactCommandPage {
+    width: calc(100% - 0.75rem) !important;
+    padding-bottom: 6.25rem !important;
+  }
+
+  .contactHero {
+    min-height: auto !important;
+    padding: 1rem !important;
+  }
+
+  .contactAiVisual {
+    min-height: 320px !important;
+  }
+
+  .contactAiVisual img {
+    min-height: 320px !important;
+  }
+
+  .contactAiCard {
+    width: calc(100% - 2rem) !important;
+  }
+}
+
+/* Screenshot-driven fixes: navbar alignment and mobile overflow. */
+body,
+.shell,
+.legacyApp {
+  overflow-x: hidden !important;
+}
+
+@media (min-width: 993px) {
+  #navbar-main .navShell {
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) auto !important;
+    align-items: center !important;
+    column-gap: 1rem !important;
+  }
+
+  #navbar-main .navTopRow {
+    display: contents !important;
+  }
+
+  #navbar-main .navBrandList {
+    grid-column: 1 !important;
+    min-width: 0 !important;
+  }
+
+  #navbar-main .navMenuPanel {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    width: auto !important;
+    margin: 0 !important;
+    min-width: 0 !important;
+  }
+
+  #navbar-main .navTopActions {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    min-width: 0 !important;
+  }
+
+  #navbar-main .navMenuPanel > ul,
+  #navbar-main .navbar-nav {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 0.1rem !important;
+    flex-wrap: wrap !important;
+    margin: 0 !important;
+  }
+
+  #navbar-main .nav-item {
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  #navbar-main .nav-link {
+    padding: 0.42rem 0.5rem !important;
+  }
+}
+
+.phpHeroExact,
+.homeHeroPhoto,
+.phpQuoteExact,
+.phpHeroPlant,
+.homeRoleShowcase,
+.panel,
+.card,
+.marketWorkspace,
+.agriChatPage,
+.modernWeatherShell {
+  max-width: 100% !important;
+}
+
+.phpHeroText,
+.phpHeroPlant,
+.homeHeroPhoto,
+.phpQuoteExact,
+.agriChatShell,
+.marketMain,
+.modernWeatherHero {
+  min-width: 0 !important;
+}
+
+.phpHeroExact h1,
+.phpHeroExact p,
+.phpQuoteExact h6,
+.agriChatBubble,
+.card,
+.marketRow,
+.marketOrder {
+  overflow-wrap: anywhere !important;
+}
+
+@media (max-width: 992px) {
+  #navbar-main .mobileNavToggle {
+    display: grid !important;
+  }
+
+  #navbar-main .navTopActions {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 700px) {
+  #navbar-main .navShell {
+    width: calc(100% - 1rem) !important;
+  }
+
+  .phpHeroExact {
+    width: 100% !important;
+    margin-inline: 0 !important;
+    padding: 1.15rem !important;
+  }
+
+  .phpHeroExact h1 {
+    max-width: 100% !important;
+    font-size: clamp(2.65rem, 13vw, 4rem) !important;
+    line-height: 1 !important;
+  }
+
+  .phpQuoteExact {
+    width: 100% !important;
+  }
+
+  .homeHeroPhoto {
+    transform: none !important;
+  }
+
+  .phpHeroMiniStats {
+    grid-template-columns: 1fr !important;
+  }
+
+  .voiceFab {
+    right: 0.5rem !important;
+    max-width: calc(100vw - 1rem) !important;
+  }
+}
+
+.marketWorkspace {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.marketSidebar {
+  position: sticky;
+  top: 88px;
+  align-self: start;
+  display: grid;
+  gap: 0.85rem;
+  padding: 1rem;
+  border-radius: 18px;
+  background: rgba(20, 55, 30, 0.94);
+  color: #fffdf6;
+}
+
+.marketSidebar strong {
+  font-size: 1.1rem;
+}
+
+.marketSidebar span {
+  color: rgba(255, 253, 246, 0.76);
+  font-size: 0.9rem;
+}
+
+.marketSidebar nav {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.marketSidebar button,
+.marketSmallLink {
+  width: 100%;
+  border: 0;
+  border-radius: 10px;
+  padding: 0.72rem 0.8rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fffdf6;
+  text-align: left;
+  cursor: pointer;
+}
+
+.marketSidebar button.active,
+.marketSidebar button:hover,
+.marketSmallLink:hover {
+  background: rgba(244, 202, 108, 0.22);
+}
+
+.marketMain {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.marketHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.marketHeader h1 {
+  margin: 0;
+  line-height: 1.1;
+  font-size: clamp(1.9rem, 3vw, 3rem);
+}
+
+.marketToast {
+  max-width: 420px;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: #e7f2db;
+  color: #21451f;
+  font-weight: 700;
+  box-shadow: 0 12px 24px rgba(33, 69, 31, 0.1);
+}
+
+.marketGrid,
+.marketProductGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1rem;
+}
+
+.marketGrid .card span {
+  color: #587050;
+  text-transform: capitalize;
+}
+
+.marketGrid .card strong {
+  font-size: 1.55rem;
+}
+
+.marketGrid .card small {
+  display: block;
+  margin-top: 0.35rem;
+  color: #60705d;
+}
+
+.marketCashGrid {
+  margin-top: 0.25rem;
+}
+
+.marketTwo {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 1rem;
+}
+
+.marketForm,
+.marketChat {
+  align-content: start;
+}
+
+.marketFormGrid,
+.marketFilters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+
+.marketFilters {
+  align-items: end;
+}
+
+.marketRow,
+.marketOrder {
+  display: grid;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.85rem;
+  border-radius: 12px;
+  background: rgba(231, 242, 219, 0.72);
+}
+
+.marketRow {
+  grid-template-columns: minmax(0, 1fr) auto auto auto;
+}
+
+.marketOrder {
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  margin-top: 0.7rem;
+}
+
+.marketOrder p,
+.marketRow p,
+.marketProduct p {
+  margin: 0;
+  color: #4c6049;
+}
+
+.marketOrder small {
+  color: #60705d;
+}
+
+.marketTimeline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.55rem;
+}
+
+.marketTimeline span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  border-radius: 999px;
+  padding: 0.3rem 0.58rem;
+  background: rgba(255, 255, 255, 0.78);
+  color: #52664e;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.marketTimeline span.done {
+  background: rgba(47, 107, 47, 0.16);
+  color: #244f24;
+}
+
+.marketTimeline span.danger {
+  background: rgba(190, 58, 58, 0.13);
+  color: #8d2727;
+}
+
+.marketBadge {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.42rem 0.7rem;
+  background: rgba(47, 107, 47, 0.12);
+  color: #244f24;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ghostAction {
+  border: 1px solid rgba(37, 79, 31, 0.18);
+  border-radius: 10px;
+  padding: 0.65rem 0.8rem;
+  background: rgba(255, 255, 255, 0.65);
+  color: #21451f;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.marketActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.marketProduct {
+  align-content: space-between;
+  min-height: 260px;
+}
+
+.marketSummary {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(244, 202, 108, 0.18);
+}
+
+.marketEmpty {
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(239, 245, 232, 0.9);
+  color: #52664e;
+}
+
+.marketChatLog {
+  display: grid;
+  gap: 0.7rem;
+  max-height: 360px;
+  overflow: auto;
+}
+
+.marketMessage {
+  padding: 0.8rem;
+  border-radius: 12px;
+  background: rgba(231, 242, 219, 0.75);
+}
+
+.marketMessage p {
+  margin: 0.25rem 0;
+}
+
+.marketTool {
+  color: #21451f;
+  font-weight: 800;
+}
+
+html[data-theme="dark"] .marketSidebar {
+  background: rgba(12, 28, 18, 0.96);
+}
+
+html[data-theme="dark"] .marketToast,
+html[data-theme="dark"] .marketRow,
+html[data-theme="dark"] .marketOrder,
+html[data-theme="dark"] .marketMessage,
+html[data-theme="dark"] .marketEmpty,
+html[data-theme="dark"] .marketSummary {
+  background: rgba(27, 45, 31, 0.94);
+  color: #eef4e8;
+}
+
+html[data-theme="dark"] .marketOrder p,
+html[data-theme="dark"] .marketRow p,
+html[data-theme="dark"] .marketProduct p,
+html[data-theme="dark"] .marketOrder small,
+html[data-theme="dark"] .marketGrid .card small {
+  color: #b8c9b2;
+}
+
+html[data-theme="dark"] .marketBadge {
+  background: rgba(186, 212, 129, 0.15);
+  color: #dce9bd;
+}
+
+html[data-theme="dark"] .marketTimeline span {
+  background: rgba(255, 255, 255, 0.08);
+  color: #b8c9b2;
+}
+
+html[data-theme="dark"] .marketTimeline span.done {
+  background: rgba(186, 212, 129, 0.16);
+  color: #dce9bd;
+}
+
+html[data-theme="dark"] .marketTimeline span.danger {
+  background: rgba(255, 122, 122, 0.14);
+  color: #ffc3c3;
+}
+
+html[data-theme="dark"] .ghostAction,
+html[data-theme="dark"] .marketTool {
+  background: rgba(255, 255, 255, 0.08);
+  color: #eef4e8;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.roleAiCard {
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 1.25rem;
+  padding: 1.2rem;
+  border: 1px solid rgba(37, 79, 31, 0.14);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 252, 235, 0.96), rgba(235, 246, 225, 0.94)),
+    #f7fbef;
+  box-shadow: 0 16px 42px rgba(22, 54, 28, 0.1);
+  color: #153c1d;
+}
+
+.roleAiCard.customer {
+  background:
+    linear-gradient(135deg, rgba(255, 250, 233, 0.96), rgba(238, 248, 229, 0.95)),
+    #fbf7ea;
+}
+
+.roleAiCard.admin {
+  background:
+    linear-gradient(135deg, rgba(239, 248, 232, 0.96), rgba(228, 241, 235, 0.95)),
+    #eef7ed;
+}
+
+.roleAiHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.roleAiIntro {
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.roleAiAvatar {
+  width: 82px;
+  height: 82px;
+  overflow: hidden;
+  border-radius: 22px;
+  border: 1px solid rgba(37, 79, 31, 0.12);
+  background: #eff8e8;
+  box-shadow: 0 14px 28px rgba(22, 54, 28, 0.1);
+}
+
+.roleAiAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.roleAiHeader span,
+.roleAiAnswer span {
+  display: inline-flex;
+  color: #326332;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.roleAiHeader h2 {
+  margin: 0.35rem 0;
+  color: #0f371a;
+  font-size: clamp(1.25rem, 2vw, 1.85rem);
+  line-height: 1.2;
+}
+
+.roleAiHeader p {
+  max-width: 860px;
+  margin: 0;
+  color: #52664e;
+  line-height: 1.6;
+}
+
+.roleAiModeBox {
+  flex: 0 0 auto;
+  display: grid;
+  gap: 0.35rem;
+  max-width: 270px;
+  border-radius: 999px;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, #174d22, #2f6b2f);
+  color: #fff8dc;
+  box-shadow: 0 10px 24px rgba(23, 77, 34, 0.22);
+}
+
+.roleAiModeBox strong,
+.roleAiModeBox small {
+  display: block;
+}
+
+.roleAiModeBox small {
+  color: rgba(255, 248, 220, 0.82);
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
+.roleAiVoiceBar {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 16px;
+  background: rgba(36, 91, 36, 0.08);
+}
+
+.roleAiVoiceBar button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 42px;
+  border: 0;
+  border-radius: 12px;
+  padding: 0.65rem 0.9rem;
+  background: #245b24;
+  color: #fff8dc;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.roleAiVoiceBar button:first-child {
+  background: linear-gradient(135deg, #f2ca65, #e8a83b);
+  color: #173c1e;
+}
+
+.roleAiVoiceBar span {
+  color: #52664e;
+  font-size: 0.88rem;
+}
+
+.roleAiPrompts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.65rem;
+}
+
+.roleAiPrompts button,
+.roleAiForm button,
+.roleAiHelplines a {
+  min-height: 44px;
+  border-radius: 12px;
+  font-weight: 800;
+}
+
+.roleAiPrompts button {
+  border: 1px solid rgba(37, 79, 31, 0.15);
+  padding: 0.75rem 0.85rem;
+  background: rgba(255, 255, 255, 0.72);
+  color: #244f24;
+  text-align: left;
+  cursor: pointer;
+}
+
+.roleAiForm {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+}
+
+.roleAiForm input {
+  min-height: 48px;
+  width: 100%;
+  border: 1px solid rgba(37, 79, 31, 0.18);
+  border-radius: 12px;
+  padding: 0.8rem 0.95rem;
+  background: rgba(255, 255, 255, 0.88);
+  color: #153c1d;
+}
+
+.roleAiForm button {
+  border: 0;
+  padding: 0.75rem 1rem;
+  background: #245b24;
+  color: #fff8dc;
+  cursor: pointer;
+}
+
+.roleAiForm button:disabled,
+.roleAiPrompts button:disabled {
+  cursor: progress;
+  opacity: 0.72;
+}
+
+.roleAiHelplines {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.roleAiHelplines a {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.85rem;
+  border: 1px solid rgba(37, 79, 31, 0.12);
+  background: rgba(36, 91, 36, 0.08);
+  color: #1d4c21;
+  text-decoration: none;
+}
+
+.roleAiHelplines span {
+  color: #60705d;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.roleAiFeedback,
+.roleAiAnswer {
+  margin: 0;
+  border-radius: 14px;
+  padding: 0.95rem;
+}
+
+.roleAiFeedback {
+  background: rgba(255, 232, 168, 0.55);
+  color: #685019;
+}
+
+.roleAiAnswer {
+  min-height: 150px;
+  border: 1px solid rgba(37, 79, 31, 0.14);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.roleAiAnswer p {
+  margin: 0.45rem 0 0;
+  color: #263f26;
+  white-space: pre-wrap;
+  line-height: 1.65;
+}
+
+html[data-theme="dark"] .roleAiCard {
+  border-color: rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(135deg, rgba(15, 38, 22, 0.97), rgba(24, 46, 31, 0.96)),
+    #102618;
+  color: #eef4e8;
+}
+
+html[data-theme="dark"] .roleAiHeader h2,
+html[data-theme="dark"] .roleAiForm input,
+html[data-theme="dark"] .roleAiAnswer p {
+  color: #eef4e8;
+}
+
+html[data-theme="dark"] .roleAiHeader p,
+html[data-theme="dark"] .roleAiHelplines span,
+html[data-theme="dark"] .roleAiVoiceBar span {
+  color: #b8c9b2;
+}
+
+html[data-theme="dark"] .roleAiPrompts button,
+html[data-theme="dark"] .roleAiForm input,
+html[data-theme="dark"] .roleAiHelplines a,
+html[data-theme="dark"] .roleAiAnswer,
+html[data-theme="dark"] .roleAiVoiceBar {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  color: #eef4e8;
+}
+
+@media (max-width: 1024px) {
+  .marketWorkspace,
+  .marketTwo {
+    grid-template-columns: 1fr;
+  }
+
+  .homeRoleShowcase,
+  .roleAiHeader,
+  .roleAiVoiceBar {
+    grid-template-columns: 1fr;
+  }
+
+  .roleAiHeader {
+    display: grid;
+  }
+
+  .marketSidebar {
+    position: static;
+  }
+
+  .marketSidebar nav {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  }
+
+  .marketHeader,
+  .marketOrder,
+  .marketRow {
+    grid-template-columns: 1fr;
+  }
+
+  .marketHeader {
+    display: grid;
+  }
+
+  .marketActions {
+    justify-content: stretch;
+  }
+
+  .marketActions > *,
+  .marketOrder > button,
+  .marketRow > button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 720px) {
+  .homeRoleShowcase,
+  .roleAiVoiceBar {
+    grid-template-columns: 1fr;
+  }
+
+  .homeAgentCard {
+    grid-template-columns: 1fr;
+  }
+
+  .homeAgentCard img {
+    width: 100%;
+    height: 180px;
+    min-height: 180px;
+  }
+
+  .homeHeroPhoto,
+  .homeHeroPhoto img {
+    min-height: 320px;
+  }
+
+  .roleAiCard {
+    padding: 1rem;
+    border-radius: 14px;
+  }
+
+  .roleAiHeader,
+  .roleAiForm {
+    grid-template-columns: 1fr;
+  }
+
+  .roleAiHeader {
+    display: grid;
+  }
+
+  .roleAiIntro {
+    grid-template-columns: 1fr;
+  }
+
+  .roleAiAvatar {
+    width: 100%;
+    height: 150px;
+  }
+
+  .roleAiModeBox,
+  .roleAiForm button {
+    width: 100%;
+    text-align: center;
+    max-width: none;
+    border-radius: 14px;
+  }
+}
+
+/* KrishiNova advanced visual upgrade */
+:root {
+  --kn-ink: #092319;
+  --kn-ink-2: #18382b;
+  --kn-muted: #61736a;
+  --kn-leaf: #16a34a;
+  --kn-leaf-2: #22c55e;
+  --kn-sky: #0ea5e9;
+  --kn-gold: #f59e0b;
+  --kn-panel: rgba(255, 255, 255, 0.9);
+  --kn-line: rgba(15, 81, 50, 0.14);
+  --kn-shadow: 0 22px 55px rgba(9, 35, 25, 0.14);
+}
+
+body {
+  background:
+    linear-gradient(180deg, rgba(222, 247, 255, 0.9), rgba(247, 251, 246, 0.96) 42%, rgba(255, 248, 230, 0.86)),
+    url("/img/agri.png") center top / cover fixed;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: rgba(247, 251, 246, 0.86);
+  pointer-events: none;
+}
+
+.topbar {
+  padding: 0.75rem clamp(1rem, 3vw, 2.6rem);
+  background: rgba(7, 30, 22, 0.82);
+  border-bottom: 1px solid rgba(209, 250, 229, 0.12);
+  box-shadow: 0 18px 45px rgba(7, 30, 22, 0.18);
+}
+
+.topbar nav a,
+.topbar nav button {
+  transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.topbar nav a:hover,
+.topbar nav button:hover {
+  transform: translateY(-1px);
+}
+
+.button,
+.ghostButton,
+.btn,
+.marketActions button,
+.marketSidebar button,
+.agriChatComposer button,
+.agriPromptChips button,
+.roleAiPrompts button,
+.roleAiVoiceBar button,
+.phpQuoteRefresh {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px !important;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+}
+
+.button::after,
+.ghostButton::after,
+.btn::after,
+.agriChatComposer button::after,
+.agriPromptChips button::after,
+.marketActions button::after,
+.marketSidebar button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-120%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
+  transition: transform 0.55s ease;
+}
+
+.button:hover,
+.ghostButton:hover,
+.btn:hover,
+.marketActions button:hover,
+.marketSidebar button:hover,
+.agriChatComposer button:hover,
+.agriPromptChips button:hover,
+.roleAiPrompts button:hover,
+.roleAiVoiceBar button:hover,
+.phpQuoteRefresh:hover {
+  transform: translateY(-2px);
+  filter: saturate(1.08);
+  box-shadow: 0 16px 35px rgba(9, 35, 25, 0.18);
+}
+
+.button:hover::after,
+.ghostButton:hover::after,
+.btn:hover::after,
+.agriChatComposer button:hover::after,
+.agriPromptChips button:hover::after,
+.marketActions button:hover::after,
+.marketSidebar button:hover::after {
+  transform: translateX(120%);
+}
+
+.phpHomeModern {
+  width: min(1480px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.phpHeroExact {
+  min-height: calc(100vh - 84px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.82fr);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  margin: 1rem auto 0;
+  padding: clamp(2rem, 5vw, 5rem);
+  border-radius: 18px;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(112deg, rgba(6, 31, 22, 0.92), rgba(16, 86, 52, 0.78) 48%, rgba(245, 158, 11, 0.36)),
+    url("/img/agri.png") center / cover;
+  color: #fffdf6;
+  box-shadow: var(--kn-shadow);
+}
+
+.phpHeroExact::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 42%;
+  background:
+    radial-gradient(circle at 18% 60%, rgba(34, 197, 94, 0.45), transparent 26%),
+    linear-gradient(180deg, transparent, rgba(7, 30, 22, 0.62));
+  pointer-events: none;
+}
+
+.phpHeroText,
+.phpHeroPlant {
+  position: relative;
+  z-index: 1;
+}
+
+.heroBrandIntro {
+  width: fit-content;
+  margin-bottom: 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  padding: 0.55rem 0.85rem;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px);
+}
+
+.heroBrandIntro .brandLockupText strong,
+.heroBrandIntro .brandLockupText small {
+  color: #fffdf6;
+}
+
+.phpHeroExact h1 {
+  max-width: 12ch;
+  margin: 0;
+  font-size: clamp(3.4rem, 8vw, 7.6rem);
+  line-height: 0.92;
+  letter-spacing: 0;
+  color: #ffffff;
+  text-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+}
+
+.phpHeroExact p {
+  max-width: 720px;
+  margin: 1.35rem 0 0;
+  color: #dffbea;
+  font-size: clamp(1.05rem, 2vw, 1.45rem);
+}
+
+.phpQuoteExact {
+  width: min(680px, 100%);
+  margin: 1.65rem 0 0;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+}
+
+.phpQuoteExact h6 {
+  margin: 0;
+  color: #fff8dc;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.phpQuoteExactFooter {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 0.85rem;
+}
+
+.phpQuoteExactFooter span {
+  color: #a7f3d0;
+  font-weight: 900;
+  font-size: 0.82rem;
+  letter-spacing: 0;
+}
+
+.phpQuoteRefresh {
+  border: 0;
+  min-height: 36px;
+  padding: 0.45rem 0.75rem;
+  background: #ecfdf5;
+  color: #14532d;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1.4rem;
+}
+
+.button,
+.ghostButton.darkGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 0.75rem 1.05rem;
+  border: 0;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.button {
+  background: linear-gradient(135deg, var(--kn-leaf-2), #15803d);
+  color: #ffffff;
+  box-shadow: 0 14px 32px rgba(22, 163, 74, 0.28);
+}
+
+.ghostButton.darkGhost {
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fffdf6;
+  backdrop-filter: blur(8px);
+}
+
+.homeHeroPhoto {
+  min-height: 540px;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 28px 65px rgba(0, 0, 0, 0.28);
+  transform: rotate(1.5deg);
+}
+
+.homeHeroPhoto img {
+  width: 100%;
+  height: 100%;
+  min-height: 540px;
+  object-fit: cover;
+  transform: scale(1.03);
+}
+
+.homeHeroAiBadge,
+.phpHeroMiniStats {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--kn-ink);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 16px 36px rgba(7, 30, 22, 0.18);
+}
+
+.homeHeroAiBadge {
+  right: 1rem;
+  top: 1rem;
+  display: grid;
+  gap: 0.15rem;
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+}
+
+.homeHeroAiBadge span {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #0ea5e9;
+  color: white;
+  font-weight: 900;
+}
+
+.phpHeroMiniStats {
+  left: -1rem;
+  bottom: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(110px, 1fr));
+  gap: 0.7rem;
+  border-radius: 14px;
+  padding: 0.75rem;
+}
+
+.phpHeroMiniStats div {
+  padding: 0.7rem;
+  border-radius: 8px;
+  background: #ecfdf5;
+}
+
+.phpHeroMiniStats strong {
+  display: block;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--kn-ink);
+}
+
+.phpHeroMiniStats span,
+.homeHeroAiBadge small {
+  color: var(--kn-muted);
+  font-weight: 800;
+  font-size: 0.78rem;
+}
+
+.panel,
+.card,
+.statCard,
+.homeAgentCard,
+.roleAiCard,
+.marketMain,
+.marketSidebar,
+.agriChatShell,
+.agriChatGuide,
+.modernWeatherShell,
+.modernWeatherHero,
+.weatherForecastCard {
+  border-radius: 8px !important;
+}
+
+.panel,
+.card,
+.homeAgentCard,
+.roleAiCard,
+.marketMain,
+.agriChatShell,
+.agriChatGuide,
+.modernWeatherShell {
+  background: var(--kn-panel) !important;
+  border: 1px solid var(--kn-line) !important;
+  box-shadow: var(--kn-shadow) !important;
+}
+
+.homeRoleShowcase {
+  width: min(1380px, calc(100% - 1rem));
+  margin: -2.5rem auto 2.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.homeAgentCard {
+  overflow: hidden;
+  min-height: 260px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.homeAgentCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 70px rgba(9, 35, 25, 0.2) !important;
+}
+
+.homeAgentCard img {
+  object-fit: cover;
+}
+
+.homeAgentBody strong,
+.phpSectionHeading h2,
+.sectionHeading h2,
+.marketHeader h1,
+.agriChatHeader h1,
+.modernWeatherHero h1 {
+  color: var(--kn-ink);
+  letter-spacing: 0;
+}
+
+.phpSectionExact {
+  margin-block: 2rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.phpFeatureRow,
+.phpCapabilityExact {
+  overflow: hidden;
+}
+
+.phpFeatureImage img,
+.phpCapabilityImage img {
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 18px 45px rgba(9, 35, 25, 0.16);
+}
+
+.marketWorkspace {
+  width: min(1460px, calc(100% - 1rem));
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+.marketSidebar {
+  background:
+    linear-gradient(180deg, rgba(9, 35, 25, 0.98), rgba(16, 83, 49, 0.96)),
+    url("/img/features.png") center / cover !important;
+  color: #ecfdf5;
+  box-shadow: 0 24px 55px rgba(9, 35, 25, 0.18);
+}
+
+.marketSidebar strong {
+  color: #ffffff;
+}
+
+.marketSidebar span,
+.marketSmallLink {
+  color: #c7f9dc !important;
+}
+
+.marketSidebar button {
+  min-height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ecfdf5;
+}
+
+.marketSidebar button.active {
+  background: #ecfdf5;
+  color: #14532d;
+}
+
+.marketHeader {
+  align-items: center;
+  padding: 1rem;
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(236, 253, 245, 0.95), rgba(239, 246, 255, 0.92)),
+    #ffffff;
+}
+
+.marketGrid .card,
+.marketCashGrid .card,
+.marketForm,
+.marketChat,
+.marketOrder,
+.marketRow,
+.forecastCard,
+.articleCard {
+  border-radius: 8px !important;
+  border: 1px solid rgba(15, 81, 50, 0.12) !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+  box-shadow: 0 12px 28px rgba(9, 35, 25, 0.08) !important;
+}
+
+.marketGrid .card:hover,
+.marketOrder:hover,
+.marketRow:hover,
+.forecastCard:hover,
+.articleCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 42px rgba(9, 35, 25, 0.14) !important;
+}
+
+.marketBadge {
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #166534;
+}
+
+.agriChatPage {
+  width: min(1360px, calc(100% - 1rem));
+  margin: 0 auto;
+}
+
+.agriChatGuide {
+  background:
+    linear-gradient(180deg, rgba(9, 35, 25, 0.96), rgba(19, 92, 56, 0.9)),
+    url("/img/plant-bulb.png") center bottom / 70% auto no-repeat !important;
+  color: #ecfdf5;
+}
+
+.agriRobotCard {
+  border-radius: 8px !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.agriRobotCard h2,
+.agriChatGuide h3 {
+  color: #ffffff;
+}
+
+.agriRobotCard p,
+.agriRobotCard span,
+.agriChatGuide small {
+  color: #c7f9dc;
+}
+
+.agriRobotFace {
+  background: linear-gradient(135deg, #facc15, #22c55e) !important;
+  box-shadow: 0 0 0 8px rgba(250, 204, 21, 0.12), 0 18px 38px rgba(0, 0, 0, 0.2);
+}
+
+.agriRobotCard.active .agriRobotFace,
+.voiceFab.active {
+  animation: knPulse 1.4s ease-in-out infinite;
+}
+
+.agriPromptChips button {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ecfdf5;
+}
+
+.agriChatShell {
+  min-height: 680px;
+  overflow: hidden;
+}
+
+.agriChatHeader {
+  border-radius: 8px;
+  padding: 1rem;
+  background: linear-gradient(135deg, #ecfdf5, #eff6ff);
+}
+
+.agriChatHeader strong {
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #166534;
+}
+
+.agriChatMessages {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)),
+    url("/img/krishinova-mark.svg") center / 220px no-repeat;
+}
+
+.agriChatBubble {
+  border-radius: 14px !important;
+  white-space: pre-wrap;
+}
+
+.agriChatBubble.assistant {
+  border: 1px solid rgba(15, 81, 50, 0.14);
+  background: #ffffff;
+}
+
+.agriChatBubble.user {
+  background: linear-gradient(135deg, #15803d, #16a34a);
+  color: #ffffff;
+}
+
+.agriChatComposer {
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.agriChatComposer input,
+.modernWeatherSearch input,
+.card input,
+.card textarea,
+.card select,
+.marketForm input,
+.marketForm textarea,
+.marketForm select {
+  border-radius: 8px !important;
+  border: 1px solid rgba(15, 81, 50, 0.16) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  color: var(--kn-ink);
+}
+
+.agriChatComposer button,
+.modernWeatherSearch button {
+  border: 0;
+  background: linear-gradient(135deg, var(--kn-leaf-2), #15803d);
+  color: white;
+  font-weight: 900;
+}
+
+.modernWeatherShell {
+  width: min(1320px, calc(100% - 1rem));
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.modernWeatherHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.5rem;
+  align-items: end;
+  min-height: 280px;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  border-radius: 8px;
+  background:
+    linear-gradient(120deg, rgba(7, 30, 22, 0.92), rgba(14, 165, 233, 0.72), rgba(245, 158, 11, 0.36)),
+    url("/img/features.png") center / cover;
+  color: #fffdf6;
+  box-shadow: var(--kn-shadow);
+}
+
+.modernWeatherHero h1 {
+  margin: 0.25rem 0;
+  color: #ffffff;
+  font-size: clamp(2.2rem, 5vw, 4.8rem);
+}
+
+.modernWeatherHero p {
+  margin: 0;
+  color: #dffbea;
+  font-size: 1.1rem;
+}
+
+.modernWeatherNow {
+  min-width: 260px;
+  border-radius: 8px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--kn-ink);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
+}
+
+.modernWeatherNow strong {
+  display: block;
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.modernWeatherSearch {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.modernWeatherSearch input,
+.modernWeatherSearch button {
+  min-height: 52px;
+  padding: 0.75rem 1rem;
+}
+
+.weatherForecastGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.weatherForecastCard {
+  position: relative;
+  overflow: hidden;
+  min-height: 190px;
+  padding: 1rem;
+  background: linear-gradient(145deg, #ffffff, #ecfdf5);
+  border: 1px solid rgba(15, 81, 50, 0.12);
+  box-shadow: 0 14px 35px rgba(9, 35, 25, 0.1);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.weatherForecastCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(9, 35, 25, 0.16);
+}
+
+.weatherForecastCard::after {
+  content: "";
+  position: absolute;
+  right: -34px;
+  top: -34px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: rgba(14, 165, 233, 0.12);
+}
+
+.weatherForecastCard .weatherTime {
+  color: var(--kn-muted);
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.weatherForecastCard strong {
+  display: block;
+  margin: 0.5rem 0;
+  color: var(--kn-ink);
+  font-size: 1.2rem;
+}
+
+.weatherMetricRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+}
+
+.weatherMetricRow span {
+  border-radius: 999px;
+  padding: 0.35rem 0.55rem;
+  background: #f0fdf4;
+  color: #166534;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.weatherTip {
+  margin: 1rem 0 0;
+  border-radius: 8px;
+  padding: 1rem;
+  background: #fff7ed;
+  color: #7c2d12;
+  font-weight: 800;
+}
+
+.row-content > [class*="col-"] > .card,
+.card.text-white {
+  border-radius: 8px !important;
+  border: 1px solid rgba(15, 81, 50, 0.12) !important;
+  box-shadow: var(--kn-shadow) !important;
+  overflow: hidden;
+}
+
+.card-header {
+  border: 0 !important;
+  background: linear-gradient(135deg, #ecfdf5, #eff6ff) !important;
+}
+
+.card-header .display-4,
+.card-header span {
+  color: var(--kn-ink) !important;
+  font-size: clamp(1.8rem, 4vw, 3.1rem) !important;
+  font-weight: 900 !important;
+}
+
+@keyframes knPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.35);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 14px rgba(34, 197, 94, 0);
+  }
+}
+
+@media (max-width: 980px) {
+  .phpHeroExact,
+  .modernWeatherHero {
+    grid-template-columns: 1fr;
+  }
+
+  .homeHeroPhoto,
+  .homeHeroPhoto img {
+    min-height: 360px;
+  }
+
+  .phpHeroMiniStats {
+    position: static;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .phpHomeModern,
+  .modernWeatherShell,
+  .marketWorkspace,
+  .agriChatPage {
+    width: min(100% - 0.75rem, 100%);
+  }
+
+  .phpHeroExact {
+    padding: 1.25rem;
+    min-height: auto;
+  }
+
+  .phpHeroExact h1 {
+    font-size: clamp(2.7rem, 17vw, 4.8rem);
+  }
+
+  .ctaRow,
+  .modernWeatherSearch,
+  .phpQuoteExactFooter {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .button,
+  .ghostButton.darkGhost,
+  .modernWeatherSearch button {
+    width: 100%;
+  }
+
+  .modernWeatherNow {
+    min-width: 0;
+  }
+}
+
+/* True final overrides. Keep this block last so Bootstrap/legacy/older visual rules cannot win. */
+.legacyApp {
+  min-height: 100vh !important;
+  background:
+    linear-gradient(180deg, rgba(224, 247, 255, 0.78), rgba(247, 251, 246, 0.96) 32%, rgba(255, 248, 230, 0.9)),
+    radial-gradient(circle at 12% 18%, rgba(34, 197, 94, 0.16), transparent 28%),
+    radial-gradient(circle at 88% 8%, rgba(14, 165, 233, 0.13), transparent 24%) !important;
+}
+
+.modernPageFrame {
+  padding: clamp(1rem, 2.5vw, 2rem) 0 clamp(2rem, 4vw, 4rem) !important;
+}
+
+.modernPageContainer {
+  width: min(1440px, calc(100% - 2rem)) !important;
+  max-width: none !important;
+  margin: 0 auto !important;
+}
+
+.modernPageContainer.fluid {
+  width: min(1540px, calc(100% - 1.5rem)) !important;
+}
+
+#navbar-main.navbar-main {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  padding: 0 !important;
+  background: rgba(7, 30, 22, 0.92) !important;
+  backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(209, 250, 229, 0.14) !important;
+  box-shadow: 0 18px 42px rgba(7, 30, 22, 0.18) !important;
+}
+
+#navbar-main .navShell {
+  width: min(1540px, calc(100% - 1.5rem)) !important;
+  max-width: none !important;
+  margin: 0 auto !important;
+  padding: 0.7rem 0 !important;
+}
+
+#navbar-main .navTopRow {
+  display: grid !important;
+  grid-template-columns: auto 1fr !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  width: 100% !important;
+}
+
+#navbar-main .navTopActions,
+#navbar-main .navUtilityControls {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 0.55rem !important;
+}
+
+#navbar-main .navMenuPanel {
+  width: 100% !important;
+  margin-top: 0.65rem !important;
+}
+
+#navbar-main .navMenuPanel > ul {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 0.25rem !important;
+  flex-wrap: wrap !important;
+}
+
+#navbar-main .nav-link,
+#navbar-main .dropdown-toggle {
+  min-height: 38px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  border-radius: 8px !important;
+  padding: 0.45rem 0.62rem !important;
+  color: #ecfdf5 !important;
+  white-space: nowrap !important;
+}
+
+#navbar-main .nav-link:hover,
+#navbar-main .dropdown-toggle:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+#navbar-main .nav-link-inner--text,
+#navbar-main .nav-link-inner--text i {
+  color: #ecfdf5 !important;
+  font-size: 0.88rem !important;
+}
+
+.mobileNavToggle {
+  display: none;
+}
+
+.phpHomeModern,
+.marketWorkspace,
+.agriChatPage,
+.modernWeatherShell {
+  width: min(1440px, calc(100% - 1rem)) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  animation: pageRise 0.55s ease both !important;
+}
+
+.panel,
+.card,
+.homeAgentCard,
+.roleAiCard,
+.marketMain,
+.marketSidebar,
+.agriChatShell,
+.agriChatGuide,
+.weatherForecastCard,
+.modernWeatherHero,
+.modernWeatherNow {
+  border-radius: 8px !important;
+  border: 1px solid rgba(15, 81, 50, 0.14) !important;
+  box-shadow: 0 22px 55px rgba(9, 35, 25, 0.14) !important;
+  overflow: hidden !important;
+}
+
+.card,
+.panel,
+.marketMain,
+.agriChatShell {
+  background: rgba(255, 255, 255, 0.92) !important;
+}
+
+.card.text-white,
+.bg-gradient-success,
+.bg-gradient-secondary,
+.bg-gradient-white {
+  background: rgba(255, 255, 255, 0.92) !important;
+  color: #17382b !important;
+}
+
+.card .card {
+  box-shadow: none !important;
+  background: #f8fafc !important;
+}
+
+.card-body {
+  color: #17382b !important;
+}
+
+.card-header {
+  border: 0 !important;
+  background: linear-gradient(135deg, #ecfdf5, #eff6ff) !important;
+}
+
+.card-header .display-4,
+.card-header span,
+.display-4 {
+  color: #092319 !important;
+  font-size: clamp(1.9rem, 4vw, 3.4rem) !important;
+  line-height: 1.05 !important;
+  font-weight: 900 !important;
+  letter-spacing: 0 !important;
+}
+
+.homeRoleShowcase,
+.grid.three,
+.grid.two,
+.grid,
+.split,
+.marketGrid,
+.marketTwo,
+.weatherForecastGrid {
+  display: grid !important;
+  gap: 1rem !important;
+  align-items: stretch !important;
+}
+
+.homeRoleShowcase,
+.grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.grid.two,
+.split,
+.marketTwo {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.marketGrid,
+.weatherForecastGrid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+}
+
+.agriChatPage {
+  display: grid !important;
+  grid-template-columns: minmax(280px, 0.34fr) minmax(0, 1fr) !important;
+  gap: 1rem !important;
+}
+
+.agriChatGuide {
+  padding: 1rem !important;
+  background:
+    linear-gradient(180deg, rgba(9, 35, 25, 0.96), rgba(19, 92, 56, 0.9)),
+    url("/img/plant-bulb.png") center bottom / 70% auto no-repeat !important;
+  color: #ecfdf5 !important;
+}
+
+.agriChatShell {
+  min-height: 680px !important;
+  display: grid !important;
+  grid-template-rows: auto minmax(360px, 1fr) auto auto !important;
+}
+
+.agriChatMessages {
+  max-height: 62vh !important;
+  overflow: auto !important;
+  padding: 1rem !important;
+}
+
+.agriChatComposer {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  gap: 0.75rem !important;
+  padding: 1rem !important;
+}
+
+.marketWorkspace {
+  display: grid !important;
+  grid-template-columns: 280px minmax(0, 1fr) !important;
+  align-items: start !important;
+  gap: 1rem !important;
+}
+
+.marketSidebar {
+  position: sticky !important;
+  top: 118px !important;
+  min-height: calc(100vh - 140px) !important;
+  padding: 1rem !important;
+  background:
+    linear-gradient(180deg, rgba(9, 35, 25, 0.98), rgba(16, 83, 49, 0.96)),
+    url("/img/features.png") center / cover !important;
+  color: #ecfdf5 !important;
+}
+
+.modernWeatherShell {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.modernWeatherSearch {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  gap: 0.75rem !important;
+  position: sticky !important;
+  top: 96px !important;
+  z-index: 5 !important;
+  border: 1px solid rgba(15, 81, 50, 0.1) !important;
+  border-radius: 8px !important;
+  padding: 0.75rem !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(10px) !important;
+  box-shadow: 0 12px 28px rgba(9, 35, 25, 0.08) !important;
+}
+
+@media (max-width: 1200px) {
+  .homeRoleShowcase,
+  .grid.three {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .mobileNavToggle {
+    display: grid !important;
+  }
+
+  #navbar-main .navUtilityControls {
+    display: none !important;
+  }
+
+  #navbar-main .navTopRow {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+  }
+
+  #navbar-main .navMenuPanel {
+    display: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 8px !important;
+    padding: 0.75rem !important;
+    background: rgba(7, 30, 22, 0.98) !important;
+  }
+
+  #navbar-main .navMenuPanel.open {
+    display: block !important;
+  }
+
+  #navbar-main .navMenuPanel > ul {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .agriChatPage,
+  .marketWorkspace,
+  .marketTwo,
+  .split,
+  .grid.two,
+  .modernWeatherHero {
+    grid-template-columns: 1fr !important;
+  }
+
+  .marketSidebar {
+    position: static !important;
+    min-height: auto !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .modernPageContainer,
+  .modernPageContainer.fluid,
+  .phpHomeModern,
+  .marketWorkspace,
+  .agriChatPage,
+  .modernWeatherShell {
+    width: min(100% - 0.75rem, 100%) !important;
+  }
+
+  .homeRoleShowcase,
+  .grid.three,
+  .grid.two,
+  .marketGrid,
+  .weatherForecastGrid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .agriChatComposer,
+  .marketHeader,
+  .modernWeatherSearch {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.phpQuoteExact h6 {
+  background: rgba(236, 253, 245, 0.9) !important;
+  color: #12382a !important;
+  text-shadow: none !important;
+}
+
+/* Mobile overflow and polish patch. Keep below every legacy block. */
+html,
+body,
+#root,
+.legacyApp {
+  max-width: 100% !important;
+  overflow-x: clip !important;
+}
+
+#navbar-main *,
+.phpHomeModern *,
+.modernPageFrame *,
+.voiceAssistant * {
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 992px) {
+  #navbar-main .navShell {
+    display: block !important;
+    width: calc(100% - 1rem) !important;
+    padding: 0.65rem 0 !important;
+  }
+
+  #navbar-main .navTopRow {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 44px !important;
+    gap: 0.75rem !important;
+  }
+
+  #navbar-main .navBrandList {
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  #navbar-main .navbar-brand {
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  #navbar-main .navTopActions {
+    display: flex !important;
+    justify-content: flex-end !important;
+    width: 44px !important;
+  }
+
+  #navbar-main .mobileNavToggle {
+    display: inline-flex !important;
+    flex: 0 0 44px !important;
+    width: 44px !important;
+    height: 44px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    gap: 5px !important;
+    position: relative !important;
+    z-index: 2 !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(236, 253, 245, 0.24) !important;
+    background: rgba(236, 253, 245, 0.12) !important;
+  }
+
+  #navbar-main .mobileNavToggle span {
+    display: block !important;
+    width: 19px !important;
+    height: 2px !important;
+    margin: 0 !important;
+    border-radius: 999px !important;
+    background: #ecfdf5 !important;
+  }
+
+  .phpHomeModern,
+  .modernPageFrame {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .phpHeroExact {
+    width: 100% !important;
+    max-width: 100% !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 1rem !important;
+    overflow: hidden !important;
+  }
+
+  .phpHeroText,
+  .phpHeroPlant,
+  .homeHeroPhoto,
+  .phpQuoteExact,
+  .phpQuoteExact h6,
+  .ctaRow,
+  .ctaRow > * {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .phpQuoteExact {
+    overflow: hidden !important;
+  }
+
+  .phpQuoteExact h6 {
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+  }
+
+  .phpQuoteExact h6 {
+    background: rgba(236, 253, 245, 0.9) !important;
+    color: #12382a !important;
+    text-shadow: none !important;
+  }
+
+  .ctaRow {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .modernPageContainer,
+  .modernPageContainer.fluid,
+  .phpHomeModern,
+  .marketWorkspace,
+  .agriChatPage,
+  .modernWeatherShell {
+    width: calc(100% - 0.75rem) !important;
+    max-width: calc(100% - 0.75rem) !important;
+  }
+
+  .phpHomeModern {
+    padding-bottom: 6.25rem !important;
+  }
+
+  .phpHeroExact {
+    min-height: auto !important;
+    padding: 1rem !important;
+    border-radius: 8px !important;
+  }
+
+  .heroBrandIntro {
+    width: 100% !important;
+    padding: 0.85rem !important;
+  }
+
+  .phpHeroExact h1 {
+    max-width: 100% !important;
+    font-size: clamp(2.25rem, 11vw, 3.35rem) !important;
+    line-height: 0.98 !important;
+  }
+
+  .phpHeroExact p,
+  .phpQuoteExact h6 {
+    font-size: 0.98rem !important;
+  }
+
+  .phpQuoteExact {
+    padding: 0.9rem !important;
+    border-radius: 8px !important;
+  }
+
+  .phpQuoteExact h6 {
+    padding: 0.85rem !important;
+    border-radius: 8px !important;
+  }
+
+  .phpQuoteExactFooter {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .phpHeroPlant {
+    display: none !important;
+  }
+
+  .button,
+  .ghostButton.darkGhost,
+  .phpQuoteRefresh {
+    min-height: 44px !important;
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: normal !important;
+  }
+
+  .voiceFab {
+    right: 0.45rem !important;
+    bottom: 0.55rem !important;
+    display: grid !important;
+    grid-template-columns: 44px !important;
+    width: 56px !important;
+    height: 56px !important;
+    max-width: 56px !important;
+    padding: 0.35rem !important;
+    border-radius: 50% !important;
+  }
+
+  .voiceFab span {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .voiceFab strong {
+    display: none !important;
+  }
+}
+
+/* Final hero correction: real imagery, smoother alignment, no overlapping hero panels. */
+.phpHeroExact {
+  min-height: auto !important;
+  grid-template-columns: minmax(0, 0.9fr) minmax(420px, 0.78fr) !important;
+  gap: clamp(1.25rem, 3vw, 2.5rem) !important;
+  align-items: center !important;
+  overflow: hidden !important;
+}
+
+.phpHeroText {
+  align-content: center !important;
+}
+
+.phpHeroExact h1 {
+  max-width: 10.5ch !important;
+  font-size: clamp(3rem, 5.2vw, 5.3rem) !important;
+  line-height: 0.98 !important;
+}
+
+.homeAiCommandVisual {
+  display: grid !important;
+  gap: 0.8rem !important;
+  align-content: center !important;
+}
+
+.homeHeroPhoto {
+  width: 100% !important;
+  max-width: 620px !important;
+  height: clamp(440px, 53vh, 580px) !important;
+  min-height: 440px !important;
+  margin-left: auto !important;
+  transform: none !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(236, 253, 245, 0.2) !important;
+  background:
+    linear-gradient(180deg, rgba(8, 47, 35, 0.18), rgba(8, 47, 35, 0.62)),
+    radial-gradient(circle at 50% 34%, rgba(250, 204, 21, 0.22), transparent 32%),
+    #0f5132 !important;
+  box-shadow: 0 26px 70px rgba(7, 30, 22, 0.26) !important;
+}
+
+.homeHeroPhoto img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  transform: scale(1.01) !important;
+  opacity: 0.96 !important;
+}
+
+.homeHeroPhoto::before {
+  opacity: 0.35 !important;
+}
+
+.homeHeroPhoto::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  background:
+    linear-gradient(180deg, rgba(8, 47, 35, 0.04), rgba(8, 47, 35, 0.58)),
+    radial-gradient(circle at 75% 22%, rgba(14, 165, 233, 0.22), transparent 20%) !important;
+  pointer-events: none !important;
+}
+
+.homeHeroAiBadge {
+  left: 1rem !important;
+  right: 1rem !important;
+  top: auto !important;
+  bottom: 1rem !important;
+  z-index: 3 !important;
+  display: grid !important;
+  grid-template-columns: 46px minmax(0, 1fr) !important;
+  gap: 0.2rem 0.75rem !important;
+  align-items: center !important;
+  padding: 0.85rem !important;
+  border-radius: 8px !important;
+  background: rgba(236, 253, 245, 0.92) !important;
+}
+
+.homeHeroAiBadge span {
+  grid-row: 1 / span 2 !important;
+  width: 46px !important;
+  height: 46px !important;
+  border-radius: 8px !important;
+}
+
+.homeHeroAiBadge strong,
+.homeHeroAiBadge small {
+  overflow-wrap: anywhere !important;
+}
+
+.phpHeroMiniStats {
+  position: static !important;
+  width: 100% !important;
+  max-width: 620px !important;
+  margin-left: auto !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0.75rem !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.phpHeroMiniStats div,
+.homeWorkflowRail div {
+  border-radius: 8px !important;
+  background: rgba(236, 253, 245, 0.88) !important;
+  box-shadow: 0 16px 32px rgba(7, 30, 22, 0.1) !important;
+}
+
+.homeWorkflowRail {
+  max-width: 620px !important;
+  margin: 0 auto 0 0 !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+
+.contactCommandPage {
+  padding-top: 1rem !important;
+}
+
+.contactHero {
+  min-height: auto !important;
+  grid-template-columns: minmax(0, 0.92fr) minmax(420px, 0.86fr) !important;
+  align-items: center !important;
+  overflow: visible !important;
+  padding: clamp(1.5rem, 3vw, 3rem) !important;
+}
+
+.contactHeroCopy {
+  align-content: center !important;
+}
+
+.contactHeroCopy h1 {
+  max-width: 10.5ch !important;
+  font-size: clamp(3rem, 5.2vw, 5.2rem) !important;
+  line-height: 1 !important;
+}
+
+.contactHeroCopy p {
+  max-width: 56ch !important;
+}
+
+.contactAiVisual {
+  min-height: 0 !important;
+  height: clamp(430px, 52vh, 560px) !important;
+  overflow: hidden !important;
+}
+
+.contactAiVisual img {
+  min-height: 0 !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+.contactAiCard {
+  width: min(250px, calc(100% - 2rem)) !important;
+}
+
+.contactAiCard.primary {
+  top: 1rem !important;
+  right: 1rem !important;
+}
+
+.contactAiCard.secondary {
+  left: 1rem !important;
+  bottom: 1rem !important;
+}
+
+.contactReasonRail {
+  max-width: 760px !important;
+}
+
+@media (max-width: 1100px) {
+  .phpHeroExact,
+  .contactHero {
+    grid-template-columns: 1fr !important;
+  }
+
+  .homeHeroPhoto,
+  .phpHeroMiniStats,
+  .homeWorkflowRail,
+  .contactAiVisual {
+    max-width: 100% !important;
+    margin-left: 0 !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .phpHeroExact {
+    padding: 1rem !important;
+    gap: 1rem !important;
+  }
+
+  .phpHeroExact h1,
+  .contactHeroCopy h1 {
+    font-size: clamp(2.15rem, 9.5vw, 3rem) !important;
+    line-height: 1.02 !important;
+  }
+
+  .homeHeroPhoto,
+  .contactAiVisual {
+    height: 330px !important;
+    min-height: 330px !important;
+  }
+
+  .phpHeroPlant,
+  .homeAiCommandVisual {
+    display: grid !important;
+  }
+
+  .homeAiSignalGrid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0.45rem !important;
+  }
+
+  .homeAiSignalGrid div {
+    min-height: 74px !important;
+    padding: 0.55rem !important;
+  }
+
+  .homeAiSignalGrid i {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .homeAiSignalGrid span {
+    font-size: 0.82rem !important;
+  }
+
+  .homeAiSignalGrid small {
+    display: none !important;
+  }
+
+  .phpHeroMiniStats,
+  .homeWorkflowRail,
+  .contactReasonRail {
+    grid-template-columns: 1fr !important;
+  }
+
+  .homeWorkflowRail {
+    display: grid !important;
+  }
+
+  .contactHero {
+    padding: 1rem !important;
+    overflow: hidden !important;
+  }
+
+  .contactAiCard {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: calc(100% - 1rem) !important;
+    margin: -4.75rem auto 0 !important;
+  }
+
+  .contactAiCard.secondary {
+    display: none !important;
   }
 }

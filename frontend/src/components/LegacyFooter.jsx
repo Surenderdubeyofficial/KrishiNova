@@ -1,4 +1,4 @@
-import { BRAND } from "../branding.js";
+import { ADMIN_CONTACT, BRAND } from "../branding.js";
 import { useUi } from "../UiContext.jsx";
 import BrandLockup from "./BrandLockup.jsx";
 
@@ -18,18 +18,18 @@ export default function LegacyFooter() {
           <div className="offset-sm-1 col-12 col-md-4 mt-4 mt-md-0">
             <h5>{t("Our Address")}</h5>
             <address>
-              Karol Bagh, New Delhi 110005
+              {ADMIN_CONTACT.address}
               <br />
               India
               <br />
               <div className="btn-group text-center mt-2" role="group">
-                <a className="btn btn-primary" href="tel:+919582514339">
+                <a className="btn btn-primary" href={ADMIN_CONTACT.phoneHref}>
                   <i className="fa fa-phone" /> {t("Call")}
                 </a>
-                <a className="btn btn-info" href="https://www.linkedin.com/in/surenderdubey/" target="_blank" rel="noreferrer">
+                <a className="btn btn-info" href={ADMIN_CONTACT.linkedin} target="_blank" rel="noreferrer">
                   <i className="fab fa-linkedin" /> LinkedIn
                 </a>
-                <a className="btn btn-success" href="mailto:surenderdubey9582@gmail.com">
+                <a className="btn btn-success" href={`mailto:${ADMIN_CONTACT.email}`}>
                   <i className="fa fa-envelope-o" /> {t("Email")}
                 </a>
               </div>
@@ -40,7 +40,7 @@ export default function LegacyFooter() {
             <div className="footerSocialGrid">
               <a
                 target="_blank"
-                href="mailto:surenderdubey9582@gmail.com"
+                href={`mailto:${ADMIN_CONTACT.email}`}
                 rel="noreferrer"
                 className="footerSocialBtn footerSocialEmail"
                 aria-label="Email"
@@ -49,7 +49,7 @@ export default function LegacyFooter() {
               </a>
               <a
                 target="_blank"
-                href="https://www.linkedin.com/in/surenderdubey/"
+                href={ADMIN_CONTACT.linkedin}
                 rel="noreferrer"
                 className="footerSocialBtn footerSocialLinkedIn"
                 aria-label="LinkedIn"
@@ -58,7 +58,7 @@ export default function LegacyFooter() {
               </a>
               <a
                 target="_blank"
-                href="https://github.com/Surenderdubeyofficial"
+                href={ADMIN_CONTACT.github}
                 rel="noreferrer"
                 className="footerSocialBtn footerSocialGithub"
                 aria-label="GitHub"
@@ -67,7 +67,7 @@ export default function LegacyFooter() {
               </a>
               <a
                 target="_blank"
-                href="tel:+919582514339"
+                href={ADMIN_CONTACT.phoneHref}
                 rel="noreferrer"
                 className="footerSocialBtn footerSocialPhone"
                 aria-label="Phone"
@@ -76,7 +76,7 @@ export default function LegacyFooter() {
               </a>
               <a
                 target="_blank"
-                href="https://maps.google.com/?q=Karol+Bagh+New+Delhi+110005+India"
+                href={ADMIN_CONTACT.mapUrl}
                 rel="noreferrer"
                 className="footerSocialBtn footerSocialMap"
                 aria-label="Map"
@@ -91,7 +91,7 @@ export default function LegacyFooter() {
 
         <div className="row justify-content-center">
           <div className="col-auto">
-            <p>&copy; 2026 {BRAND.name}, Built by Surender Dubey</p>
+            <p>&copy; 2026 {BRAND.name}, Built by {ADMIN_CONTACT.name}</p>
           </div>
         </div>
       </div>

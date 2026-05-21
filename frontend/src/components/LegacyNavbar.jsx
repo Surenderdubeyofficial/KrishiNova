@@ -5,6 +5,14 @@ import { useUi } from "../UiContext.jsx";
 import BrandLockup from "./BrandLockup.jsx";
 import LegacyDropdownNav from "./LegacyDropdownNav.jsx";
 
+function openAiSahayak(mode = "chat") {
+  window.dispatchEvent(
+    new CustomEvent("krishinova-open-assistant", {
+      detail: { mode, autoStart: mode === "voice" },
+    }),
+  );
+}
+
 function PublicNav() {
   const { t } = useUi();
   return (
@@ -56,6 +64,13 @@ function FarmerNav({ name, logout }) {
         <Link to="/farmer" className="nav-link">
           <span className="text-white nav-link-inner--text font-weight-bold">
             <i className="text-white fas fa-chart-line" /> Dashboard
+          </span>
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link to="/farmer/marketplace" className="nav-link">
+          <span className="text-white nav-link-inner--text font-weight-bold">
+            <i className="text-white fas fa-store" /> Marketplace
           </span>
         </Link>
       </li>
@@ -131,6 +146,13 @@ function CustomerNav({ name, logout }) {
         </Link>
       </li>
       <li className="nav-item">
+        <Link to="/customer/marketplace" className="nav-link">
+          <span className="text-white nav-link-inner--text font-weight-bold">
+            <i className="text-white fas fa-store" /> Marketplace
+          </span>
+        </Link>
+      </li>
+      <li className="nav-item">
         <Link to="/customer/cbuy_crops" className="nav-link">
           <span className="text-white nav-link-inner--text font-weight-bold">
             <i className="text-white fas fa-shopping-cart" /> {t("Buy Crops")}
@@ -184,6 +206,13 @@ function AdminNav({ name, logout }) {
         <Link to="/admin" className="nav-link">
           <span className="text-white nav-link-inner--text font-weight-bold">
             <i className="text-white fas fa-chart-bar" /> Dashboard
+          </span>
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link to="/admin/marketplace" className="nav-link">
+          <span className="text-white nav-link-inner--text font-weight-bold">
+            <i className="text-white fas fa-store" /> Marketplace
           </span>
         </Link>
       </li>
@@ -268,6 +297,13 @@ export default function LegacyNavbar() {
 
           <div className="navTopActions">
             <div className="navUtilityControls">
+              <button type="button" className="navAiSahayakBtn" onClick={() => openAiSahayak("chat")}>
+                <i className="fas fa-headset" />
+                <span>AI Sahayak</span>
+              </button>
+              <button type="button" className="navVoiceBtn" onClick={() => openAiSahayak("voice")} aria-label="Open AI voice assistant">
+                <i className="fas fa-microphone" />
+              </button>
               <button type="button" className="uiToggleBtn" onClick={toggleLanguage}>
                 {language === "en" ? "हिंदी" : "ENG"}
               </button>

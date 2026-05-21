@@ -12,7 +12,7 @@ export default function PhoneAuthFields({ form, updateForm, mode }) {
       <div className="authNote">
         {mode === "register"
           ? "We will verify your number first, create the account immediately, and then ask you to complete the remaining fields inside your profile."
-          : "We will verify your number with SMS OTP and sign you in directly."}
+          : "We will verify your number with SMS OTP. If this mobile number is new, we will create a quick account first."}
       </div>
     </>
   );

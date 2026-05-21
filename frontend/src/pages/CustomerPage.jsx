@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { api } from "../api";
 import ProtectedRoute from "../components/ProtectedRoute.jsx";
 import LegacySection from "../components/LegacySection.jsx";
+import RoleAiAssistantCard from "../components/RoleAiAssistantCard.jsx";
 import { useUi } from "../UiContext.jsx";
 
 export default function CustomerPage() {
@@ -139,6 +140,9 @@ export default function CustomerPage() {
             </div>
           </div>
         </div>
+
+        <RoleAiAssistantCard role="customer" currentPage="Customer Dashboard" />
+
         <div className="row row-content">
           <div className="col-md-12 mb-3">
             <div className="card text-white bg-gradient-danger mb-3">

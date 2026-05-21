@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../api";
-import { BRAND } from "../branding.js";
+import { ADMIN_CONTACT, BRAND } from "../branding.js";
 import BrandLockup from "../components/BrandLockup.jsx";
 import { useUi } from "../UiContext.jsx";
 
@@ -19,6 +19,57 @@ const quotes = [
     author: "MASANOBU FUKUOKA",
   },
 ];
+
+const homeAgents = [
+  {
+    role: "farmer",
+    image: "/img/farmers.png",
+    title: "Farmer AI Agent",
+    subtitle: "Crop, scheme, stock and payout help",
+    prompt: "I am a farmer. Help me sell crops, manage orders, and understand agriculture schemes.",
+    path: "/farmer",
+    bullets: ["Crop disease and fertilizer", "PM-Kisan, KCC, soil card", "Listing, orders and payout"],
+  },
+  {
+    role: "customer",
+    image: "/img/customers.png",
+    title: "Customer AI Agent",
+    subtitle: "Buying, payment and delivery support",
+    prompt: "I am a customer. Help me buy crops safely and track my order.",
+    path: "/customer",
+    bullets: ["Find verified farmers", "Payment and invoice", "Delivery, review and refund"],
+  },
+  {
+    role: "admin",
+    image: "/img/admin.png",
+    title: "Admin AI Agent",
+    subtitle: "Trust, disputes, payouts and analytics",
+    prompt: "I am admin. Help me verify farmers, approve listings, handle disputes and release payouts.",
+    path: "/admin",
+    bullets: ["Verification checklist", "Commission and payout flow", "Dispute and refund decisions"],
+  },
+];
+
+const intelligenceTiles = [
+  { label: "Crop AI", value: "Disease, fertilizer and sowing guidance", icon: "fas fa-seedling" },
+  { label: "Weather", value: "Forecast-aware irrigation and spraying", icon: "fas fa-cloud-sun-rain" },
+  { label: "Market", value: "Verified crop stock, order and payout flow", icon: "fas fa-store" },
+];
+
+const workflowNodes = [
+  "Ask AI Sahayak",
+  "Check crop and weather",
+  "List or buy stock",
+  "Track payout",
+];
+
+function openAiSahayak(mode = "chat", prompt = "") {
+  window.dispatchEvent(
+    new CustomEvent("krishinova-open-assistant", {
+      detail: { mode, prompt, autoStart: mode === "voice" },
+    }),
+  );
+}
 
 export default function HomePage() {
   const { t, language } = useUi();
@@ -102,24 +153,48 @@ export default function HomePage() {
           <div className="heroBrandIntro">
             <BrandLockup theme="light" />
           </div>
-          <h1>{BRAND.name}</h1>
-          <p>{BRAND.subtitle}</p>
-          <div className="phpQuoteExact">
-            <h6>{currentQuote.text}</h6>
-            <div className="phpQuoteExactFooter">
-              <span>{currentQuote.author}</span>
-              <button className="phpQuoteRefresh" type="button" onClick={() => setQuoteIndex((current) => (current + 1) % quotes.length)}>
-                {t("Refresh")}
-              </button>
+          <h1>AI crop trading and farmer support</h1>
+          <p>{BRAND.tagline} Role-based guidance, live weather context, secure crop trading and payout visibility in one place.</p>
+          <div className="homeAiSignalPanel">
+            <div className="homeAiSignalHeader">
+              <span>KrishiNova Sahayak</span>
+              <strong>Gemini + OpenAI fallback</strong>
             </div>
+            <div className="homeAiSignalGrid">
+              {intelligenceTiles.map((tile) => (
+                <div key={tile.label}>
+                  <i className={tile.icon} />
+                  <span>{tile.label}</span>
+                  <small>{tile.value}</small>
+                </div>
+              ))}
+            </div>
+            <button className="phpQuoteRefresh" type="button" onClick={() => setQuoteIndex((current) => (current + 1) % quotes.length)}>
+              {currentQuote.author}: {currentQuote.text}
+            </button>
           </div>
           <div className="ctaRow">
             <Link className="button" to="/auth">{t("Login / Register")}</Link>
             <Link className="ghostButton darkGhost" to="/customer/cstock_crop">{t("Marketplace")}</Link>
+            <button className="ghostButton darkGhost" type="button" onClick={() => openAiSahayak("voice", "Help me use KrishiNova")}>
+              Talk to AI Sahayak
+            </button>
           </div>
         </div>
-        <div className="phpHeroPlant">
-          <img src="/img/agri.png" alt="Agriculture landscape" />
+        <div className="phpHeroPlant homeAiCommandVisual">
+          <div className="homeHeroPhoto">
+            <img src="/img/farmers.png" alt="Farmer using smart agriculture tools in a real crop support workspace" />
+            <div className="aiOrbit">
+              <span />
+              <span />
+              <span />
+            </div>
+            <div className="homeHeroAiBadge">
+              <span>AI</span>
+              <strong>Field intelligence</strong>
+              <small>Crop, weather, market and voice help</small>
+            </div>
+          </div>
           <div className="phpHeroMiniStats">
             <div>
               <strong>{overview?.stats?.farmers ?? 0}</strong>
@@ -129,6 +204,80 @@ export default function HomePage() {
               <strong>{overview?.stats?.customers ?? 0}</strong>
               <span>{t("Customers")}</span>
             </div>
+          </div>
+          <div className="homeWorkflowRail">
+            {workflowNodes.map((node, index) => (
+              <div key={node}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{node}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="homeRoleShowcase">
+        {homeAgents.map((agent) => (
+          <article className={`homeAgentCard ${agent.role}`} key={agent.role}>
+            <img src={agent.image} alt="" />
+            <div className="homeAgentBody">
+              <span>{agent.subtitle}</span>
+              <strong>{agent.title}</strong>
+              <ul>
+                {agent.bullets.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <div className="homeAgentActions">
+                <button type="button" onClick={() => openAiSahayak("voice", agent.prompt)}>
+                  Talk
+                </button>
+                <button type="button" onClick={() => openAiSahayak("chat", agent.prompt)}>
+                  Chat
+                </button>
+                <Link to={agent.path}>Workspace</Link>
+              </div>
+            </div>
+          </article>
+        ))}
+      </section>
+
+      <section className="panel phpSectionExact">
+        <div className="phpSectionHeading">
+          <span className="eyebrow">Marketplace</span>
+          <h2>How KrishiNova works</h2>
+          <p className="sectionText">A direct agriculture marketplace where customers pay the platform, farmers fulfill orders, and admin releases payouts after delivery trust checks.</p>
+        </div>
+        <div className="grid three">
+          <article className="card">
+            <strong>Farmers list crops</strong>
+            <p>Verified farmers add stock, price, location, and category for admin approval.</p>
+          </article>
+          <article className="card">
+            <strong>Customers buy securely</strong>
+            <p>Customers browse verified listings, pay with Razorpay, track orders, chat, and download invoices.</p>
+          </article>
+          <article className="card">
+            <strong>Admin manages trust</strong>
+            <p>Admin handles verification, disputes, refunds, commission, featured listings, and farmer payout release.</p>
+          </article>
+        </div>
+        <div className="grid two phpBottomGrid">
+          <article className="card">
+            <strong>Benefits for farmers</strong>
+            <p>Separate farmer workspace, direct orders, stock control, payout visibility, reviews, AI crop tools, weather, and agriculture news.</p>
+          </article>
+          <article className="card">
+            <strong>Benefits for customers</strong>
+            <p>Search crops by name, location, price, and category with verified farmer badges, secure payment, chat, invoice, reviews, and dispute support.</p>
+          </article>
+        </div>
+        <div className="card phpBottomGrid">
+          <strong>Trust and secure payment</strong>
+          <p>Customer payment is held by the platform. Commission is deducted first, then farmer payout is released by admin after delivery confirmation.</p>
+          <div className="ctaRow">
+            <Link className="button" to="/farmer/fregister">Join as Farmer</Link>
+            <Link className="ghostButton darkGhost" to="/customer/cregister">Start Buying</Link>
           </div>
         </div>
       </section>
@@ -251,7 +400,9 @@ export default function HomePage() {
           <form className="card" onSubmit={submitContact}>
             <strong>{t("Contact Us")}</strong>
             <p className="sectionText">
-              {language === "hi" ? "सुरेन्द्र दुबे से सीधे surenderdubey9582@gmail.com या 9582514339 पर संपर्क करें।" : "Reach Surender Dubey directly at surenderdubey9582@gmail.com or 9582514339."}
+              {language === "hi"
+                ? `सुरेन्द्र दुबे से सीधे ${ADMIN_CONTACT.email} या ${ADMIN_CONTACT.mobile} पर संपर्क करें। पता: ${ADMIN_CONTACT.address}।`
+                : `Reach ${ADMIN_CONTACT.name} directly at ${ADMIN_CONTACT.email} or ${ADMIN_CONTACT.mobile}. Address: ${ADMIN_CONTACT.address}.`}
             </p>
             <input placeholder={t("Name")} value={contact.name} onChange={(e) => setContact({ ...contact, name: e.target.value })} />
             <input placeholder={t("Mobile")} value={contact.mobile} onChange={(e) => setContact({ ...contact, mobile: e.target.value })} />

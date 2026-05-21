@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "../api";
-import { BRAND } from "../branding.js";
+import { ADMIN_CONTACT, BRAND } from "../branding.js";
 import ProtectedRoute from "../components/ProtectedRoute.jsx";
 import LegacySection from "../components/LegacySection.jsx";
 import { useUi } from "../UiContext.jsx";
@@ -34,7 +34,17 @@ export default function AdminProfilePage() {
                   <li className="list-group-item">{t("Admin can modify and view all the customer details when necessary.")}</li>
                   <li className="list-group-item">{t("Admin can manage the farmer details who provide supplies to the store.")}</li>
                   <li className="list-group-item">{t("Admin also has access to the sales report and can sort them as required.")}</li>
+                  <li className="list-group-item">Admin can add and remove other admin accounts from the admin dashboard.</li>
                 </ol>
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-body bg-gradient-white">
+                <h4 className="mb-3">Admin Contact</h4>
+                <p className="mb-1"><strong>Name:</strong> {ADMIN_CONTACT.name}</p>
+                <p className="mb-1"><strong>Email:</strong> {ADMIN_CONTACT.email}</p>
+                <p className="mb-1"><strong>Mobile:</strong> {ADMIN_CONTACT.mobile}</p>
+                <p className="mb-0"><strong>Address:</strong> {ADMIN_CONTACT.address}</p>
               </div>
             </div>
           </div>

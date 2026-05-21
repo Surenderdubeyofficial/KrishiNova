@@ -88,73 +88,70 @@ export default function FarmerWeatherPage() {
     }
   }
 
+  const currentForecast = data.forecast?.[0];
+  const tempNow = currentForecast?.tempMax ?? currentForecast?.tempMin;
+  const hasRain = data.forecast?.some((item) => String(item.label || item.description || "").toLowerCase().includes("rain"));
+
   return (
     <ProtectedRoute role="farmer">
       <LegacySection badge="Weather Forecast">
-        <div className="row row-content">
-          <div className="col-md-12 mb-3">
-            <div className="row">
-              <div className="col-md-12">
-                <div className="card text-white bg-gradient-secondary mb-3">
-                  <div className="card-header">
-                    <span>{city}</span>
-                  </div>
-                  <div className="card-body text-dark">
-                    <form className="mb-3" onSubmit={searchWeather}>
-                      <div className="row">
-                        <div className="col-md-9 mb-2 mb-md-0">
-                          <input
-                            className="form-control"
-                            placeholder={t("Search city or location like Delhi, Mumbai, Udupi")}
-                            value={searchCity}
-                            onChange={(e) => setSearchCity(e.target.value)}
-                            disabled={loading}
-                          />
-                        </div>
-                        <div className="col-md-3">
-                          <button className="btn btn-success btn-block" type="submit" disabled={loading}>
-                            {loading ? t("Searching...") : t("Search Weather")}
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                    {loading ? <div className="alert alert-info mb-3">{t("Loading weather forecast...")}</div> : null}
-                    {feedback ? <div className="alert alert-warning mb-3">{feedback}</div> : null}
-                    {!loading && !data.forecast?.length ? (
-                      <div className="alert alert-secondary mb-0">{t("No forecast data is available right now.")}</div>
-                    ) : (
-                      <div className="table-responsive">
-                        <table className="table table-striped table-hover table-bordered bg-gradient-white text-center display mb-0">
-                          <thead>
-                            <tr className="font-weight-bold text-default">
-                              <th><center>{t("Date")}</center></th>
-                              <th><center>{t("Time")}</center></th>
-                              <th><center>{t("Temperature (Max / Min)")}</center></th>
-                              <th><center>{t("Description")}</center></th>
-                              <th><center>{t("Humidity")}</center></th>
-                              <th><center>{t("Wind")}</center></th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {data.forecast?.map((f) => (
-                              <tr className="text-center" key={f.datetime}>
-                                <td>{String(f.datetime).slice(0, 10)}</td>
-                                <td>{String(f.datetime).slice(11)}</td>
-                                <td>{f.tempMax} C / {f.tempMin} C</td>
-                                <td>{f.label}, {f.description}</td>
-                                <td>{f.humidity}%</td>
-                                <td>{f.windSpeed} km/h</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    )}
-                  </div>
-                </div>
+        <div className="modernWeatherShell">
+          <section className="modernWeatherHero">
+            <div>
+              <span className="eyebrow">Live agriculture weather</span>
+              <h1>{city}</h1>
+              <p>{currentForecast ? `${currentForecast.label || "Forecast"} - ${currentForecast.description || "weather outlook"}` : "Search any city to plan irrigation, spraying, and selling decisions."}</p>
+            </div>
+            <div className="modernWeatherNow">
+              <span className="label">Current slot</span>
+              <strong>{tempNow !== undefined ? `${Math.round(Number(tempNow))} C` : "--"}</strong>
+              <small>{currentForecast?.datetime || "Waiting for forecast"}</small>
+              <div className="weatherMetricRow">
+                <span>{currentForecast?.humidity ?? "--"}% humidity</span>
+                <span>{currentForecast?.windSpeed ?? "--"} wind</span>
               </div>
             </div>
-          </div>
+          </section>
+
+          <form className="modernWeatherSearch" onSubmit={searchWeather}>
+            <input
+              placeholder={t("Search city or location like Delhi, Mumbai, Udupi")}
+              value={searchCity}
+              onChange={(e) => setSearchCity(e.target.value)}
+              disabled={loading}
+            />
+            <button type="submit" disabled={loading}>
+              {loading ? t("Searching...") : t("Search Weather")}
+            </button>
+          </form>
+
+          {loading ? <div className="alert alert-info mb-3">{t("Loading weather forecast...")}</div> : null}
+          {feedback ? <div className="alert alert-warning mb-3">{feedback}</div> : null}
+          {!loading && !data.forecast?.length ? (
+            <div className="alert alert-secondary mb-0">{t("No forecast data is available right now.")}</div>
+          ) : (
+            <>
+              <div className="weatherForecastGrid">
+                {data.forecast?.map((f) => (
+                  <article className="weatherForecastCard" key={f.datetime}>
+                    <span className="weatherTime">{String(f.datetime).slice(0, 16)}</span>
+                    <strong>{f.label || "Forecast"}</strong>
+                    <p>{f.description}</p>
+                    <div className="weatherMetricRow">
+                      <span>{f.tempMax} C / {f.tempMin} C</span>
+                      <span>{f.humidity}% humidity</span>
+                      <span>{f.windSpeed} wind</span>
+                    </div>
+                  </article>
+                ))}
+              </div>
+              <div className="weatherTip">
+                {hasRain
+                  ? "Rain is expected in the forecast. Avoid pesticide spraying near rainy slots and protect harvested produce."
+                  : "No rain is highlighted in the visible forecast. Check soil moisture before irrigation and avoid afternoon heat stress."}
+              </div>
+            </>
+          )}
         </div>
       </LegacySection>
     </ProtectedRoute>

@@ -2,6 +2,7 @@ import { Router } from "express";
 import jwt from "jsonwebtoken";
 import { query } from "../config/db.js";
 import { requireAuth } from "../middleware/auth.js";
+import { adminContact } from "../services/adminContact.js";
 import { verifyGoogleCredential } from "../services/googleAuthService.js";
 import { sendOtpEmail } from "../services/mailService.js";
 import { normalizePhoneNumber, sendPhoneOtp, verifyPhoneOtp } from "../services/phoneOtpService.js";
@@ -61,6 +62,10 @@ const roleConfig = {
 
 function isPendingValue(value) {
   return !String(value || "").trim() || String(value).trim() === PENDING_VALUE;
+}
+
+function isLocalDevelopment() {
+  return process.env.NODE_ENV !== "production";
 }
 
 function isValidEmail(value) {
@@ -147,6 +152,10 @@ function sanitizeAuthUser(role, profile) {
     id: profile.id ?? profile.admin_id,
     role: "admin",
     name: profile.name ?? profile.admin_name,
+    email: adminContact.email,
+    mobile: adminContact.mobile,
+    address: adminContact.address,
+    contactName: adminContact.name,
     profileComplete: true,
   };
 }
@@ -255,6 +264,15 @@ async function issueOtp({ role, email, userId, table, idColumn }) {
 
   const mailResult = await sendOtpEmail({ email, otp, role });
   if (!mailResult.delivered) {
+    if (isLocalDevelopment()) {
+      return {
+        ok: true,
+        otpToken: createPendingOtpToken({ role, userId }),
+        devOtp: otp,
+        warning: mailResult.reason || "OTP email could not be delivered",
+      };
+    }
+
     return {
       ok: false,
       reason: mailResult.reason || "OTP email could not be delivered",
@@ -265,6 +283,14 @@ async function issueOtp({ role, email, userId, table, idColumn }) {
     ok: true,
     otpToken: createPendingOtpToken({ role, userId }),
   };
+}
+
+function otpResponseMessage(otpResult, fallback = "OTP sent to your email. Verify it to continue.") {
+  if (otpResult.warning) {
+    return `${fallback} Local development note: ${otpResult.warning}.`;
+  }
+
+  return fallback;
 }
 
 async function findUserByPhone(role, phoneNumber) {
@@ -372,8 +398,9 @@ router.post(
     res.status(201).json({
       requiresOtp: true,
       otpToken: otpResult.otpToken,
+      devOtp: otpResult.devOtp,
       user: { id: userId, role: req.params.role, name, email },
-      message: "OTP sent to your email. Verify it to continue.",
+      message: otpResponseMessage(otpResult),
     });
   }),
 );
@@ -443,8 +470,9 @@ router.post(
       return res.json({
         requiresOtp: true,
         otpToken: otpResult.otpToken,
+        devOtp: otpResult.devOtp,
         user: sanitizeAuthUser(req.params.role, user),
-        message: "OTP sent to your email. Verify it to continue.",
+        message: otpResponseMessage(otpResult),
       });
     }
   }),
@@ -554,8 +582,9 @@ router.post(
     return res.json({
       requiresOtp: true,
       otpToken: otpResult.otpToken,
+      devOtp: otpResult.devOtp,
       user: sanitizeAuthUser(payload.role, user),
-      message: "OTP sent again to your email.",
+      message: otpResponseMessage(otpResult, "OTP sent again to your email."),
     });
   }),
 );
@@ -580,11 +609,8 @@ router.post(
     }
 
     let user = await findUserByPhone(role, phoneNumber);
-    if (!user && mode !== "register") {
-      return res.status(404).json({ message: "No account found for this mobile number" });
-    }
-
-    if (!user && mode === "register") {
+    const createdQuickAccount = !user;
+    if (!user) {
       const userId = await createQuickAccount(role, {
         mobile: normalizePhoneNumber(phoneNumber),
         name: role === "farmer" ? "New Farmer" : "New Customer",
@@ -597,6 +623,30 @@ router.post(
 
     const phoneResult = await sendPhoneOtp({ phoneNumber });
     if (!phoneResult.sent) {
+      if (isLocalDevelopment()) {
+        const devOtp = String(Math.floor(100000 + Math.random() * 900000));
+        return res.json({
+          requiresPhoneOtp: true,
+          phoneOtpToken: createPendingPhoneOtpToken({
+            role,
+            userId: user.id,
+            mobile: normalizePhoneNumber(phoneNumber),
+            mode,
+            devOtp,
+          }),
+          devOtp,
+          user: {
+            id: user.id,
+            role,
+            name: user.name,
+            email: user.email,
+            mobile: normalizePhoneNumber(user.phone_no || phoneNumber),
+            profileComplete: false,
+          },
+          message: `${createdQuickAccount ? "Account created. " : ""}Local test OTP generated because SMS delivery is unavailable.`,
+        });
+      }
+
       return res.status(500).json({ message: phoneResult.reason });
     }
 
@@ -616,7 +666,7 @@ router.post(
         mobile: phoneResult.phoneNumber || normalizePhoneNumber(user.phone_no),
         profileComplete: false,
       },
-      message: "SMS OTP sent to your mobile number.",
+      message: `${createdQuickAccount ? "Account created. " : ""}SMS OTP sent to your mobile number.`,
     });
   }),
 );
@@ -641,13 +691,19 @@ router.post(
       return res.status(400).json({ message: "Invalid phone OTP session" });
     }
 
-    const verification = await verifyPhoneOtp({
-      phoneNumber: payload.mobile,
-      code: String(otp).trim(),
-    });
+    if (isLocalDevelopment() && payload.devOtp) {
+      if (String(payload.devOtp) !== String(otp).trim()) {
+        return res.status(401).json({ message: "Invalid mobile OTP" });
+      }
+    } else {
+      const verification = await verifyPhoneOtp({
+        phoneNumber: payload.mobile,
+        code: String(otp).trim(),
+      });
 
-    if (!verification.ok) {
-      return res.status(401).json({ message: "Invalid mobile OTP" });
+      if (!verification.ok) {
+        return res.status(401).json({ message: "Invalid mobile OTP" });
+      }
     }
 
     const config = roleConfig[payload.role];
@@ -703,18 +759,12 @@ router.post(
       [googleResult.profile.email],
     );
 
-    if (!user && mode === "register") {
+    if (!user) {
       const userId = await createQuickAccount(role, {
         email: googleResult.profile.email,
         name: googleResult.profile.name,
       });
       user = await loadUserProfile(role, userId);
-    }
-
-    if (!user) {
-      return res.status(404).json({
-        message: `No ${role} account exists for ${googleResult.profile.email}. Register first, then use Google sign-in.`,
-      });
     }
 
     const fullProfile = await loadUserProfile(role, user.id ?? user.farmer_id ?? user.cust_id);

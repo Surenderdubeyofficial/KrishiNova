@@ -43,6 +43,11 @@ const initialForm = {
   pincode: "",
 };
 
+function authMessage(result, fallback) {
+  const baseMessage = result.message || fallback;
+  return result.devOtp ? `${baseMessage} Local test OTP: ${result.devOtp}` : baseMessage;
+}
+
 function normalizeList(result) {
   if (Array.isArray(result)) {
     return result;
@@ -116,6 +121,7 @@ export default function AuthPage() {
   useEffect(() => {
     if (role === "admin") {
       setAuthMethod("email");
+      setMode("login");
       return;
     }
 
@@ -190,10 +196,11 @@ export default function AuthPage() {
           phoneOtpToken: result.phoneOtpToken,
           user: result.user,
           role: result.user?.role,
+          devOtp: result.devOtp,
         });
         setPendingOtp(null);
-        setPhoneOtp("");
-        setFeedback(result.message || "SMS OTP sent.");
+        setPhoneOtp(result.devOtp || "");
+        setFeedback(authMessage(result, "SMS OTP sent."));
         return;
       }
 
@@ -213,7 +220,7 @@ export default function AuthPage() {
         });
         setPendingPhoneOtp(null);
         setOtp("");
-        setFeedback(result.message || "OTP sent to your email.");
+        setFeedback(authMessage(result, "OTP sent to your email."));
         return;
       }
 
@@ -254,7 +261,7 @@ export default function AuthPage() {
         ...current,
         otpToken: result.otpToken,
       }));
-      setFeedback(result.message || "OTP sent again.");
+      setFeedback(authMessage(result, "OTP sent again."));
     } catch (error) {
       setFeedback(error.message);
     }
@@ -312,144 +319,132 @@ export default function AuthPage() {
   const methodSummary = {
     email: mode === "register" ? t("Full details now, verified by email OTP.") : t("Password login with email OTP verification."),
     phone: mode === "register" ? t("Fast signup by mobile, complete profile after entry.") : t("Instant mobile login through SMS OTP."),
-    google: mode === "register" ? t("Quick account creation with Google identity.") : t("Direct Google sign-in for existing accounts."),
+    google: t("Google verifies the email and opens the role workspace. New users get a quick account and complete profile after entry."),
   };
   const statusTiles = [
     { label: t("Security"), value: "OTP + JWT" },
     { label: t("Payments"), value: "Razorpay" },
     { label: t("Support"), value: "AI + Weather" },
   ];
+  const roleOptions = [
+    { id: "farmer", label: t("Farmer"), hint: t("Sell crops and manage farm orders.") },
+    { id: "customer", label: t("Customer"), hint: t("Buy crops and track deliveries.") },
+    { id: "admin", label: t("Admin"), hint: t("Control trust, orders, and payouts.") },
+  ];
+  const methodOptions = [
+    { id: "email", label: t("Email"), hint: methodSummary.email },
+    { id: "phone", label: t("Mobile OTP"), hint: methodSummary.phone },
+    { id: "google", label: t("Google"), hint: showGoogle ? methodSummary.google : t("Enable Google client ID to use this.") },
+  ];
 
   return (
-    <main className="authExperience authRefresh authBackdrop authPagePremium">
-      <span className="authAmbientOrb authAmbientOrbOne" aria-hidden="true" />
-      <span className="authAmbientOrb authAmbientOrbTwo" aria-hidden="true" />
-      <span className="authAmbientOrb authAmbientOrbThree" aria-hidden="true" />
-
-      <section className="authShowcase authShowcaseModal">
-        <div className="authShowcasePanel authShowcasePanelRich">
-          <div className="authShowcaseCopy">
-            <div className="authBrandHeader">
-              <BrandLockup theme="light" />
-              <span className="eyebrow">{BRAND.subtitle}</span>
-            </div>
-            <h1>{t("Secure access for a smarter agricultural marketplace.")}</h1>
-            <p className="lede">
-              {BRAND.name} brings farmers, buyers, and admins into one polished experience with quick entry methods, verified access, and complete profile workflows.
-            </p>
-          </div>
-
-          <div className="authStatusRail">
-            {statusTiles.map((tile) => (
-              <div className="authStatusTile" key={tile.label}>
-                <span>{tile.label}</span>
-                <strong>{tile.value}</strong>
-              </div>
-            ))}
-          </div>
-
-          <div className="authMetricStrip authMetricStripSoft">
-            <div className="authMetricCard">
-              <strong>3</strong>
-              <span>{t("Access methods")}</span>
-            </div>
-            <div className="authMetricCard">
-              <strong>3</strong>
-              <span>{t("User roles")}</span>
-            </div>
-            <div className="authMetricCard">
-              <strong>1</strong>
-              <span>{t("Unified entry screen")}</span>
-            </div>
-          </div>
-
-          <div className="authFlowRibbon">
-            <div>
-              <span className="authFlowLabel">{t("Manual")}</span>
-              <strong>{t("Email and password")}</strong>
-            </div>
-            <div>
-              <span className="authFlowLabel">{t("Quick")}</span>
-              <strong>{t("Mobile OTP or Google")}</strong>
-            </div>
-            <div>
-              <span className="authFlowLabel">{t("After entry")}</span>
-              <strong>{t("Complete missing profile details")}</strong>
-            </div>
-          </div>
-
-          <div className="authFeatureStack">
-            <article className="authFeatureItem">
-              <strong>{t("Role-based access")}</strong>
-              <span>{t("Switch between farmer, customer, and admin without leaving the screen.")}</span>
-            </article>
-            <article className="authFeatureItem">
-              <strong>{t("Verified entry")}</strong>
-              <span>{t("Email OTP and SMS OTP flows keep manual and mobile access consistent.")}</span>
-            </article>
-            <article className="authFeatureItem">
-              <strong>{t("Profile completion")}</strong>
-              <span>{t("Quick signup methods can enter first and complete business details afterward.")}</span>
-            </article>
-          </div>
-
-          <div className="authPreviewWindow">
-            <div className="authPreviewTop">
-              <span />
-              <span />
-              <span />
-            </div>
-
-            <div className="authPreviewHero">
-              <div>
-                <strong>{BRAND.name} access flow</strong>
-                <p>One responsive screen for sign in, signup, OTP verification, and profile completion.</p>
-              </div>
-              <div className="authPreviewBadge">Live</div>
-            </div>
-
-            <div className="authPreviewFormMock">
-              <div className="authPreviewLine authPreviewLineWide" />
-              <div className="authPreviewLine" />
-              <div className="authPreviewLine" />
-              <div className="authPreviewButton">Continue to dashboard</div>
-            </div>
-
-            <div className="authBenefitList authBenefitListCompact">
-              <article className="authBenefitCard">
-                <strong>Email + OTP</strong>
-                <span>Best for complete registration with full details up front.</span>
-              </article>
-              <article className="authBenefitCard">
-                <strong>Google + Mobile</strong>
-                <span>Faster access with profile completion handled after login.</span>
-              </article>
-            </div>
-          </div>
+    <main className="authEasyPage">
+      <section className="authEasyHero">
+        <div>
+          <BrandLockup theme="light" />
+          <p className="eyebrow">{BRAND.subtitle}</p>
+          <h1>{t("Welcome to KrishiNova")}</h1>
+          <p className="sectionText">
+            {t("A simple entry screen for farmers, customers, and admins to reach their own workspace quickly.")}
+          </p>
         </div>
+        <div className="authEasyStats" aria-label="Platform access summary">
+          {statusTiles.map((tile) => (
+            <article key={tile.label}>
+              <span>{tile.label}</span>
+              <strong>{tile.value}</strong>
+            </article>
+          ))}
+        </div>
+      </section>
 
-        <section className="authWorkspace authWorkspaceModern authWorkspaceModal">
-          <div className="authWorkspaceHeader authWorkspaceHeaderPremium">
+      <section className="authEasyShell">
+        <aside className="authEasySteps" aria-label="Authentication choices">
+          <div className="authEasyPanel">
+            <span className="authStepNumber">1</span>
+            <div>
+              <h2>{t("Choose your role")}</h2>
+              <p>{roleSummary[role]}</p>
+            </div>
+            <div className="authRoleCards">
+              {roleOptions.map((option) => (
+                <button
+                  className={role === option.id ? "selected" : ""}
+                  key={option.id}
+                  type="button"
+                  onClick={() => {
+                    setRole(option.id);
+                    clearPendingStates();
+                  }}
+                >
+                  <strong>{option.label}</strong>
+                  <span>{option.hint}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="authEasyPanel">
+            <span className="authStepNumber">2</span>
+            <div>
+              <h2>{t("Select access type")}</h2>
+              <p>{role === "admin" ? t("Admin access uses username and password.") : methodSummary[authMethod]}</p>
+            </div>
+            <div className="authModeSwitch">
+              <button className={mode === "login" ? "selected" : ""} type="button" onClick={() => setMode("login")}>
+                {t("Login")}
+              </button>
+              {role !== "admin" ? (
+                <button className={mode === "register" ? "selected" : ""} type="button" onClick={() => setMode("register")}>
+                  {t("Signup")}
+                </button>
+              ) : null}
+            </div>
+            {role !== "admin" ? (
+              <div className="authMethodCards">
+                {methodOptions.map((option) => (
+                  <button
+                    className={authMethod === option.id ? "selected" : ""}
+                    disabled={option.id === "google" && !showGoogle}
+                    key={option.id}
+                    type="button"
+                    onClick={() => setAuthMethod(option.id)}
+                  >
+                    <strong>{option.label}</strong>
+                    <span>{option.hint}</span>
+                  </button>
+                ))}
+              </div>
+            ) : null}
+          </div>
+
+          <div className="authEasyPanel authEasyHelp">
+            <span className="authStepNumber">3</span>
+            <div>
+              <h2>{t("Go to dashboard")}</h2>
+              <p>{t("After verification, every role lands in its own workspace with protected access.")}</p>
+            </div>
+          </div>
+        </aside>
+
+        <section className="authEasyFormCard">
+          <div className="authEasyFormHeader">
             <div>
               <span className="eyebrow">{t("Secure Access")}</span>
               <h2>{authTitle}</h2>
-              <p className="sectionText authHeaderText">
+              <p>
                 {pendingOtp
                   ? `Enter the email OTP sent to ${pendingOtp.user?.email}.`
                   : pendingPhoneOtp
                     ? `Enter the SMS OTP sent to ${pendingPhoneOtp.user?.mobile}.`
-                    : "Choose a role, pick your preferred method, and continue through the matching flow."}
+                    : `${roleOptions.find((option) => option.id === role)?.label} ${mode === "login" ? "login" : "signup"}`}
               </p>
             </div>
-            <div className="authMiniChecklist">
-              <span>Farmer</span>
-              <span>Customer</span>
-              <span>Admin</span>
-            </div>
+            <span className="authEasyBadge">{role}</span>
           </div>
 
           {pendingOtp ? (
-            <form className="authVerifyCard authVerifyCardModern authCardShell" onSubmit={verifyOtp}>
+            <form className="authVerifyCard authEasyInnerCard" onSubmit={verifyOtp}>
               <div className="authInlineHeading">
                 <strong>{t("Email verification")}</strong>
                 <span>{t("Use the OTP we sent to your email address.")}</span>
@@ -462,11 +457,16 @@ export default function AuthPage() {
               </div>
             </form>
           ) : pendingPhoneOtp ? (
-            <form className="authVerifyCard authVerifyCardModern authCardShell" onSubmit={verifyPhoneOtp}>
+            <form className="authVerifyCard authEasyInnerCard" onSubmit={verifyPhoneOtp}>
               <div className="authInlineHeading">
                 <strong>{t("Mobile verification")}</strong>
                 <span>{t("Use the SMS OTP just sent to your phone.")}</span>
               </div>
+              {pendingPhoneOtp.devOtp ? (
+                <div className="authNote">
+                  Local test OTP: <strong>{pendingPhoneOtp.devOtp}</strong>
+                </div>
+              ) : null}
               <input placeholder={t("Enter SMS OTP")} value={phoneOtp} onChange={(e) => setPhoneOtp(e.target.value)} maxLength={6} />
               <button className="button" type="submit">{t("Verify SMS OTP")}</button>
               <div className="authActionRow">
@@ -475,73 +475,24 @@ export default function AuthPage() {
             </form>
           ) : (
             <>
-              <div className="authControlStrip authCardShell">
-                <div className="authTopControls authTopControlsModal">
-                  <div className="authToggleRow authModeTabs">
-                    <button className={mode === "login" ? "activePill" : "pill"} type="button" onClick={() => setMode("login")}>
-                      {t("Login")}
-                    </button>
-                    <button className={mode === "register" ? "activePill" : "pill"} type="button" onClick={() => setMode("register")}>
-                      {t("Signup")}
-                    </button>
-                  </div>
-                  <div className="authRoleSelectWrap">
-                    <label className="authFieldLabel">{t("Role")}</label>
-                    <div className="authSelectShell">
-                      <select value={role} onChange={(e) => setRole(e.target.value)}>
-                        <option value="farmer">{t("Farmer")}</option>
-                        <option value="customer">{t("Customer")}</option>
-                        <option value="admin">{t("Admin")}</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="authRoleHighlight authCardShell">
-                <strong>{role.charAt(0).toUpperCase() + role.slice(1)} access</strong>
-                <span>{roleSummary[role]}</span>
-              </div>
-
-              {role !== "admin" ? (
-                <section className="authSectionBlock authCardShell">
-                  <div className="authSectionHeader">
-                    <strong>{t("Choose sign in method")}</strong>
-                    <span>{t("Email for full forms, or use quick access methods.")}</span>
-                  </div>
-                  <div className="authMethodGrid authMethodGridModern">
-                    <button className={authMethod === "email" ? "authMethodCard activeAuthMethod" : "authMethodCard"} type="button" onClick={() => setAuthMethod("email")}>
-                      <strong>{t("Email")}</strong>
-                      <span>{methodSummary.email}</span>
-                    </button>
-                    <button className={authMethod === "phone" ? "authMethodCard activeAuthMethod" : "authMethodCard"} type="button" onClick={() => setAuthMethod("phone")}>
-                      <strong>{t("Mobile")}</strong>
-                      <span>{methodSummary.phone}</span>
-                    </button>
-                    <button className={authMethod === "google" ? "authMethodCard activeAuthMethod" : "authMethodCard"} type="button" onClick={() => setAuthMethod("google")} disabled={!showGoogle}>
-                      <strong>{t("Google")}</strong>
-                      <span>{methodSummary.google}</span>
-                    </button>
-                  </div>
-                </section>
-              ) : null}
-
               {authMethod === "google" && showGoogle ? (
-                <div className="authGoogleCard authGoogleCardModern authCardShell">
+                <div className="authGoogleCard authEasyInnerCard">
                   <div>
                     <strong>{mode === "register" ? "Continue with Google to create an account" : "Continue with Google to sign in"}</strong>
                     <p className="sectionText">
-                      {mode === "register"
-                        ? "After Google verification, we will create the account instantly and send you to complete the remaining required profile fields."
-                        : "Use a Google account whose verified email already exists in the selected role table."}
+                      Google will verify your email, create the role account if needed, and then send you to complete any missing profile fields.
                     </p>
                   </div>
-                  <GoogleLogin onSuccess={handleGoogleSuccess} onError={() => setFeedback("Google sign-in failed")} />
+                  <GoogleLogin
+                    onSuccess={handleGoogleSuccess}
+                    onError={() => setFeedback("Google sign-in failed. Check that this Google OAuth client allows http://localhost:5173 as an authorized JavaScript origin.")}
+                    useOneTap={false}
+                  />
                 </div>
               ) : null}
 
               {authMethod !== "google" ? (
-                <form className="authFormGrid authFormGridModern authCardShell" onSubmit={submit}>
+                <form className="authFormGrid authEasyFormGrid" onSubmit={submit}>
                   {role === "admin" ? (
                     <AdminAuthFields form={form} updateForm={updateForm} />
                   ) : authMethod === "phone" ? (
@@ -580,7 +531,7 @@ export default function AuthPage() {
               ) : null}
 
               {quickFlow ? (
-                <p className="authFootnote authFootnoteModern">
+                <p className="authFootnote authEasyFootnote">
                   Quick methods do not ask for every business field up front. After entry, the app will redirect the user to the role profile page to finish required details.
                 </p>
               ) : null}

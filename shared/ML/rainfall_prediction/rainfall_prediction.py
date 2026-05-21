@@ -4,16 +4,31 @@ import sys
 # Load the dataset into a dataframe
 df = pd.read_csv('ML/rainfall_prediction/rainfall_in_india_1901-2015.csv')
 
-# Define a function to predict rainfall for a given district and month
+# Define a function to predict rainfall for a given subdivision/state and month
 def predict_rainfall(state, month):
-    # Filter the dataframe to only include rows with the given district
-    state_data = df[df['SUBDIVISION'] == state]
+    normalized_state = str(state).strip().upper()
+    normalized_month = str(month).strip().upper()
 
-    # Calculate the average rainfall for the given month across all the years
-    avg_rainfall = state_data[month].mean()
-    
-    # Return the predicted rainfall for the given month
-    return avg_rainfall
+    if normalized_month not in df.columns:
+        return "Invalid month"
+
+    # First try the exact subdivision used by the dataset.
+    state_data = df[df['SUBDIVISION'].str.upper() == normalized_state]
+
+    # Users usually type a state name like "Karnataka". In that case, use all
+    # matching rainfall subdivisions instead of returning NaN.
+    if state_data.empty:
+        state_data = df[df['SUBDIVISION'].str.upper().str.contains(normalized_state, na=False)]
+
+    if state_data.empty:
+        return "No rainfall data found"
+
+    avg_rainfall = state_data[normalized_month].mean()
+
+    if pd.isna(avg_rainfall):
+        return "No rainfall data found"
+
+    return round(float(avg_rainfall), 2)
 
 # Get the input parameters as command line arguments
 Jregion = sys.argv[1]
@@ -23,5 +38,4 @@ Jmonth = sys.argv[2]
 
 predicted_rainfall = predict_rainfall(Jregion, Jmonth)
 print(predicted_rainfall)
-
 

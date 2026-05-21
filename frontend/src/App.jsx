@@ -30,6 +30,7 @@ import AdminCustomersPage from "./pages/AdminCustomersPage.jsx";
 import AdminMessagesPage from "./pages/AdminMessagesPage.jsx";
 import AdminStockPage from "./pages/AdminStockPage.jsx";
 import AdminProfilePage from "./pages/AdminProfilePage.jsx";
+import { AdminMarketplacePage, CustomerMarketplacePage, FarmerMarketplacePage } from "./pages/MarketplaceDashboards.jsx";
 
 export default function App() {
   return (
@@ -46,6 +47,7 @@ export default function App() {
         <Route path="/customer/cregister" element={<AuthAliasPage target="customer-register" />} />
         <Route path="/admin/alogin" element={<AuthAliasPage target="admin-login" />} />
         <Route path="/farmer" element={<FarmerPage />} />
+        <Route path="/farmer/marketplace" element={<FarmerMarketplacePage />} />
         <Route path="/farmer/crop-prediction" element={<FarmerCropPredictionPage />} />
         <Route path="/farmer/fcrop_prediction" element={<FarmerCropPredictionPage />} />
         <Route path="/farmer/crop-recommendation" element={<FarmerCropRecommendationPage />} />
@@ -70,6 +72,7 @@ export default function App() {
         <Route path="/farmer/selling-history" element={<FarmerSellingHistoryPage />} />
         <Route path="/farmer/fselling_history" element={<FarmerSellingHistoryPage />} />
         <Route path="/customer" element={<CustomerPage />} />
+        <Route path="/customer/marketplace" element={<CustomerMarketplacePage />} />
         <Route path="/customer/buy-crops" element={<CustomerBuyCropsPage />} />
         <Route path="/customer/cbuy_crops" element={<CustomerBuyCropsPage />} />
         <Route path="/customer/crop-stocks" element={<CustomerStockPage />} />
@@ -80,6 +83,7 @@ export default function App() {
         <Route path="/customer/profile" element={<CustomerProfilePage />} />
         <Route path="/customer/cprofile" element={<CustomerProfilePage />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/admin/marketplace" element={<AdminMarketplacePage />} />
         <Route path="/admin/farmers" element={<AdminFarmersPage />} />
         <Route path="/admin/afarmers" element={<AdminFarmersPage />} />
         <Route path="/admin/customers" element={<AdminCustomersPage />} />

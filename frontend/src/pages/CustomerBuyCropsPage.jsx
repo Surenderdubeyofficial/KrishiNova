@@ -314,6 +314,10 @@ export default function CustomerBuyCropsPage() {
         },
       });
 
+      if (result.mode === "test") {
+        setFeedback("Razorpay test checkout opened. Use Razorpay test card or UPI details.");
+      }
+
       razorpay.open();
     } catch (error) {
       setFeedback(error.message);
