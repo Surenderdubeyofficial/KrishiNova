@@ -21,7 +21,12 @@ export async function query(sql, params = []) {
     const [rows] = await pool.execute(sql, params);
     return rows;
   } catch (error) {
-    if (["PROTOCOL_CONNECTION_LOST", "ECONNRESET", "EPIPE"].includes(error.code)) {
+    const isTransientDisconnect =
+      ["PROTOCOL_CONNECTION_LOST", "ECONNRESET", "EPIPE"].includes(error.code) ||
+      error.fatal === true ||
+      /connection lost|server closed the connection|closed state/i.test(error.message || "");
+
+    if (isTransientDisconnect) {
       const [rows] = await pool.execute(sql, params);
       return rows;
     }
