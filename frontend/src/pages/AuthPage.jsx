@@ -173,6 +173,11 @@ export default function AuthPage() {
     setFeedback("");
 
     if (role !== "admin" && authMethod !== "phone") {
+      if (String(form.email || "").trim().toLowerCase() === "admin") {
+        setFeedback("Select the Admin role to login with admin username and password.");
+        return;
+      }
+
       if (!emailPattern.test(String(form.email || "").trim())) {
         setFeedback("Enter a valid email address");
         return;
