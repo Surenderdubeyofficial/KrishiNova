@@ -17,8 +17,17 @@ const pool = mysql.createPool({
 });
 
 export async function query(sql, params = []) {
-  const [rows] = await pool.execute(sql, params);
-  return rows;
+  try {
+    const [rows] = await pool.execute(sql, params);
+    return rows;
+  } catch (error) {
+    if (["PROTOCOL_CONNECTION_LOST", "ECONNRESET", "EPIPE"].includes(error.code)) {
+      const [rows] = await pool.execute(sql, params);
+      return rows;
+    }
+
+    throw error;
+  }
 }
 
 export default pool;
