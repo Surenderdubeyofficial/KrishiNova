@@ -13,22 +13,47 @@ const pool = mysql.createPool({
   connectionLimit: Number(process.env.DB_CONNECTION_LIMIT || 10),
   waitForConnections: true,
   queueLimit: 0,
+  enableKeepAlive: true,
+  keepAliveInitialDelay: 0,
   ssl: toBool(process.env.DB_SSL) ? { rejectUnauthorized: false } : undefined,
 });
 
-export async function query(sql, params = []) {
+function isTransientDisconnect(error) {
+  return (
+    ["PROTOCOL_CONNECTION_LOST", "ECONNRESET", "EPIPE"].includes(error.code) ||
+    error.fatal === true ||
+    /connection lost|server closed the connection|closed state/i.test(error.message || "")
+  );
+}
+
+async function executeQuery(sql, params = []) {
+  const connection = await pool.getConnection();
+  let shouldRelease = true;
   try {
-    const [rows] = await pool.execute(sql, params);
+    const [rows] = await connection.execute(sql, params);
     return rows;
   } catch (error) {
-    const isTransientDisconnect =
-      ["PROTOCOL_CONNECTION_LOST", "ECONNRESET", "EPIPE"].includes(error.code) ||
-      error.fatal === true ||
-      /connection lost|server closed the connection|closed state/i.test(error.message || "");
+    if (isTransientDisconnect(error) && typeof connection.destroy === "function") {
+      connection.destroy();
+      shouldRelease = false;
+    } else {
+      shouldRelease = true;
+    }
 
-    if (isTransientDisconnect) {
-      const [rows] = await pool.execute(sql, params);
-      return rows;
+    throw error;
+  } finally {
+    if (shouldRelease) {
+      connection.release();
+    }
+  }
+}
+
+export async function query(sql, params = []) {
+  try {
+    return await executeQuery(sql, params);
+  } catch (error) {
+    if (isTransientDisconnect(error)) {
+      return executeQuery(sql, params);
     }
 
     throw error;
