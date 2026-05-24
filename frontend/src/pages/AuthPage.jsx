@@ -156,16 +156,16 @@ export default function AuthPage() {
     login(result);
 
     if (result.user?.role === "admin") {
-      navigate("/admin/aprofile");
+      navigate("/admin");
       return;
     }
 
     if (result.user?.role === "farmer") {
-      navigate(result.user?.profileComplete === false ? "/farmer/fprofile" : "/farmer/fprofile");
+      navigate(result.user?.profileComplete === false ? "/farmer/fprofile" : "/farmer");
       return;
     }
 
-    navigate(result.user?.profileComplete === false ? "/customer/cprofile" : "/customer/cprofile");
+    navigate(result.user?.profileComplete === false ? "/customer/cprofile" : "/customer");
   }
 
   async function submit(event) {
